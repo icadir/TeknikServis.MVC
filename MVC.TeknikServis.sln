@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeknikServis.Models", "Tekn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeknikServis.Web.UI", "TeknikServis.Web.UI\TeknikServis.Web.UI.csproj", "{2241CD27-20B9-431B-B47F-63525450FEF2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tema", "Tema", "{9D09DD13-0B4B-470A-AE35-198953D84BEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.Tema", "Service.Tema\Service.Tema.csproj", "{C0A39319-633B-47D5-9CA3-A18BF5624B62}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,9 +37,16 @@ Global
 		{2241CD27-20B9-431B-B47F-63525450FEF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2241CD27-20B9-431B-B47F-63525450FEF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2241CD27-20B9-431B-B47F-63525450FEF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0A39319-633B-47D5-9CA3-A18BF5624B62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0A39319-633B-47D5-9CA3-A18BF5624B62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0A39319-633B-47D5-9CA3-A18BF5624B62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0A39319-633B-47D5-9CA3-A18BF5624B62}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C0A39319-633B-47D5-9CA3-A18BF5624B62} = {9D09DD13-0B4B-470A-AE35-198953D84BEF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DA3336AD-417C-4FD6-9BD8-6C0A5F6D2894}
