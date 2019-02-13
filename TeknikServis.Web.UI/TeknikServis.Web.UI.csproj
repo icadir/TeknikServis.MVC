@@ -113,6 +113,16 @@
     <Folder Include="Controllers\" />
     <Folder Include="Models\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TeknikServis.BLL\TeknikServis.BLL.csproj">
+      <Project>{d0879dbf-40ca-45b2-b6c4-a8aa64af5d11}</Project>
+      <Name>TeknikServis.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TeknikServis.Entity\TeknikServis.Models.csproj">
+      <Project>{f075a0d4-16da-4b3d-a391-47489438dbce}</Project>
+      <Name>TeknikServis.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

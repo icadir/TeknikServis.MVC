@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeknikServis.BLL", "TeknikS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeknikServis.DAL", "TeknikServis.DAL\TeknikServis.DAL.csproj", "{A7EF0079-AB1A-49E1-8B18-D950AAC1D40F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeknikServis.Entity", "TeknikServis.Entity\TeknikServis.Entity.csproj", "{F075A0D4-16DA-4B3D-A391-47489438DBCE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeknikServis.Models", "TeknikServis.Entity\TeknikServis.Models.csproj", "{F075A0D4-16DA-4B3D-A391-47489438DBCE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeknikServis.Web.UI", "TeknikServis.Web.UI\TeknikServis.Web.UI.csproj", "{2241CD27-20B9-431B-B47F-63525450FEF2}"
 EndProject
