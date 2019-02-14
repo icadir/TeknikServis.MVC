@@ -78,6 +78,7 @@
   <ItemGroup>
     <Compile Include="Abstracts\BaseEntity.cs" />
     <Compile Include="Abstracts\BaseEntity2.cs" />
+    <Compile Include="Enums\Marka.cs" />
     <Compile Include="Enums\MessageStates.cs" />
     <Compile Include="Enums\IdentityRoles.cs" />
     <Compile Include="IdentityModels\Role.cs" />
