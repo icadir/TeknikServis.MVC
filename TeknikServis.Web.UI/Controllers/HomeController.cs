@@ -13,5 +13,9 @@ namespace TeknikServis.Web.UI.Controllers
         {
             return View();
         }
+        public ActionResult Error()
+        {
+            return View();
+        }
     }
 }

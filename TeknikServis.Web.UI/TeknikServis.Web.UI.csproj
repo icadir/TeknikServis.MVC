@@ -274,6 +274,7 @@
     <Content Include="Views\Shared\Partial\_DrawerPartial.cshtml" />
     <Content Include="Views\Shared\Partial\_ModalPartial.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
