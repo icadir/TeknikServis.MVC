@@ -7,12 +7,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{C0A39319-633B-47D5-9CA3-A18BF5624B62}</ProjectGuid>
+    <ProjectGuid>{4693136E-78B2-4290-B7B8-025B2A74C454}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Service.Tema</RootNamespace>
-    <AssemblyName>Service.Tema</AssemblyName>
+    <RootNamespace>TeknikServis.Tema</RootNamespace>
+    <AssemblyName>TeknikServis.Tema</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -169,6 +169,51 @@
     <Content Include="assets\js\plugins\slick\slick.min.css" />
     <Content Include="assets\js\plugins\slick\slick.min.js" />
     <Content Include="assets\js\plugins\sparkline\jquery.sparkline.min.js" />
+    <Content Include="base_forms_elements.html" />
+    <Content Include="base_forms_pickers_select.html" />
+    <Content Include="base_forms_samples.html" />
+    <Content Include="base_forms_validation.html" />
+    <Content Include="base_forms_wizard.html" />
+    <Content Include="base_js_charts_chartjs.html" />
+    <Content Include="base_js_charts_flot.html" />
+    <Content Include="base_js_charts_sparkline.html" />
+    <Content Include="base_js_draggable.html" />
+    <Content Include="base_js_maps.html" />
+    <Content Include="base_js_sliders.html" />
+    <Content Include="base_js_syntax_highlight.html" />
+    <Content Include="base_pages_blank.html" />
+    <Content Include="base_pages_inbox.html" />
+    <Content Include="base_pages_invoice.html" />
+    <Content Include="base_pages_profile.html" />
+    <Content Include="base_pages_search.html" />
+    <Content Include="base_tables_datatables.html" />
+    <Content Include="base_tables_pricing.html" />
+    <Content Include="base_tables_responsive.html" />
+    <Content Include="base_tables_styles.html" />
+    <Content Include="base_tables_tools.html" />
+    <Content Include="base_ui_alerts_notify.html" />
+    <Content Include="base_ui_buttons.html" />
+    <Content Include="base_ui_cards.html" />
+    <Content Include="base_ui_cards_api.html" />
+    <Content Include="base_ui_grid.html" />
+    <Content Include="base_ui_icons.html" />
+    <Content Include="base_ui_layout.html" />
+    <Content Include="base_ui_modals_tooltips.html" />
+    <Content Include="base_ui_pagination.html" />
+    <Content Include="base_ui_progress.html" />
+    <Content Include="base_ui_tabs.html" />
+    <Content Include="base_ui_typography.html" />
+    <Content Include="base_ui_widgets.html" />
+    <Content Include="frontend_400.html" />
+    <Content Include="frontend_about.html" />
+    <Content Include="frontend_contact.html" />
+    <Content Include="frontend_home.html" />
+    <Content Include="frontend_login_signup.html" />
+    <Content Include="frontend_pricing.html" />
+    <Content Include="frontend_search.html" />
+    <Content Include="frontend_support.html" />
+    <Content Include="frontend_team.html" />
+    <Content Include="index.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -212,9 +257,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>58199</DevelopmentServerPort>
+          <DevelopmentServerPort>49822</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:58199/</IISUrl>
+          <IISUrl>http://localhost:49822/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
