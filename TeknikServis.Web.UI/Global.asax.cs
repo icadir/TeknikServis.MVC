@@ -1,9 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Web.Mvc;
+using System.Web.Optimization;
 using System.Web.Routing;
+using TeknikServis.BLL.Identity;
+using TeknikServis.Entity.IdentityModels;
+using TeknikServis.Web.UI.App_Start;
 
 namespace TeknikServis.Web.UI
 {
@@ -13,6 +15,19 @@ namespace TeknikServis.Web.UI
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            var roller = Enum.GetNames(typeof(IdentityRoles));
+
+            var roleManager = MembershipTools.NewRoleManager();
+            foreach (var rol in roller)
+            {
+                if (!roleManager.RoleExists(rol))
+                    roleManager.Create(new Role()
+                    {
+                       Name=rol,
+                    });
+            }
         }
     }
 }

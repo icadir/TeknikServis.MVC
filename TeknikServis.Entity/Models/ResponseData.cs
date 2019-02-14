@@ -12,6 +12,6 @@ namespace TeknikServis.Entity.Models
         public bool success { get; set; }
         public object data { get; set; }
         public DateTime responseTime { get; set; } = DateTime.Now;
-        public string responseTimeU { get; set; } = $"{DateTime.Now:O}"
+        public string responseTimeU { get; set; } = $"{DateTime.Now:O}";
     }
 }
