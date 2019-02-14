@@ -22,12 +22,14 @@ namespace TeknikServis.Web.UI.App_Start
                 ));
 
             bundles.Add(new StyleBundle("~/bundle/css").Include(
-                "~/assets/css/font-awesome.css",
                 "~/assets/css/ionicons.css",
+                //"~/assets/css/font-awesome.css",
                 "~/assets/css/bootstrap.css",
                 "~/assets/css/app.css",
                 "~/assets/css/app-custom.css"));
 
+            //bundles.Add(new StyleBundle("~/bundle/css")
+            //    .Include("~/assets/css/font-awesome.css", new CssRewriteUrlTransform()));
             BundleTable.EnableOptimizations = true;
         }
     }
