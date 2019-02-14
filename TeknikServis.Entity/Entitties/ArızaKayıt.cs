@@ -56,10 +56,7 @@ namespace TeknikServis.Entity.Entitties
 
         [Required]
         public string MusteriId { get; set; }
-
         public string OperatorId { get; set; }
-
-
         public string TeknisyenId { get; set; }
 
         [ForeignKey("MusteriId")]
