@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
-using Microsoft.AspNet.Identity;
 using TeknikServis.Entity.Enums;
 
 namespace TeknikServis.BLL.Services.Senders
 {
-   public class EmailService : IMessageService
+    public class EmailService : IMessageService
     {
         private string _userId = HttpContext.Current.User.Identity.GetUserId();
         public string[] Cc { get; set; }
