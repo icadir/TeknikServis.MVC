@@ -78,6 +78,8 @@
   <ItemGroup>
     <Compile Include="Abstracts\BaseEntity.cs" />
     <Compile Include="Abstracts\BaseEntity2.cs" />
+    <Compile Include="Entitties\ArızaKayıt.cs" />
+    <Compile Include="Enums\ArizaDurum.cs" />
     <Compile Include="Enums\Marka.cs" />
     <Compile Include="Enums\MessageStates.cs" />
     <Compile Include="Enums\IdentityRoles.cs" />
@@ -99,8 +101,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Entitties\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
