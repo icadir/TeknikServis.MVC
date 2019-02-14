@@ -8,7 +8,7 @@ using TeknikServis.BLL.Identity;
 namespace TeknikServis.Web.UI.Controllers
 {
     [Authorize]
-    [RequireHttps]
+   
     public class BaseController : Controller
     {
         // GET: Base
