@@ -80,6 +80,7 @@
     <Compile Include="Abstracts\BaseEntity2.cs" />
     <Compile Include="Entitties\ArızaKayıt.cs" />
     <Compile Include="Enums\ArizaDurum.cs" />
+    <Compile Include="Enums\BeyazEsyaTip.cs" />
     <Compile Include="Enums\Marka.cs" />
     <Compile Include="Enums\MessageStates.cs" />
     <Compile Include="Enums\IdentityRoles.cs" />

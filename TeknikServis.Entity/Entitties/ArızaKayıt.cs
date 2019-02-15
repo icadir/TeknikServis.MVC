@@ -44,11 +44,14 @@ namespace TeknikServis.Entity.Entitties
         public DateTime? ArizaCozulduguTarih { get; set; }
         //default olarak çözülemedi atadık.
         public ArizaDurum ArizaDurumu { get; set; } = ArizaDurum.Cozulemedi;
+        [DisplayName("Ürün Tipini Seçiniz")]
+        public BeyazEsyaTip BeyazEsya { get; set; }
+
 
         //todo otomatik olarak false sen operator sayfasında false olanları getirirsin. eger onaylarsa yeni bir sayfasına true olanları alırsın. ve orda yönlendirmeyi yaparsın. Yerse belki ariza durum a da onaylandi eklenebilir.
         public bool OperatorKabul { get; set; } = false;
         
-
+        //TODO Operatör icin bool alan.
 
 
         [Required]
