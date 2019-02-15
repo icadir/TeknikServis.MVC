@@ -1,4 +1,5 @@
-﻿
+﻿@using TeknikServis.BLL.Identity
+@model TeknikServis.Entity.ViewModels.ArizaViewModels.ArizaViewModel
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
@@ -13,18 +14,21 @@
             <!-- Step Tabs -->
             <ul class="nav nav-tabs nav-justified">
                 <li class="active">
-                    <a href="#simple-classic-progress-step1" data-toggle="tab">1. Standard</a>
+                    <a href="#simple-classic-progress-step1" data-toggle="tab">Bilgiler</a>
                 </li>
                 <li>
-                    <a href="#simple-classic-progress-step2" data-toggle="tab">2. Details</a>
+                    <a href="#simple-classic-progress-step2" data-toggle="tab">Konum?</a>
                 </li>
                 <li>
-                    <a href="#simple-classic-progress-step3" data-toggle="tab">3. Extra</a>
+
+                    <a href="#simple-classic-progress-step3" data-toggle="tab">Resim Yükleme</a>
                 </li>
             </ul>
             <!-- End Step Tabs -->
             <!-- Form -->
-            <form class="form-horizontal" action="base_forms_wizard.html" method="post">
+
+            @using (Html.BeginForm("ArizaKayitEkle", "Musteri", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+            {
                 <!-- Steps Progress -->
                 <div class="card-block b-b">
                     <div class="wizard-progress progress progress-mini m-b-0">
@@ -34,24 +38,30 @@
                 <!-- End Steps Progress -->
                 <!-- Steps Content -->
                 <div class="card-block tab-content">
+
                     <!-- Step 1 -->
                     <div class="tab-pane fade fade-up in m-t-md m-b-lg active" id="simple-classic-progress-step1">
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-2">
-                                <label for="simple-classic-progress-firstname">First Name</label>
-                                <input class="form-control" type="text" id="simple-classic-progress-firstname" name="simple-classic-progress-firstname" placeholder="Please enter your first name" />
+                                @*Todo For dedigimiz nedir nasılveilir. HOCAYA SOR*@
+                                @*<label for="simple-classic-progress-firstname">First Name</label>*@
+                                @Html.LabelFor(x => x.Email)
+                                @*<input class="form-control" type="text" id="simple-classic-progress-firstname" name="simple-classic-progress-firstname" placeholder="Please enter your first name"/>*@
+                                @Html.TextBoxFor(x => x.Email, new { @class = "form-control", type = "email", placeholder = "İletişim maili" })
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-2">
-                                <label for="simple-classic-progress-lastname">Last Name</label>
-                                <input class="form-control" type="text" id="simple-classic-progress-lastname" name="simple-classic-progress-lastname" placeholder="Please enter your last name">
+
+                                @Html.LabelFor(x => x.Telno)
+
+                                @Html.TextBoxFor(x => x.Telno, new { @class = "form-control", type = "text", placeholder = "İletişim telno" })
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-2">
-                                <label for="simple-classic-progress-email">Email</label>
-                                <input class="form-control" type="email" id="simple-classic-progress-email" name="simple-classic-progress-email" placeholder="Please enter your email">
+                                @Html.LabelFor(x => x.ArızaAcıklaması)
+                                @Html.TextBoxFor(x => x.ArızaAcıklaması, new { @class = "form-control", type = "text", placeholder = "Lütfen Arıza Hakkında Açıklama Yapiniz" })
                             </div>
                         </div>
                     </div>
@@ -60,8 +70,9 @@
                     <div class="tab-pane fade fade-up m-t-md m-b-lg" id="simple-classic-progress-step2">
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-2">
-                                <label for="simple-classic-progress-details">Details</label>
-                                <textarea class="form-control" id="simple-classic-progress-details" name="simple-classic-progress-details" rows="9" placeholder="Share something about yourself"></textarea>
+                                @Html.LabelFor(x => x.Adres)
+                                @Html.TextBoxFor(x => x.Adres, new { @class = "form-control", type = "text", placeholder = "Lütfen Adresinizi Yaziniz." })
+                                @*TODO BURADA HARİTA İŞLEMLERİ OLCAK NORMALDE*@
                             </div>
                         </div>
                     </div>
@@ -70,66 +81,74 @@
                     <div class="tab-pane fade fade-up m-t-md m-b-lg" id="simple-classic-progress-step3">
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-2">
-                                <label for="simple-classic-progress-city">City</label>
-                                <input class="form-control" type="text" id="simple-classic-progress-city" name="simple-classic-progress-city" placeholder="Where do you live?">
+                                @Html.LabelFor(x => x.PostedFileAriza)
+                                @Html.TextBoxFor(x => x.PostedFileAriza, new { @class = "form-control", type = "file", multiple = false })
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-2">
-                                <label for="simple-classic-progress-skills">Skills</label>
-                                <select class="form-control" id="simple-classic-progress-skills" name="simple-classic-progress-skills" size="1">
-                                    <option value="">Please select your best skill</option>
-                                    <option value="1">Photoshop</option>
-                                    <option value="2">HTML</option>
-                                    <option value="3">CSS</option>
-                                    <option value="4">JavaScript</option>
-                                </select>
+                                @Html.LabelFor(x => x.PostedFileFatura)
+                                @Html.TextBoxFor(x => x.PostedFileFatura, new { @class = "form-control", type = "file", multiple = false })
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-2">
                                 <label class="css-input switch switch-sm switch-primary" for="simple-classic-progress-terms">
-                                    <input type="checkbox" id="simple-classic-progress-terms" name="simple-classic-progress-terms"><span></span> Agree with the <a data-toggle="modal" data-target="#modal-terms" href="#">terms</a>
+                                    <input type="checkbox" id="simple-classic-progress-terms" name="simple-classic-progress-terms"><span></span> Teşekkürler--@MembershipTools.GetNameSurname(null)<a data-toggle="modal" data-target="#modal-terms" href="#">terms</a>
                                 </label>
                             </div>
                         </div>
                     </div>
                     <!-- End Step 3 -->
+
+
                 </div>
                 <!-- End Steps Content -->
                 <!-- Steps Navigation -->
                 <div class="card-block b-t">
                     <div class="row">
                         <div class="col-xs-6">
-                            <button class="wizard-prev btn btn-default" type="button">Previous</button>
+                            <button class="wizard-prev btn btn-default" type="button">Önceki</button>
                         </div>
                         <div class="col-xs-6 text-right">
-                            <button class="wizard-next btn btn-default" type="button">Next</button>
-                            <button class="wizard-finish btn btn-app" type="submit"><i class="ion-checkmark m-r-xs"></i> Submit</button>
+                            <button class="wizard-next btn btn-default" type="button">Sonraki</button>
+                            <button class="wizard-finish btn btn-app" type="submit" id="kaydetx"><i class="ion-checkmark m-r-xs"></i> Kaydet</button>
                         </div>
                     </div>
                 </div>
                 <!-- End Steps Navigation -->
-            </form>
+            }
+
+
             <!-- End Form -->
         </div>
         <!-- .card -->
         <!-- End Simple Classic Progress Wizard -->
     </div>
     <!-- .col-lg-6 -->
-
-   
     <!-- .col-lg-6 -->
 
 </div>
 
 @section bottom
 {
-    
+
     <!-- Page JS Plugins -->
     <script src="~/assets/js/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
     <script src="~/assets/js/plugins/jquery-validation/jquery.validate.min.js"></script>
-    
+    <script src="~/assets/js/plugins/bootstrap-notify/bootstrap-notify.min.js"></script>
+
     <!-- Page JS Code -->
     <script src="~/assets/js/pages/base_forms_wizard.js"></script>
+    <script>
+        $(function () {
+            $("#kaydetx").click(function () {
+                $.notify({
+                    message: "Kaydınız Alınmıştır. Teşekkür ederiz.",
+                    title: "Servis MESAJI -",
+                    type:"success"
+                });
+            });
+        })
+    </script>
 }
