@@ -26,7 +26,12 @@
             </ul>
             <!-- End Step Tabs -->
             <!-- Form -->
+            <div>
+                <p class="text-muted">@Html.ValidationSummary()</p>
+                <h3>@TempData["Message"]</h3>
+            </div>
 
+            
             @using (Html.BeginForm("ArizaKayitEkle", "Musteri", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
             {
                 @Html.AntiForgeryToken()
@@ -44,9 +49,9 @@
                     <div class="tab-pane fade fade-up in m-t-md m-b-lg active" id="simple-classic-progress-step1">
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-2">
-                            @Html.LabelFor(x=>x.BeyazEsya)
-                            @Html.EnumDropDownListFor(x=>x.BeyazEsya,"Ürün Seçiniz",new {@class="form-control",size="1"})
-                              
+                                @Html.LabelFor(x => x.BeyazEsya)
+                                @Html.EnumDropDownListFor(x => x.BeyazEsya, "Ürün Seçiniz", new { @class = "form-control", size = "1" })
+
                             </div>
                         </div>
                         <div class="form-group">
@@ -55,7 +60,7 @@
                                 @*<label for="simple-classic-progress-firstname">First Name</label>*@
                                 @Html.LabelFor(x => x.Email)
                                 @*<input class="form-control" type="text" id="simple-classic-progress-firstname" name="simple-classic-progress-firstname" placeholder="Please enter your first name"/>*@
-                                @Html.TextBoxFor(x => x.Email, new {@class = "form-control", type = "email", placeholder = "İletişim maili"})
+                                @Html.TextBoxFor(x => x.Email, new { @class = "form-control", type = "email", placeholder = "İletişim maili" })
                             </div>
                         </div>
                         <div class="form-group">
@@ -63,13 +68,13 @@
 
                                 @Html.LabelFor(x => x.Telno)
 
-                                @Html.TextBoxFor(x => x.Telno, new {@class = "form-control", type = "text", placeholder = "İletişim telno"})
+                                @Html.TextBoxFor(x => x.Telno, new { @class = "form-control", type = "text", placeholder = "İletişim telno" })
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-2">
                                 @Html.LabelFor(x => x.ArızaAcıklaması)
-                                @Html.TextBoxFor(x => x.ArızaAcıklaması, new {@class = "form-control", type = "text", placeholder = "Lütfen Arıza Hakkında Açıklama Yapiniz"})
+                                @Html.TextBoxFor(x => x.ArızaAcıklaması, new { @class = "form-control", type = "text", placeholder = "Lütfen Arıza Hakkında Açıklama Yapiniz" })
                             </div>
                         </div>
                     </div>
@@ -154,7 +159,7 @@
                 $.notify({
                     message: "Kaydınız Alınmıştır. Teşekkür ederiz.",
                     title: "Servis MESAJI -",
-                    type:"success"
+                    type: "success"
                 });
             });
         })
