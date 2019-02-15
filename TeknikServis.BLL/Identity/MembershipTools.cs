@@ -57,5 +57,15 @@ namespace TeknikServis.BLL.Identity
 
             return $"{user.AvatarPath}";
         }
+
+        public static User GetMusteri(string UserId)
+        {
+            //if (string.IsNullOrEmpty(UserId))
+            //    //return "/assets/img/avatars/avatar3.jpg";
+
+          var MusteriUser = NewUserManager().FindById(UserId);
+
+          return MusteriUser;
+        }
     }
 }

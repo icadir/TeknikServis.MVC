@@ -1,4 +1,5 @@
-﻿@using TeknikServis.BLL.Identity
+﻿@using Microsoft.AspNet.Identity
+@using TeknikServis.BLL.Identity
 @model TeknikServis.Entity.ViewModels.ArizaViewModels.ArizaViewModel
 @{
     ViewBag.Title = "Index";
@@ -31,10 +32,11 @@
                 <h3>@TempData["Message"]</h3>
             </div>
 
-            
+
             @using (Html.BeginForm("ArizaKayitEkle", "Musteri", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
             {
                 @Html.AntiForgeryToken()
+                @Html.Hidden("MusteriId", HttpContext.Current.User.Identity.GetUserId())
                 <!-- Steps Progress -->
                 <div class="card-block b-b">
                     <div class="wizard-progress progress progress-mini m-b-0">
@@ -154,14 +156,14 @@
     <!-- Page JS Code -->
     <script src="~/assets/js/pages/base_forms_wizard.js"></script>
     <script>
-        $(function () {
-            $("#kaydetx").click(function () {
-                $.notify({
-                    message: "Kaydınız Alınmıştır. Teşekkür ederiz.",
-                    title: "Servis MESAJI -",
-                    type: "success"
-                });
-            });
-        })
+        //$(function () {
+        //    $("#kaydetx").click(function () {
+        //        $.notify({
+        //            message: "Kaydınız Alınmıştır. Teşekkür ederiz.",
+        //            title: "Servis MESAJI -",
+        //            type: "success"
+        //        });
+        //    });
+        //})
     </script>
 }

@@ -9,9 +9,11 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using TeknikServis.BLL.Helpers;
 using TeknikServis.BLL.Repository;
+using TeknikServis.BLL.Services.Senders;
 using TeknikServis.Entity.Entitties;
 using TeknikServis.Entity.ViewModels;
 using TeknikServis.Entity.ViewModels.ArizaViewModels;
+using static TeknikServis.BLL.Identity.MembershipTools;
 
 namespace TeknikServis.Web.UI.Controllers
 {
@@ -33,15 +35,14 @@ namespace TeknikServis.Web.UI.Controllers
         public ActionResult ArizaKayitEkle(ArizaViewModel model)
         {
             //o anki sistemdeki kullanıcının idsini verir. 
-            var MusteriId = HttpContext.User.Identity.GetUserId();
+            //var asd = HttpContext.User.Identity.GetUserId();
+            if (!ModelState.IsValid)
+            {
+                //Gelen model valid degiilse bu sayfaya yönlendirilip hatalar gösterilicek.
+                return RedirectToAction("Index", "Musteri", model);
+            }
 
-            //if (!ModelState.IsValid)
-            //{
-            //    //Gelen model valid degiilse bu sayfaya yönlendirilip hatalar gösterilicek.
-            //    return RedirectToAction("Index", "Musteri", model);
-            //}
-
-
+            var userManager = NewUserManager().FindById(model.MusteriId);
             try
             {
                 #region ArızaResimİşlemi
@@ -104,7 +105,7 @@ namespace TeknikServis.Web.UI.Controllers
 
                 var data = new ArızaKayıt
                 {
-                    MusteriId = MusteriId,
+                    MusteriId = model.MusteriId,
                     Adres = model.Adres,
                     ArizaDurumu = model.ArizaDurumu,
                     ArizaOlusturmaTarihi = DateTime.Now,
@@ -117,8 +118,13 @@ namespace TeknikServis.Web.UI.Controllers
                     FaturaPath = model.FaturaPath,
                 };
                 new ArizaKayitRepo().Insert(data);
-                TempData["Message"] = $"{model.ArizaId} no'lu kayıt başarıyla eklenmiştir";
+                var emailService = new EmailService();
+                var body = $"Merhaba <b>{userManager.Name} {userManager.Surname}</b><br>Arıza Kaydınız Oluşturulmuştur. En kısa zamanda arızanız giderilicektir.<br>Fitech Mutlu Günler Diler.<br>  ";
+                emailService.Send(new IdentityMessage() { Body = body, Subject = $"{userManager.UserName} Arıza Kaydı" }, model.Email);
+                TempData["Message"] = $"{model.BeyazEsya} arıza şikayetiniz alınmıştır.";
                 return RedirectToAction("Index");
+              
+
             }
             catch (DbEntityValidationException ex)
             {
@@ -142,7 +148,7 @@ namespace TeknikServis.Web.UI.Controllers
                 };
                 return RedirectToAction("Error", "Home");
             }
-            return View();
+        
         }
     }
 }
