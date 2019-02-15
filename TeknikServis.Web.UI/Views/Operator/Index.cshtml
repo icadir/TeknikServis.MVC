@@ -1,4 +1,4 @@
-﻿@using Microsoft.AspNet.Identity
+﻿
 @using TeknikServis.BLL.Identity
 @model List<TeknikServis.Entity.ViewModels.ArizaViewModels.ArizaViewModel>
 
@@ -55,13 +55,8 @@
                         
                         <td class="text-center">
                             <div class="btn-group">
-                                <button class="btn btn-xs btn-default btnsendcode" name="@data.Id" type="button" title="Send Activation Code">
-                                    <i class="ion-android-mail"></i>
-                                </button>
-                                <button class="btn btn-xs btn-default btnsendpassword" name="@data.Id" type="button" title="Send Password">
-                                    <i class="ion-key"></i>
-                                </button>
-                                <a href="@Url.Action("EditUser", "Admin", new {id = data.Id})" class="btn btn-xs btn-default" title="Edit User">
+                               
+                                <a href="@Url.Action("ArizaDetay", "Operator", new {id = data2.ArizaId})" class="btn btn-xs btn-default" title="Edit User">
                                     <i class="ion-edit"></i>
                                 </a>
                             </div>

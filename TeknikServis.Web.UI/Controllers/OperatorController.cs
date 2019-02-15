@@ -19,5 +19,11 @@ namespace TeknikServis.Web.UI.Controllers
          
             return View(data);
         }
+
+        [HttpGet]
+        public ActionResult ArizaDetay(string id)
+        {
+            return View();
+        }
     }
 }

@@ -292,6 +292,7 @@
     <Content Include="Views\Admin\EditUser.cshtml" />
     <Content Include="Views\Musteri\Index.cshtml" />
     <Content Include="Views\Operator\Index.cshtml" />
+    <Content Include="Views\Operator\ArizaDetay.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
