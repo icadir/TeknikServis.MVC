@@ -10,7 +10,6 @@ namespace TeknikServis.DAL.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            ContextKey = "TeknikServis.DAL.MyContext";
         }
 
         protected override void Seed(TeknikServis.DAL.MyContext context)

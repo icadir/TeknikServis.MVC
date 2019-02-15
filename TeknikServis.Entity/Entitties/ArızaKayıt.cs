@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TeknikServis.Entity.Enums;
 using TeknikServis.Entity.IdentityModels;
 using TeknikServis.Web.UI.Abstracts;
@@ -15,8 +11,6 @@ namespace TeknikServis.Entity.Entitties
     [Table("ArizaKayitlari")]
     public class ArızaKayıt : BaseEntity<int>
     {
-
-       
 
         [Required(ErrorMessage = "Lütfen Açıklama kısmını doldurdunuz.")]
         [DisplayName("Arıza Açıklaması")]

@@ -16,6 +16,6 @@ namespace TeknikServis.Entity.IdentityModels
 
         public string ActivationCode { get; set; }
         public string AvatarPath { get; set; }
-        public virtual ICollection<ArızaKayıt> ArizaKayitlari { get; set; } = new HashSet<ArızaKayıt>();
+       
     }
 }
