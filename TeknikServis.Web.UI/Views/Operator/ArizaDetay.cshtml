@@ -1,8 +1,86 @@
-﻿
+﻿@using TeknikServis.BLL.Identity
+@model TeknikServis.Entity.ViewModels.ArizaViewModels.ArizaViewModel
 @{
-    ViewBag.Title = "ArizaDetay";
+    ViewBag.Title = "Ariza Detay";
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
 
-<h2>ArizaDetay</h2>
+<h2 class="text-center">Ariza Detay</h2>
 
+<div class="col-md-6 col-md-offset-3">
+    <div class="card">
+        <div class="card-block tab-content">
+            <div class="tab-pane fade active in" id="profile-tab1">
+
+                @using (Html.BeginForm("ArizaKabul", "Operator", FormMethod.Post, new { @class = "fieldset" }))
+                {
+
+                    var data = MembershipTools.GetMusteri(Model.MusteriId);
+
+                    <h4 class="m-t-sm m-b">Arıza Kayıt Bilgileri</h4>
+                    <div class="form-group row">
+                        <div class="col-xs-6">
+                            @*<label for="exampleInputName1">First name</label>*@
+                            @Html.Label(data.Name)
+                            @*<input type="text" class="form-control" id="exampleInputName1">*@
+                            @Html.TextBox("data.Name", data.Name, new {@class="form-control",@readonly="readonly"})
+                        
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="exampleInputName2">Last name</label>
+                            <input type="text" class="form-control" id="exampleInputName2">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-6">
+                            <label for="exampleInputPhone1">Mobile phone</label>
+                            <input type="tel" class="form-control" id="exampleInputPhone1">
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="exampleInputPhone2">Work phone</label>
+                            <input type="datetime-local" class="form-control" id="exampleInputPhone2">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputAddress">Address</label>
+                        <input type="text" class="form-control" id="exampleInputAddress">
+                    </div>
+
+                    <h4 class="m-t-md m-b">Change password</h4>
+                    <div class="form-group row">
+                        <div class="col-xs-6">
+                            <label for="exampleInputPassword1">Confirm current password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        <div class="col-xs-6">
+                            <label for="exampleInputPassword2">Confirm new password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword2">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-6">
+                            <label for="exampleInputPassword3">New password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword3">
+                        </div>
+                    </div>
+                    <div class="row narrow-gutter">
+                        <div class="col-xs-6">
+                            <button type="button" class="btn btn-default btn-block">Cancel</button>
+                        </div>
+                        <div class="col-xs-6">
+                            <button type="button" class="btn btn-app btn-block">Save<span class="hidden-xs"> changes</span></button>
+                        </div>
+                    </div>
+                }
+                <!-- Profile tab 1 -->
+                @*<form class="fieldset">*@
+
+                @*</form>*@
+            </div>
+            <!-- End profile tab 1 -->
+
+        </div>
+        <!-- .card-block .tab-content -->
+    </div>
+    <!-- .card -->
+</div>
