@@ -25,13 +25,13 @@
             <thead>
                 <tr>
                     <th class="text-center">#</th>
-                    <th>Avatar</th>
+                    <th>Resim</th>
                     <th>Kullanıcı Adı</th>
                     <th>Name</th>
                     <th>Surname</th>
                     <th>Eklendigi Tarih</th>
                     <th>Adres</th>
-                    <th class="text-center" style="width: 10%;">Actions</th>
+                    <th class="text-center" style="width: 10%;">Detay</th>
                 </tr>
             </thead>
             <tbody>
@@ -53,12 +53,10 @@
                         <td>@data2.ArizaOlusturmaTarihi</td>
                         <td>@data2.Adres</td>
 
-                        
+                
                         <td class="text-center">
                             <div class="btn-group">
-                               
-                                <a href="@Url.Action("ArizaDetay", "Operator", new {id = data2.ArizaId})" class="btn btn-xs btn-default" title="Arıza Detay">
-                                    <i class="ion-edit"></i>
+                                <a href="@Url.Action("ArizaDetay", "Operator", new {id = data2.ArizaId})" class="btn btn-xs btn-default" title="Arıza Detay"><i class="ion-edit"></i>
                                 </a>
                             </div>
                         </td>

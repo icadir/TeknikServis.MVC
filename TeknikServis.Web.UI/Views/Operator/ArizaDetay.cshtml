@@ -60,7 +60,8 @@
                     </div>
                     <div class="row narrow-gutter">
                         <div class="col-xs-12">
-                            @*<button type="button" class="btn btn-app btn-block">Save<span class="hidden-xs"> changes</span></button>*@
+                            @*//TODO unutmazsan sor hocaya. burada yapmak istedigimiz daha önceden bunu operator almıssa arıza onaylama butonu onayladı veya pasif veya gelmesin vs*@ 
+                            @*@(Model.OperatorKabul==false? "<a href="+Url.Action("ArizaDetay","Operator",new {id=data2.ArizaId})+ "class='btn btn-xs btn-default'"+"title='Arıza Detay'"+"></a>":"Belalım")*@
                             <a href="@Url.Action("ArizaKabul", "Operator", new {id = Model.ArizaId})" class="btn btn-app btn-block hidden-xs" title="Arıza Kabul">
                              Arızayı Onayla
                             </a>
