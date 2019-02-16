@@ -33,6 +33,7 @@
                    
                     <th class="text-center">Arıza Kayıt No</th>
                     <th class="text-center">Arıza Durum</th>
+                    <th class="text-center">Operator İsimö</th>
                     <th class="text-center">Teknisyen İsim</th>
                     <th class="text-center">Teknisyen Telefon</th>
                     <th class="text-center" style="width: 10%;">Actions</th>
@@ -44,6 +45,7 @@
 
                  
                     var dataTeknisyen = MembershipTools.GetMusteri(Model[i].TeknisyenId);
+                    var dataOperator = MembershipTools.GetMusteri(Model[i].OperatorId);
 
                     var data2 = Model[i];
 
@@ -51,8 +53,9 @@
                     <tr class="@(data2.ArizaDurumu==ArizaDurum.Beklemede?"":"bg-red")">
                         <td class="font-300 text-center">@(i + 1)</td>
                         <td class="font-300 text-center">@(data2.ArizaDurumu)</td>
+                        <td class="font-300 text-center">@(data2.OperatorId==null ? "Operator Onaylamadı":dataOperator.Name+" "+dataOperator.Surname)</td>
                         <td class="font-300 text-center">@((data2.TeknisyenId==null)? "Teknisyen Atanmadı" : dataTeknisyen.Name + " " + dataTeknisyen.Surname)</td>
-                        <td class="font-300 text-center">@((data2.TeknisyenId==null)?data2.Telno:"Teknisyen Atanmadı")</td>
+                        <td class="font-300 text-center">@((data2.TeknisyenId==null)?"Teknisyen atanmadı": data2.Telno)</td>
 
                         <td class="text-center">
                             <div class="btn-group">

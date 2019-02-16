@@ -156,11 +156,15 @@ namespace TeknikServis.Web.UI.Controllers
         [Authorize]
         public ActionResult ArizaTakip()
         {
-            //o an sistemdeki Musteriyi bulur
+            //o an giriş yapan user'ın id'sini getirir.
             var musteriId = HttpContext.User.Identity.GetUserId();
             try
             {
-                var arizalar = new ArizaKayitRepo().GetAll(x => x.MusteriId == musteriId).ToList();
+                //arizalar tablosuna sistemde hangi müşteri giriş yapmıssa ona göre bir sorgu atılıyor. gelen sorguda olusturuldugu tarihe göre sıralanaıp sayfaya gönderiyoruz.
+                var arizalar = new ArizaKayitRepo()
+                    .GetAll(x => x.MusteriId == musteriId)
+                    .OrderBy(x=>x.ArizaOlusturmaTarihi)
+                    .ToList();
                 return View(arizalar);
             }
             catch (Exception ex)
