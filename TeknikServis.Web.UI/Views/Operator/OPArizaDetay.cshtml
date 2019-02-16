@@ -1,0 +1,113 @@
+﻿@using TeknikServis.BLL.Identity
+@model TeknikServis.Entity.ViewModels.ArizaViewModels.ArizaViewModel
+@{
+    ViewBag.Title = "OPArizaDetay";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<h2 class="text-center">Ariza Detay</h2>
+
+<div class="col-md-6">
+    <div class="card">
+        <div class="card-block tab-content">
+            <div class="tab-pane fade active in" id="profile-tab1">
+
+                @using (Html.BeginForm("ArizaKabul", "Operator", FormMethod.Post, new { @class = "fieldset" }))
+                {
+
+                    var data = MembershipTools.GetMusteri(Model.MusteriId);
+
+                    <h4 class="m-t-sm m-b">Teknisyen Atama</h4>
+                    <div class="form-group row">
+                        <div class="col-xs-6">
+                            @*<label for="exampleInputName1">First name</label>*@
+                            @Html.Label("", "Müşterinin Adı")
+                            @*<input type="text" class="form-control" id="exampleInputName1">*@
+                            @Html.TextBox("data.Name", data.Name, new { @class = "form-control", @readonly = "readonly" })
+
+                        </div>
+                        <div class="col-xs-6">
+                            @Html.Label("", "Müşterinin Soyadı")
+
+                            @Html.TextBox("data.Surname", data.Surname, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-6">
+                            @Html.Label("", "Müşteri Email")
+                            @Html.TextBox("data.Email", data.Email, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                        <div class="col-xs-6">
+                            @Html.LabelFor(x => x.Telno)
+                            @Html.TextBoxFor(x => x.Telno, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("", "Adres Bilgisi")
+                        @Html.TextAreaFor(x => x.Adres, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-xs-6">
+                            @Html.Label("", "Arızalı Ürün Resmi")
+                            <img src="@(string.IsNullOrEmpty(Model.ArızaPath) ? "/assets/img/avatars/avatar3.jpg" : Model.ArızaPath)" class="img-avatar-96" width="100" height="100" />
+                        </div>
+                        <div class="col-xs-6">
+                            @Html.Label("", "Ürün Fatura Bilgisi")
+                            <img src="@(string.IsNullOrEmpty(Model.FaturaPath) ? "/assets/img/avatars/avatar3.jpg" : Model.FaturaPath)" class="img-avatar-96" width="100" height="100" />
+                        </div>
+
+                    </div>
+
+                }
+                <!-- Profile tab 1 -->
+                @*<form class="fieldset">*@
+
+                @*</form>*@
+            </div>
+            <!-- End profile tab 1 -->
+
+        </div>
+        <!-- .card-block .tab-content -->
+    </div>
+    <!-- .card -->
+</div>
+
+<div class="col-md-6">
+    <div class="card">
+        <div class="card-block">
+            <div class="form-group">
+                @using (Html.BeginForm("EditUserRoles", "Admin", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.Label("Roles", new { @class = "col-md-3 control-label" })
+                    <div class="col-md-7">
+                        @Html.DropDownList("Roles", (List<SelectListItem>)ViewBag.RoleList, new { @class = "js-select2 form-control", size = "1" })
+                    </div>
+                    <div class="row narrow-gutter">
+                        <div class="col-xs-12">
+                            <a href="@Url.Action("TeknisyenAta", "Operator", new {id = Model.ArizaId})" class="btn btn-app btn-block hidden-xs" title="Teknisyen Atama">
+                                Teknisyen Ata
+                            </a>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section bottom
+{
+    <script src="~/assets/js/plugins/select2/select2.full.min.js"></script>
+
+    <script>
+        $(function () {
+            App.initHelpers(['select2']);
+
+        });
+    </script>
+}
+}

@@ -294,6 +294,8 @@
     <Content Include="Views\Operator\Index.cshtml" />
     <Content Include="Views\Operator\ArizaDetay.cshtml" />
     <Content Include="Views\Musteri\ArizaTakip.cshtml" />
+    <Content Include="Views\Operator\ArizaList.cshtml" />
+    <Content Include="Views\Operator\OPArizaDetay.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

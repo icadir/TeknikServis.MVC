@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
+using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using TeknikServis.BLL.Repository;
 using TeknikServis.Entity.Enums;
 using TeknikServis.Entity.ViewModels;
+using static TeknikServis.BLL.Identity.MembershipTools;
 using TeknikServis.Entity.ViewModels.ArizaViewModels;
+
 
 namespace TeknikServis.Web.UI.Controllers
 {
@@ -86,6 +90,74 @@ namespace TeknikServis.Web.UI.Controllers
                 return RedirectToAction("Error", "Home");
             }
           
+        }
+
+        [HttpGet]
+        public ActionResult ArizaList()
+        {
+            //operator bulunuyor ve o operatorun aldıgı kayıtlar listelenip çekiliyor.
+            var operatorId = HttpContext.User.Identity.GetUserId();
+            try
+            {
+                var data = new ArizaKayitRepo()
+                    .GetAll(x => x.OperatorId == operatorId)
+                    .OrderBy(x=>x.ArizaOlusturmaTarihi)
+                    .ToList();
+                return View(data);
+            }
+            catch (Exception ex)
+            {
+                TempData["Model"] = new ErrorViewModel()
+                {
+                    Text = $"Bir hata oluştu {ex.Message}",
+                    ActionName = "Index",
+                    ControllerName = "Admin",
+                    ErrorCode = 500
+                };
+                return RedirectToAction("Error", "Home");
+            }
+        }
+
+       [HttpPost]
+       [ValidateAntiForgeryToken]
+        //TODO TEknisyen atamayı burada yap
+        public ActionResult TeknisyenAta()
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                TempData["Model"] = new ErrorViewModel()
+                {
+                    Text = $"Bir hata oluştu {ex.Message}",
+                    ActionName = "Index",
+                    ControllerName = "Admin",
+                    ErrorCode = 500
+                };
+                return RedirectToAction("Error", "Home");
+            }
+            return View();
+        }
+
+        public ActionResult OPArizaDetay(int id)
+        {
+
+            try
+            {
+ 
+                var data = new ArizaKayitRepo()
+                    .GetAll(x=>x.Id==id)
+                    .Select(x=>Mapper.Map<ArizaViewModel>(x)).FirstOrDefault();
+                return View(data);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw;
+            }
+        
         }
     }
 }

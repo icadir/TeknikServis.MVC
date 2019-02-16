@@ -12,6 +12,8 @@ namespace TeknikServis.Entity.Enums
         Cozuldu,
         Beklemede,
         OperatorTakibeAldı,
+        ÇözümSürecinde,
+        
        
     }
 }
