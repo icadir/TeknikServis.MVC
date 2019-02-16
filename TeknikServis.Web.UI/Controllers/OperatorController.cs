@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
+using Microsoft.AspNet.Identity;
 using TeknikServis.BLL.Repository;
 using TeknikServis.Entity.ViewModels;
 using TeknikServis.Entity.ViewModels.ArizaViewModels;
@@ -42,6 +43,47 @@ namespace TeknikServis.Web.UI.Controllers
                 };
                 return RedirectToAction("Error", "Home");
             }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> ArizaKabul(int id)
+        {
+            //ikisiylede bulabilirsin o anki sistemde online olanı
+            //var OpertatorId = HttpContext.User.Identity.GetUserId();
+            var OpertatorId = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            try
+            {
+                var ariza =await new ArizaKayitRepo().GetByIdAsync(id);
+                if (ariza==null)
+                {
+                    RedirectToAction("Index", "Operator");
+                }
+                else
+                {
+                    ariza.OperatorKabulTarih = DateTime.Now;
+                    ariza.OperatorKabul = true;
+                    ariza.OperatorId = OpertatorId;
+                    new ArizaKayitRepo().Update(ariza);
+                    RedirectToAction("Index", "Operator");
+                    //TODO Müşteriye Mail gönderilir bilgilendirme belki
+                }
+
+                return RedirectToAction("Index","Operator");
+
+            }
+          
+            catch (Exception ex)
+            {
+                TempData["Model"] = new ErrorViewModel()
+                {
+                    Text = $"Bir hata oluştu {ex.Message}",
+                    ActionName = "Index",
+                    ControllerName = "Admin",
+                    ErrorCode = 500
+                };
+                return RedirectToAction("Error", "Home");
+            }
+          
         }
     }
 }

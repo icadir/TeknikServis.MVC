@@ -38,8 +38,10 @@ namespace TeknikServis.Entity.Entitties
         //todo view modelyapcaksın bu alanı resim için.
         [DisplayName("Fatura Resmini Ekleyiniz")]
         public string FaturaPath { get; set; }
-
+        [DisplayName("Arızanın Olusturuldugu Tarihi")]
         public DateTime ArizaOlusturmaTarihi { get; set; } = DateTime.Now;
+        [DisplayName("Operator Kabul Tarihi")]
+        public DateTime? OperatorKabulTarih { get; set; }
     //todo çözüldügünde datetime.nowla atarsın otomatik
         public DateTime? ArizaCozulduguTarih { get; set; }
         //default olarak çözülemedi atadık.

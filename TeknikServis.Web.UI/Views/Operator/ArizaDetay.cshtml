@@ -21,54 +21,49 @@
                     <div class="form-group row">
                         <div class="col-xs-6">
                             @*<label for="exampleInputName1">First name</label>*@
-                            @Html.Label(data.Name)
+                            @Html.Label("","Müşterinin Adı")
                             @*<input type="text" class="form-control" id="exampleInputName1">*@
                             @Html.TextBox("data.Name", data.Name, new {@class="form-control",@readonly="readonly"})
                         
                         </div>
                         <div class="col-xs-6">
-                            <label for="exampleInputName2">Last name</label>
-                            <input type="text" class="form-control" id="exampleInputName2">
+                            @Html.Label("","Müşterinin Soyadı")
+            
+                            @Html.TextBox("data.Surname", data.Surname, new {@class="form-control",@readonly="readonly"})
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-xs-6">
-                            <label for="exampleInputPhone1">Mobile phone</label>
-                            <input type="tel" class="form-control" id="exampleInputPhone1">
+                            @Html.Label("","Müşteri Email")
+                            @Html.TextBox("data.Email", data.Email, new {@class="form-control",@readonly="readonly"})
                         </div>
                         <div class="col-xs-6">
-                            <label for="exampleInputPhone2">Work phone</label>
-                            <input type="datetime-local" class="form-control" id="exampleInputPhone2">
+                            @Html.LabelFor(x=>x.Telno)
+                            @Html.TextBoxFor(x=>x.Telno, new { @class = "form-control", @readonly = "readonly" })
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputAddress">Address</label>
-                        <input type="text" class="form-control" id="exampleInputAddress">
+                        @Html.Label("","Adres Bilgisi")
+                        @Html.TextAreaFor(x=>x.Adres, new { @class = "form-control", @readonly = "readonly" })
                     </div>
 
-                    <h4 class="m-t-md m-b">Change password</h4>
                     <div class="form-group row">
                         <div class="col-xs-6">
-                            <label for="exampleInputPassword1">Confirm current password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1">
+                            @Html.Label("","Arızalı Ürün Resmi")
+                            <img src="@(string.IsNullOrEmpty(Model.ArızaPath) ? "/assets/img/avatars/avatar3.jpg" : Model.ArızaPath)" class="img-avatar-96" width="100" height="100"/>
                         </div>
                         <div class="col-xs-6">
-                            <label for="exampleInputPassword2">Confirm new password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword2">
+                            @Html.Label("","Ürün Fatura Bilgisi")
+                            <img src="@(string.IsNullOrEmpty(Model.FaturaPath) ? "/assets/img/avatars/avatar3.jpg" : Model.FaturaPath)" class="img-avatar-96" width="100" height="100"/>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-xs-6">
-                            <label for="exampleInputPassword3">New password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword3">
-                        </div>
+                       
                     </div>
                     <div class="row narrow-gutter">
-                        <div class="col-xs-6">
-                            <button type="button" class="btn btn-default btn-block">Cancel</button>
-                        </div>
-                        <div class="col-xs-6">
-                            <button type="button" class="btn btn-app btn-block">Save<span class="hidden-xs"> changes</span></button>
+                        <div class="col-xs-12">
+                            @*<button type="button" class="btn btn-app btn-block">Save<span class="hidden-xs"> changes</span></button>*@
+                            <a href="@Url.Action("ArizaKabul", "Operator", new {id = Model.ArizaId})" class="btn btn-app btn-block hidden-xs" title="Arıza Kabul">
+                             Arızayı Onayla
+                            </a>
                         </div>
                     </div>
                 }

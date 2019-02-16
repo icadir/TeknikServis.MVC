@@ -40,6 +40,7 @@
                   
                     var data = MembershipTools.GetMusteri(Model[i].MusteriId);
                     var data2 = Model[i];
+                  
                     @*<tr class="@(data.EmailConfirmed?"":"bg-yellow")">*@
                     <tr class="bg-danger">
                         <td class="text-center">@(i + 1)</td>
@@ -56,7 +57,7 @@
                         <td class="text-center">
                             <div class="btn-group">
                                
-                                <a href="@Url.Action("ArizaDetay", "Operator", new {id = data2.ArizaId})" class="btn btn-xs btn-default" title="Edit User">
+                                <a href="@Url.Action("ArizaDetay", "Operator", new {id = data2.ArizaId})" class="btn btn-xs btn-default" title="Arıza Detay">
                                     <i class="ion-edit"></i>
                                 </a>
                             </div>

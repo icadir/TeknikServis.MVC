@@ -17,7 +17,9 @@ namespace TeknikServis.Web.UI.App_Start
 
         private static void ArizaKayitMap(IMapperConfigurationExpression cfg)
         {
-            cfg.CreateMap<ArızaKayıt, ArizaViewModel>().ReverseMap();
+            cfg.CreateMap<ArızaKayıt, ArizaViewModel>()
+                .ForMember(dest=>dest.ArizaId,opt=>opt.MapFrom(x=>x.Id))
+                .ReverseMap();
         }
     }
 }

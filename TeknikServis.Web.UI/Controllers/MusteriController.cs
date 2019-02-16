@@ -34,8 +34,9 @@ namespace TeknikServis.Web.UI.Controllers
         [Authorize]
         public ActionResult ArizaKayitEkle(ArizaViewModel model)
         {
-            //o anki sistemdeki kullanıcının idsini verir. 
+            //o anki sistemdeki kullanıcının idsini verir.
             //var asd = HttpContext.User.Identity.GetUserId();
+            //
             if (!ModelState.IsValid)
             {
                 //Gelen model valid degiilse bu sayfaya yönlendirilip hatalar gösterilicek.

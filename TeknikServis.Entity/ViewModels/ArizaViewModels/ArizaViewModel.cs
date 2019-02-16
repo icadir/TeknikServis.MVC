@@ -31,7 +31,7 @@ namespace TeknikServis.Entity.ViewModels.ArizaViewModels
         [DisplayName("Boylam Giriniz :")]
         public string Boylam { get; set; }
 
-        
+
 
         [DisplayName("Ürün Resmi Ekleyiniz :")]
         public string ArızaPath { get; set; }
@@ -42,8 +42,10 @@ namespace TeknikServis.Entity.ViewModels.ArizaViewModels
         public string FaturaPath { get; set; }
         [DisplayName("Ürünün Fatura Resmini Ekleyiniz.")]
         public HttpPostedFileBase PostedFileFatura { get; set; }
-
+        [DisplayName("Arızanın Olusturuldugu Tarihi")]
         public DateTime ArizaOlusturmaTarihi { get; set; } = DateTime.Now;
+        [DisplayName("Operator Kabul Tarihi")]
+        public DateTime? OperatorKabulTarih { get; set; }
         //todo çözüldügünde datetime.nowla atarsın otomatik
         public DateTime? ArizaCozulduguTarih { get; set; }
         //default olarak çözülemedi atadık.
