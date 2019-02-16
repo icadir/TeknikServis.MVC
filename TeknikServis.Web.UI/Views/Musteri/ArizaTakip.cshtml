@@ -50,7 +50,7 @@
                     var data2 = Model[i];
 
                     @*<tr class="@(data.EmailConfirmed?"":"bg-yellow")">*@
-                    <tr class="@(data2.ArizaDurumu==ArizaDurum.Beklemede?"":"bg-red")">
+                    <tr class="@(data2.ArizaDurumu==ArizaDurum.Beklemede ?"bg-red":"bg-green")">
                         <td class="font-300 text-center">@(i + 1)</td>
                         <td class="font-300 text-center">@(data2.ArizaDurumu)</td>
                         <td class="font-300 text-center">@(data2.OperatorId==null ? "Operator Onaylamadı":dataOperator.Name+" "+dataOperator.Surname)</td>
