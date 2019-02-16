@@ -49,7 +49,7 @@ namespace TeknikServis.Entity.ViewModels.ArizaViewModels
         //todo çözüldügünde datetime.nowla atarsın otomatik
         public DateTime? ArizaCozulduguTarih { get; set; }
         //default olarak çözülemedi atadık.
-        public ArizaDurum ArizaDurumu { get; set; } = ArizaDurum.Cozulemedi;
+        public ArizaDurum ArizaDurumu { get; set; } = ArizaDurum.Beklemede;
         [DisplayName("Ürün Tipini Seçiniz")]
         public BeyazEsyaTip BeyazEsya { get; set; }
         //todo otomatik olarak false sen operator sayfasında false olanları getirirsin. eger onaylarsa yeni bir sayfasına true olanları alırsın. ve orda yönlendirmeyi yaparsın. Yerse belki ariza durum a da onaylandi eklenebilir.

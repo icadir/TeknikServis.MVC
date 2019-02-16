@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using AutoMapper;
 using Microsoft.AspNet.Identity;
 using TeknikServis.BLL.Repository;
+using TeknikServis.Entity.Enums;
 using TeknikServis.Entity.ViewModels;
 using TeknikServis.Entity.ViewModels.ArizaViewModels;
 
@@ -63,6 +64,7 @@ namespace TeknikServis.Web.UI.Controllers
                     ariza.OperatorKabulTarih = DateTime.Now;
                     ariza.OperatorKabul = true;
                     ariza.OperatorId = OpertatorId;
+                    ariza.ArizaDurumu = ArizaDurum.OperatorTakibeAldı;
                     new ArizaKayitRepo().Update(ariza);
                     RedirectToAction("Index", "Operator");
                     //TODO Müşteriye Mail gönderilir bilgilendirme belki

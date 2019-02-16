@@ -151,5 +151,31 @@ namespace TeknikServis.Web.UI.Controllers
             }
         
         }
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult ArizaTakip()
+        {
+            //o an sistemdeki Musteriyi bulur
+            var musteriId = HttpContext.User.Identity.GetUserId();
+            try
+            {
+                var arizalar = new ArizaKayitRepo().GetAll(x => x.MusteriId == musteriId).ToList();
+                return View(arizalar);
+            }
+            catch (Exception ex)
+            {
+                TempData["Model"] = new ErrorViewModel()
+                {
+                    Text = $"Bir hata oluştu: {ex.Message}",
+                    ActionName = "Index",
+                    ControllerName = "Musteri",
+                    ErrorCode = 500
+                };
+                return RedirectToAction("Error", "Home");
+            }
+
+
+        }
     }
 }

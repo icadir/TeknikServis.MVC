@@ -60,12 +60,16 @@ namespace TeknikServis.BLL.Identity
 
         public static User GetMusteri(string UserId)
         {
-            //if (string.IsNullOrEmpty(UserId))
-            //    //return "/assets/img/avatars/avatar3.jpg";
+            if (string.IsNullOrEmpty(UserId))
+            {
+                return null;
+            }
+            else
+            {
+                var MusteriUser = NewUserManager().FindById(UserId);
+                return MusteriUser;
+            }
 
-          var MusteriUser = NewUserManager().FindById(UserId);
-
-          return MusteriUser;
         }
     }
 }

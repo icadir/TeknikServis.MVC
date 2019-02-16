@@ -45,7 +45,7 @@ namespace TeknikServis.Entity.Entitties
     //todo çözüldügünde datetime.nowla atarsın otomatik
         public DateTime? ArizaCozulduguTarih { get; set; }
         //default olarak çözülemedi atadık.
-        public ArizaDurum ArizaDurumu { get; set; } = ArizaDurum.Cozulemedi;
+        public ArizaDurum ArizaDurumu { get; set; } = ArizaDurum.Beklemede;
         [DisplayName("Ürün Tipini Seçiniz")]
         public BeyazEsyaTip BeyazEsya { get; set; }
 
