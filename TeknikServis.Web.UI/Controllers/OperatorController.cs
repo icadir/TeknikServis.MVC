@@ -131,7 +131,9 @@ namespace TeknikServis.Web.UI.Controllers
                 ariza.ArizaDurumu = ArizaDurum.TeknisyenAtandi;
                 new ArizaKayitRepo().Update(ariza);
                var teknisyen = await NewUserStore().FindByIdAsync(ariza.TeknisyenId);
+               //TODO Musteriye ve Teknisyene mail gönder. 
                 TempData["Message"] = $"{ariza.Id} nolu arızaya {teknisyen.Name}  {teknisyen.Surname} atanmıştır.İyi çalışmalar.";
+                
               return  RedirectToAction("Index", "Operator");
             }
       
