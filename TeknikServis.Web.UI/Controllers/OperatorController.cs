@@ -123,7 +123,7 @@ namespace TeknikServis.Web.UI.Controllers
        [HttpPost]
        [ValidateAntiForgeryToken]
         //TODO TEknisyen atamayı burada yap
-        public ActionResult TeknisyenAta()
+        public ActionResult TeknisyenAta(User model)
         {
             try
             {
@@ -142,6 +142,8 @@ namespace TeknikServis.Web.UI.Controllers
             }
             return View();
         }
+
+
         List<User> Teknisyenler = new List<User>();
         List<SelectListItem> TeknisyenX = new List<SelectListItem>();
         public ActionResult OPArizaDetay(int id)

@@ -83,15 +83,15 @@
                     @Html.AntiForgeryToken()
 
                     @Html.Label("Teknisyen", new { @class = "col-md-3 control-label" })
-                    <div class="col-md-7">
-                        @*@Html.DropDownList("Teknisyenler", (List<SelectListItem>)ViewBag.TeknisyenK, new { @class = "form-control", size = "1" })*@
-                        @Html.DropDownList("TeknisyenK")
-                    </div>
+                <div class="col-md-7">
+                    @*@Html.DropDownList("Teknisyenler", (List<SelectListItem>)ViewBag.TeknisyenK, new { @class = "form-control", size = "1" })*@
+                    @*@Html.DropDownListFor(x => x.TeknisyenId, (List<SelectListItem>)ViewBag.TeknisyenK, new { @class = "form-control", size = "1" })*@
+                    @*TODO Aklıma gelen şey gidip arıza tablosunda teknisyen için bir alan mı açmamız lazım sadece burası için yoksa yenibir viewmodel yapıp bu sayfa için kullanmalımı. User olarak alıyorum cünkü ama bana arızanın ıd side lazım .*@
+                    @Html.DropDownList("TeknisyenK", (List<SelectListItem>)ViewBag.TeknisyenK, new { @class = "form-control", size = "1" })  @*ÇAlışan bölüm *@
+                </div>
                     <div class="row narrow-gutter">
                         <div class="col-xs-12">
-                            <a href="@Url.Action("TeknisyenAta", "Operator", new {id = Model.ArizaId})" class="btn btn-app btn-block hidden-xs" title="Teknisyen Atama">
-                                Teknisyen Ata
-                            </a>
+                            <button class="btn btn-app" type="submit">Teknisyen Ata</button>
                         </div>
                     </div>
                 }
@@ -112,4 +112,4 @@
         });
     </script>
 }
-}
+
