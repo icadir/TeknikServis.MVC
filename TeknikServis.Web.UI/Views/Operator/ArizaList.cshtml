@@ -1,5 +1,5 @@
 ﻿@using TeknikServis.BLL.Identity
-@model List<TeknikServis.Entity.Entitties.ArızaKayıt>
+@model List<TeknikServis.Entity.ViewModels.ArizaViewModels.ArizaViewModel>
 
 @{
     ViewBag.Title = "Operator Arıza Listesi";
@@ -56,7 +56,7 @@
 
                         <td class="text-center">
                             <div class="btn-group">
-                                <a href="@Url.Action("OPArizaDetay", "Operator")" class="btn btn-xs btn-default" title="Teknisyen Ata">
+                                <a href="@Url.Action("OPArizaDetay", "Operator", new {id=data2.ArizaId})" class="btn btn-xs btn-default" title="Teknisyen Ata">
                                     <i class="ion-android-arrow-up">Teknisyen Ata</i>
                                 </a>
                             </div>

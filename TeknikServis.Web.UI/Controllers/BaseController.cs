@@ -6,11 +6,11 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using TeknikServis.BLL.Identity;
 using TeknikServis.Entity.IdentityModels;
-using static  TeknikServis.BLL.Identity.MembershipTools;
+using static TeknikServis.BLL.Identity.MembershipTools;
 namespace TeknikServis.Web.UI.Controllers
 {
     [Authorize]
-   
+
     public class BaseController : Controller
     {
         // GET: Base
@@ -31,17 +31,17 @@ namespace TeknikServis.Web.UI.Controllers
             return data;
         }
 
-        protected List<User> GetTeknisyen()
-        {
+        //protected List<User> GetTeknisyen()
+        //{
 
-        var asdasd = NewRoleManager().FindByName("Teknisyen").Users.Select(x => x.UserId).ToList();
-            for (int i = 0; i<asdasd.Count; i++)
-        {
-            var zzzzzz = NewUserManager().FindById(asdasd[i]);
-            Teknisyenler.Add(zzzzzz);
-        }
+        //    var asdasd = NewRoleManager().FindByName("Teknisyen").Users.Select(x => x.UserId).ToList();
+        //    for (int i = 0; i < asdasd.Count; i++)
+        //    {
+        //        var zzzzzz = NewUserManager().FindById(asdasd[i]);
+        //        Teknisyenler.Add(zzzzzz);
+        //    }
 
-        return Teknisyenler;
-}
+        //    return Teknisyenler;
+        //}
     }
 }

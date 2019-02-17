@@ -1,4 +1,5 @@
 ﻿@using TeknikServis.BLL.Identity
+@using TeknikServis.Entity.IdentityModels
 @model TeknikServis.Entity.ViewModels.ArizaViewModels.ArizaViewModel
 @{
     ViewBag.Title = "OPArizaDetay";
@@ -77,13 +78,14 @@
     <div class="card">
         <div class="card-block">
             <div class="form-group">
-                @using (Html.BeginForm("EditUserRoles", "Admin", FormMethod.Post))
+                @using (Html.BeginForm("TeknisyenAta", "Operator", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
 
-                    @Html.Label("Roles", new { @class = "col-md-3 control-label" })
+                    @Html.Label("Teknisyen", new { @class = "col-md-3 control-label" })
                     <div class="col-md-7">
-                        @Html.DropDownList("Roles", (List<SelectListItem>)ViewBag.RoleList, new { @class = "js-select2 form-control", size = "1" })
+                        @*@Html.DropDownList("Teknisyenler", (List<SelectListItem>)ViewBag.TeknisyenK, new { @class = "form-control", size = "1" })*@
+                        @Html.DropDownList("TeknisyenK")
                     </div>
                     <div class="row narrow-gutter">
                         <div class="col-xs-12">

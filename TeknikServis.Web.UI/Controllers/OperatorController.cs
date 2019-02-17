@@ -10,6 +10,7 @@ using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using TeknikServis.BLL.Repository;
 using TeknikServis.Entity.Enums;
+using TeknikServis.Entity.IdentityModels;
 using TeknikServis.Entity.ViewModels;
 using static TeknikServis.BLL.Identity.MembershipTools;
 using TeknikServis.Entity.ViewModels.ArizaViewModels;
@@ -101,6 +102,7 @@ namespace TeknikServis.Web.UI.Controllers
             {
                 var data = new ArizaKayitRepo()
                     .GetAll(x => x.OperatorId == operatorId)
+                    .Select(x=> Mapper.Map<ArizaViewModel>(x))
                     .OrderBy(x=>x.ArizaOlusturmaTarihi)
                     .ToList();
                 return View(data);
@@ -140,14 +142,35 @@ namespace TeknikServis.Web.UI.Controllers
             }
             return View();
         }
-
+        List<User> Teknisyenler = new List<User>();
+        List<SelectListItem> TeknisyenX = new List<SelectListItem>();
         public ActionResult OPArizaDetay(int id)
         {
-
+           
             try
             {
-           
-                   
+                //TODO Beyin yanması  ve yapılacaklar .
+                //TODO Burayı Base kontrollıra Tası .
+                //TODO Hocaya Dropdownlistfor u sor . Id olarak nasıl  çekeriz sor. Sonra buradaki gereksizleri temizle.
+                //TODO Projede kaldıgınyer ArizaList sayfasında teknisyen ata diyince gelen ekranda teknisyen seçip Atama işlemini yapıcaksın. Teknisyen sayfası yapıcaksın . teknisyen atandıgı yerde müsteriye ve teknisyene mail atıcaksın.
+                //TODO Teknisyen için  İşi var İşi yok nasıl kontrol edilir sor. Yani Users Tablosuna Bir Alan mı eklenicek Bool olarak teknisyen atanırken o userın işi var gelicek ? 
+                //TODO HOCAYI BIRAKMA HEPSİNİ SORRRRr :D
+                var asdasd = NewRoleManager().FindByName("Teknisyen").Users.Select(x => x.UserId).ToList();
+                    for (int i = 0; i < asdasd.Count; i++)
+                    {
+                        var zzzzzz = NewUserManager().FindById(asdasd[i]);
+                        TeknisyenX.Add(new SelectListItem()
+                        {
+                            Text = zzzzzz.Name,
+                            Value = zzzzzz.Id
+                        });
+                   Teknisyenler.Add(zzzzzz);
+                    
+                    }
+
+                    ViewBag.TeknisyenK = TeknisyenX;
+                    ViewBag.Teknisyenler = new SelectList(Teknisyenler, "Id", "Name");
+               
                 var data = new ArizaKayitRepo()
                     .GetAll(x=>x.Id==id)
                     .Select(x=>Mapper.Map<ArizaViewModel>(x)).FirstOrDefault();
