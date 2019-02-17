@@ -13,6 +13,7 @@ namespace TeknikServis.Entity.Enums
         Beklemede,
         OperatorTakibeAldı,
         ÇözümSürecinde,
+        TeknisyenAtandi,
         
        
     }

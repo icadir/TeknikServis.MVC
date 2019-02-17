@@ -1,19 +1,16 @@
-﻿using System;
+﻿using AutoMapper;
+using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
-using AutoMapper;
-using Microsoft.Ajax.Utilities;
-using Microsoft.AspNet.Identity;
 using TeknikServis.BLL.Repository;
 using TeknikServis.Entity.Enums;
 using TeknikServis.Entity.IdentityModels;
 using TeknikServis.Entity.ViewModels;
-using static TeknikServis.BLL.Identity.MembershipTools;
 using TeknikServis.Entity.ViewModels.ArizaViewModels;
+using static TeknikServis.BLL.Identity.MembershipTools;
 
 
 namespace TeknikServis.Web.UI.Controllers
@@ -123,13 +120,21 @@ namespace TeknikServis.Web.UI.Controllers
        [HttpPost]
        [ValidateAntiForgeryToken]
         //TODO TEknisyen atamayı burada yap
-        public ActionResult TeknisyenAta(ArizaViewModel model)
+        public async Task<ActionResult> TeknisyenAta(ArizaViewModel model)
         {
             //TODO NOT Eger bir yerlerde program view modelden patlarsa string birşeyler EKledik ondandır.
             try
             {
-
+                //TODO Teknisyen atandıgı tarihde eklenebilir istenirse.
+                var ariza = new ArizaKayitRepo().GetById(model.ArizaId);
+                ariza.TeknisyenId = model.UserId;
+                ariza.ArizaDurumu = ArizaDurum.TeknisyenAtandi;
+                new ArizaKayitRepo().Update(ariza);
+               var teknisyen = await NewUserStore().FindByIdAsync(ariza.TeknisyenId);
+                TempData["Message"] = $"{ariza.Id} nolu arızaya {teknisyen.Name}  {teknisyen.Surname} atanmıştır.İyi çalışmalar.";
+              return  RedirectToAction("Index", "Operator");
             }
+      
             catch (Exception ex)
             {
                 TempData["Model"] = new ErrorViewModel()
@@ -141,7 +146,7 @@ namespace TeknikServis.Web.UI.Controllers
                 };
                 return RedirectToAction("Error", "Home");
             }
-            return View();
+          
         }
 
 
