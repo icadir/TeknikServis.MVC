@@ -31,7 +31,7 @@ namespace TeknikServis.Entity.ViewModels.ArizaViewModels
         [DisplayName("Boylam Giriniz :")]
         public string Boylam { get; set; }
 
-
+        public string UserId { get; set; }
 
         [DisplayName("Ürün Resmi Ekleyiniz :")]
         public string ArızaPath { get; set; }

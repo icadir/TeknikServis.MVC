@@ -8,22 +8,39 @@
 
 <h2 class="text-center">Ariza Detay</h2>
 
-<div class="col-md-6">
+<div class="col-md-12">
     <div class="card">
         <div class="card-block tab-content">
             <div class="tab-pane fade active in" id="profile-tab1">
 
-                @using (Html.BeginForm("ArizaKabul", "Operator", FormMethod.Post, new { @class = "fieldset" }))
+                @using (Html.BeginForm("TeknisyenAta", "Operator", FormMethod.Post, new { @class = "fieldset" }))
                 {
-
+                    @Html.AntiForgeryToken()
                     var data = MembershipTools.GetMusteri(Model.MusteriId);
+                    @Html.HiddenFor(x => x.ArizaId)
 
-                    <h4 class="m-t-sm m-b">Teknisyen Atama</h4>
+                    <h4 class="m-t-sm m-b">Teknisyen Atama Sayfası</h4>
+                                                           <br/>
+
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            @Html.Label("Teknisyen Seçiniz", new { @class = "col-md-3 control-label" })
+                            <div class="col-md-6">
+                                @*TODO buradaki x.UserId sayafaya gelen modelde olmalı. ona göre anlıyor. ve tipi de geldigi gibi olmalı. string geliyorsa string int ise int*@
+                                @Html.DropDownListFor(x => x.UserId, (List<SelectListItem>)ViewBag.TeknisyenK, new { @class = "form-control", size = "1"})
+                            </div>
+                            <br/>
+                            <div class="row narrow-gutter">
+                                <div class="col-md-12">
+                                    <button class="btn btn-app btn-block" type="submit">Teknisyen Ata</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="form-group row">
                         <div class="col-xs-6">
-                            @*<label for="exampleInputName1">First name</label>*@
-                            @Html.Label("", "Müşterinin Adı")
-                            @*<input type="text" class="form-control" id="exampleInputName1">*@
+                            @Html.Label("", "Müşterinin Adı")          
                             @Html.TextBox("data.Name", data.Name, new { @class = "form-control", @readonly = "readonly" })
 
                         </div>
@@ -60,6 +77,7 @@
 
                     </div>
 
+
                 }
                 <!-- Profile tab 1 -->
                 @*<form class="fieldset">*@
@@ -74,32 +92,7 @@
     <!-- .card -->
 </div>
 
-<div class="col-md-6">
-    <div class="card">
-        <div class="card-block">
-            <div class="form-group">
-                @using (Html.BeginForm("TeknisyenAta", "Operator", FormMethod.Post))
-                {
-                    @Html.AntiForgeryToken()
 
-                    @Html.Label("Teknisyen", new { @class = "col-md-3 control-label" })
-                <div class="col-md-7">
-                    @*@Html.DropDownList("Teknisyenler", (List<SelectListItem>)ViewBag.TeknisyenK, new { @class = "form-control", size = "1" })*@
-                    @*@Html.DropDownListFor(x => x.TeknisyenId, (List<SelectListItem>)ViewBag.TeknisyenK, new { @class = "form-control", size = "1" })*@
-                    @*TODO Aklıma gelen şey gidip arıza tablosunda teknisyen için bir alan mı açmamız lazım sadece burası için yoksa yenibir viewmodel yapıp bu sayfa için kullanmalımı. User olarak alıyorum cünkü ama bana arızanın ıd side lazım .*@
-                    @Html.DropDownList("TeknisyenK", (List<SelectListItem>)ViewBag.TeknisyenK, new { @class = "form-control", size = "1" })  @*ÇAlışan bölüm *@
-                </div>
-                    <div class="row narrow-gutter">
-                        <div class="col-xs-12">
-                            <button class="btn btn-app" type="submit">Teknisyen Ata</button>
-                        </div>
-                    </div>
-                }
-
-            </div>
-        </div>
-    </div>
-</div>
 
 @section bottom
 {

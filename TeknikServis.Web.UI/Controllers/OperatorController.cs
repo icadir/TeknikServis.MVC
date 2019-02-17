@@ -123,8 +123,9 @@ namespace TeknikServis.Web.UI.Controllers
        [HttpPost]
        [ValidateAntiForgeryToken]
         //TODO TEknisyen atamayı burada yap
-        public ActionResult TeknisyenAta(User model)
+        public ActionResult TeknisyenAta(ArizaViewModel model)
         {
+            //TODO NOT Eger bir yerlerde program view modelden patlarsa string birşeyler EKledik ondandır.
             try
             {
 
@@ -144,8 +145,7 @@ namespace TeknikServis.Web.UI.Controllers
         }
 
 
-        List<User> Teknisyenler = new List<User>();
-        List<SelectListItem> TeknisyenX = new List<SelectListItem>();
+        List<SelectListItem> Teknisyenler = new List<SelectListItem>();
         public ActionResult OPArizaDetay(int id)
         {
            
@@ -157,22 +157,20 @@ namespace TeknikServis.Web.UI.Controllers
                 //TODO Projede kaldıgınyer ArizaList sayfasında teknisyen ata diyince gelen ekranda teknisyen seçip Atama işlemini yapıcaksın. Teknisyen sayfası yapıcaksın . teknisyen atandıgı yerde müsteriye ve teknisyene mail atıcaksın.
                 //TODO Teknisyen için  İşi var İşi yok nasıl kontrol edilir sor. Yani Users Tablosuna Bir Alan mı eklenicek Bool olarak teknisyen atanırken o userın işi var gelicek ? 
                 //TODO HOCAYI BIRAKMA HEPSİNİ SORRRRr :D
-                var asdasd = NewRoleManager().FindByName("Teknisyen").Users.Select(x => x.UserId).ToList();
-                    for (int i = 0; i < asdasd.Count; i++)
+                //TODO User alanına veya teknisyenlere özel olarak uzmanlık vs nasıl eklenebilir soralım hocaya eger olursa buarada combo boxta uzmanlık alanını getiririz. zaten
+                var RoleTeknisyenler = NewRoleManager().FindByName("Teknisyen").Users.Select(x => x.UserId).ToList();
+                    for (int i = 0; i < RoleTeknisyenler.Count; i++)
                     {
-                        var zzzzzz = NewUserManager().FindById(asdasd[i]);
-                        TeknisyenX.Add(new SelectListItem()
+                        var User = NewUserManager().FindById(RoleTeknisyenler[i]);
+                        Teknisyenler.Add(new SelectListItem()
                         {
-                            Text = zzzzzz.Name,
-                            Value = zzzzzz.Id
-                        });
-                   Teknisyenler.Add(zzzzzz);
-                    
+                            //TODO User alanına veya teknisyenlere özel olarak uzmanlık vs nasıl eklenebilir soralım hocaya eger olursa buarada combo boxta uzmanlık alanını getiririz. zaten İşi varmı yokmuyu nasıl ekliceksek aynı mantık olabilir.
+                            Text = User.Name + " "+ User.Surname,
+                            Value = User.Id
+                        });        
                     }
 
-                    ViewBag.TeknisyenK = TeknisyenX;
-                    ViewBag.Teknisyenler = new SelectList(Teknisyenler, "Id", "Name");
-               
+                    ViewBag.TeknisyenK = Teknisyenler;         
                 var data = new ArizaKayitRepo()
                     .GetAll(x=>x.Id==id)
                     .Select(x=>Mapper.Map<ArizaViewModel>(x)).FirstOrDefault();
