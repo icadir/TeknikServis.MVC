@@ -11,6 +11,7 @@ using TeknikServis.BLL.Helpers;
 using TeknikServis.BLL.Repository;
 using TeknikServis.BLL.Services.Senders;
 using TeknikServis.Entity.Entitties;
+using TeknikServis.Entity.IdentityModels;
 using TeknikServis.Entity.ViewModels;
 using TeknikServis.Entity.ViewModels.ArizaViewModels;
 using static TeknikServis.BLL.Identity.MembershipTools;
@@ -27,7 +28,24 @@ namespace TeknikServis.Web.UI.Controllers
             //TODO sadece müşteri giricek ayarlarsın.
             //Sayfaya tıklayan kişinin giriş yapıp yapamadıgını kontrol eder. 
             //if (HttpContext.GetOwinContext().Authentication.User.Identity.IsAuthenticated)
-                return View();
+            //TODO denedik denedik olmadı...
+            var ww = "3ed9fe3b-9f64-449b-8d26-350088bd559b";
+            var AllPersonel = NewRoleManager().Roles.Where(x => x.Name == "Personel").ToList();
+            var Lpersonel = NewRoleManager().Roles.Where(x => x.Name == ww).ToList();
+            var Admins = NewRoleStore().Roles.Where(x => x.Name == "Admin").ToList();
+            var Ladmins = NewRoleStore().Roles.Where(x => x.Id == ww).ToList();
+            var zxc = NewRoleManager().FindByName("Teknisyen").Users.ToList();
+            
+            var asdasd = NewRoleManager().FindByName("Teknisyen").Users.Select(x => x.UserId).ToList();
+            for (int i = 0; i < asdasd.Count; i++)
+            {
+                var s = NewUserManager().Users.FirstOrDefault(x => x.Id == asdasd[i]);
+            }
+            //NewUserStore().FindByIdAsync()
+    
+          
+            //var users = NewUserManager().Users.Where(x => x.Roles.Select(s => s.RoleId).Contains(roleId)).ToList();
+            return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]

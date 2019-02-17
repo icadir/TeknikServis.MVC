@@ -146,7 +146,8 @@ namespace TeknikServis.Web.UI.Controllers
 
             try
             {
- 
+           
+                   
                 var data = new ArizaKayitRepo()
                     .GetAll(x=>x.Id==id)
                     .Select(x=>Mapper.Map<ArizaViewModel>(x)).FirstOrDefault();
