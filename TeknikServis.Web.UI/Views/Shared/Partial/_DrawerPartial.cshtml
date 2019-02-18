@@ -17,117 +17,116 @@
                     <a href="frontend_home.html"><i class="ion-ios-monitor-outline"></i> Frontend</a>
                 </li>
                 <li class="nav-item nav-drawer-header">Kullanıcılar</li>
-                <li class="nav-item nav-item-has-subnav">
-                    <a href="javascript:void(0)"> <i class="ion-android-person fa-2x"></i>Admin</a>
-                    <ul class="nav nav-subnav">
-                        <li>
-                            <a href="@Url.Action("Index","Admin")">Admin AnaSayfa</a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("EditUser","Admin")">Kullanıcı Ayarı</a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("Index","Operator")">Operator Indexi</a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("ArizaDetay","Operator")">Operator Arizadetay</a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("Index","Musteri")">musteri Indexi</a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("ArizaTakip","Musteri")">müsteri arıza takip</a>
-                        </li>
-                        <li>
-                            <a href="base_ui_modals_tooltips.html">Modals / Tooltips</a>
-                        </li>
-                        <li>
-                            <a href="base_ui_alerts_notify.html">Alerts / Notify</a>
-                        </li>
-                        <li>
-                            <a href="base_ui_pagination.html">Pagination</a>
-                        </li>
-                        <li>
-                            <a href="base_ui_progress.html">Progress</a>
-                        </li>
-                        <li>
-                            <a href="base_ui_tabs.html">Tabs</a>
-                        </li>
-                        <li>
-                            <a href="base_ui_typography.html">Typography</a>
-                        </li>
-                        <li>
-                            <a href="base_ui_widgets.html">Widgets</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item nav-item-has-subnav">
-                    <a href="javascript:void(0)"><i class="ion-android-people fa-2x"></i>Operatör</a>
-                    <ul class="nav nav-subnav">
-                        <li>
-                            <a href="@Url.Action("Index","Operator")">Operator Anasayfa</a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("ArizaDetay","Operator")">Operator Arizadetay</a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("ArizaList","Operator")">Operator Arizalsitesiy</a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("OPArizaDetay","Operator")">Operator Detayımsı</a>
-                        </li>
-                        <li>
-                            <a href="base_forms_wizard.html">Wizard</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item nav-item-has-subnav">
-                    <a href="javascript:void(0)"><i class="ion-android-people fa-2x"></i>Teknisyen</a>
-                    <ul class="nav nav-subnav">
-                        <li>
-                            <a href="base_tables_styles.html">Styles</a>
-                        </li>
-                        <li>
-                            <a href="base_tables_responsive.html">Responsive</a>
-                        </li>
-                        <li>
-                            <a href="base_tables_tools.html">Tools</a>
-                        </li>
-                        <li>
-                            <a href="base_tables_pricing.html">Pricing</a>
-                        </li>
-                        <li>
-                            <a href="base_tables_datatables.html">Wizard</a>
-                        </li>
-                    </ul>
-                </li>
-               
-                <li class="nav-item nav-item-has-subnav">
-                    <a href="javascript:void(0)"><i class="ion-ios-people fa-2x"></i> Müsteri</a>
-                    <ul class="nav nav-subnav">
-                        <li>
-                            <a href="@Url.Action("Index","Musteri")">Ariza Bildirimi</a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("ArizaTakip","Musteri")">Arıza Takip</a>
-                        </li>
-                        <li>
-                            <a href="base_js_charts_flot.html">Charts - Flot</a>
-                        </li>
-                        <li>
-                            <a href="base_js_charts_chartjs.html">Charts - Chart.js</a>
-                        </li>
-                        <li>
-                            <a href="base_js_charts_sparkline.html">Charts - Sparkline</a>
-                        </li>
-                        <li>
-                            <a href="base_js_draggable.html">Draggable</a>
-                        </li>
-                        <li>
-                            <a href="base_js_syntax_highlight.html">Syntax highlight</a>
-                        </li>
-                    </ul>
-                </li>
+                @if (HttpContext.Current.User.IsInRole("Admin"))
+                {
+                    <li class="nav-item nav-item-has-subnav">
+                        <a href="javascript:void(0)"> <i class="ion-android-person fa-2x"></i>Admin</a>
+                        <ul class="nav nav-subnav">
+                            <li>
+                                <a href="@Url.Action("Index", "Admin")">Admin AnaSayfa</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("EditUser", "Admin")">Kullanıcı Ayarı</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "Operator")">Operator Indexi</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("ArizaDetay", "Operator")">Operator Arizadetay</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "Musteri")">musteri Indexi</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("ArizaTakip", "Musteri")">müsteri arıza takip</a>
+                            </li>
+                            <li>
+                                <a href="base_ui_modals_tooltips.html">Modals / Tooltips</a>
+                            </li>
+                            <li>
+                                <a href="base_ui_alerts_notify.html">Alerts / Notify</a>
+                            </li>
+                            <li>
+                                <a href="base_ui_pagination.html">Pagination</a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+                @if (HttpContext.Current.User.IsInRole("Admin") || HttpContext.Current.User.IsInRole("Operator"))
+                {
+                    <li class="nav-item nav-item-has-subnav">
+                        <a href="javascript:void(0)"><i class="ion-android-people fa-2x"></i>Operatör</a>
+                        <ul class="nav nav-subnav">
+                            <li>
+                                <a href="@Url.Action("Index", "Operator")">Operator Anasayfa</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("ArizaDetay", "Operator")">Operator Arizadetay</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("ArizaList", "Operator")">Operator Arizalsitesiy</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("OPArizaDetay", "Operator")">Operator Detayımsı</a>
+                            </li>
+                            <li>
+                                <a href="base_forms_wizard.html">Wizard</a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+                @if (HttpContext.Current.User.IsInRole("Admin") || HttpContext.Current.User.IsInRole("Teknisyen"))
+                {
+                    <li class="nav-item nav-item-has-subnav">
+                        <a href="javascript:void(0)"><i class="ion-android-people fa-2x"></i>Teknisyen</a>
+                        <ul class="nav nav-subnav">
+                            <li>
+                                <a href="base_tables_styles.html">Styles</a>
+                            </li>
+                            <li>
+                                <a href="base_tables_responsive.html">Responsive</a>
+                            </li>
+                            <li>
+                                <a href="base_tables_tools.html">Tools</a>
+                            </li>
+                            <li>
+                                <a href="base_tables_pricing.html">Pricing</a>
+                            </li>
+                            <li>
+                                <a href="base_tables_datatables.html">Wizard</a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+                @if (HttpContext.Current.User.IsInRole("Admin") || HttpContext.Current.User.IsInRole("Musteri"))
+                {
+                    <li class="nav-item nav-item-has-subnav">
+                        <a href="javascript:void(0)"><i class="ion-ios-people fa-2x"></i> Müsteri</a>
+                        <ul class="nav nav-subnav">
+                            <li>
+                                <a href="@Url.Action("Index", "Musteri")">Ariza Bildirimi</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("ArizaTakip", "Musteri")">Arıza Takip</a>
+                            </li>
+                            <li>
+                                <a href="base_js_charts_flot.html">Charts - Flot</a>
+                            </li>
+                            <li>
+                                <a href="base_js_charts_chartjs.html">Charts - Chart.js</a>
+                            </li>
+                            <li>
+                                <a href="base_js_charts_sparkline.html">Charts - Sparkline</a>
+                            </li>
+                            <li>
+                                <a href="base_js_draggable.html">Draggable</a>
+                            </li>
+                            <li>
+                                <a href="base_js_syntax_highlight.html">Syntax highlight</a>
+                            </li>
+                        </ul>
+                    </li>
+                }
             </ul>
         </nav>
         <!-- End drawer navigation -->
