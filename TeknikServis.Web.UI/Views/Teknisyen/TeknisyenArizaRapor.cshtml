@@ -1,0 +1,78 @@
+﻿@using TeknikServis.BLL.Identity
+@model TeknikServis.Entity.ViewModels.ArizaViewModels.ArizaViewModel
+
+@{
+    ViewBag.Title = "TeknisyenArizaRapor";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+
+<h2 class="text-center">Ariza Detay</h2>
+
+<div class="col-md-6 col-md-offset-3">
+    <div class="card">
+        <div class="card-block tab-content">
+            <div class="tab-pane fade active in" id="profile-tab1">
+
+                @using (Html.BeginForm("TeknisyenArızaBildiriOnayla", "Teknisyen", FormMethod.Post, new { @class = "fieldset" }))
+                {
+
+                    var data = MembershipTools.GetMusteri(Model.MusteriId);
+
+                    <h4 class="m-t-sm m-b">Arıza Kontrol Bildiri</h4>
+                    <div class="form-group row">
+                        <div class="col-xs-6">
+                            @*<label for="exampleInputName1">First name</label>*@
+                            @Html.Label("", "Müşterinin Adı")
+                            @*<input type="text" class="form-control" id="exampleInputName1">*@
+                            @Html.TextBox("data.Name", data.Name, new { @class = "form-control", @readonly = "readonly" })
+
+                        </div>
+                        <div class="col-xs-6">
+                            @Html.Label("", "Müşterinin Soyadı")
+
+                            @Html.TextBox("data.Surname", data.Surname, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-12">
+                           @Html.Label("","Arıza Durumu")
+                        </div> 
+                        <div class="col-xs-12">
+                            @Html.EnumDropDownListFor(x => x.ArizaDurumu, "Arızanın Son Durumu", new {@class = "form-control", size = "1"})
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-xs-6">
+                            @Html.Label("", "Arızalı Ürün Resmi")
+                            <img src="@(string.IsNullOrEmpty(Model.ArızaPath) ? "/assets/img/avatars/avatar3.jpg" : Model.ArızaPath)" class="img-avatar-96" width="100" height="100" />
+                        </div>
+                        <div class="col-xs-6">
+                            @Html.Label("", "Ürün Fatura Bilgisi")
+                            <img src="@(string.IsNullOrEmpty(Model.FaturaPath) ? "/assets/img/avatars/avatar3.jpg" : Model.FaturaPath)" class="img-avatar-96" width="100" height="100" />
+                        </div>
+
+                    </div>
+                    <div class="row narrow-gutter">
+                        <div class="col-xs-12">
+                            @*//TODO unutmazsan sor hocaya. burada yapmak istedigimiz daha önceden bunu operator almıssa arıza onaylama butonu onayladı veya pasif veya gelmesin vs*@
+                            @*@(Model.OperatorKabul==false? "<a href="+Url.Action("ArizaDetay","Operator",new {id=data2.ArizaId})+ "class='btn btn-xs btn-default'"+"title='Arıza Detay'"+"></a>":"Belalım")*@
+                            <a href="@Url.Action("TeknisyenArızaBildiriOnayla", "Teknisyen", new {id = Model.ArizaId})" class="btn btn-app btn-block hidden-xs" title="Arıza Rapor Gönder">
+                                Arıza Kontrol Raporu Gönder
+                            </a>
+                        </div>
+                    </div>
+                }
+                <!-- Profile tab 1 -->
+                @*<form class="fieldset">*@
+
+                @*</form>*@
+            </div>
+            <!-- End profile tab 1 -->
+
+        </div>
+        <!-- .card-block .tab-content -->
+    </div>
+    <!-- .card -->
+</div>

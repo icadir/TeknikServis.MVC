@@ -49,6 +49,8 @@ namespace TeknikServis.Entity.Entitties
         [DisplayName("Ürün Tipini Seçiniz")]
         public BeyazEsyaTip BeyazEsya { get; set; }
 
+        [DisplayName("Teknisyen Arıza Açıklaması")]
+        public string TeknisyenArizaAciklama { get; set; }
 
         //todo otomatik olarak false sen operator sayfasında false olanları getirirsin. eger onaylarsa yeni bir sayfasına true olanları alırsın. ve orda yönlendirmeyi yaparsın. Yerse belki ariza durum a da onaylandi eklenebilir.
         public bool OperatorKabul { get; set; } = false;
