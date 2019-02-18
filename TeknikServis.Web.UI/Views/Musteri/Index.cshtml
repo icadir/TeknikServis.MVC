@@ -76,7 +76,8 @@
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-2">
                                 @Html.LabelFor(x => x.ArızaAcıklaması)
-                                @Html.TextBoxFor(x => x.ArızaAcıklaması, new { @class = "form-control", type = "text", placeholder = "Lütfen Arıza Hakkında Açıklama Yapiniz" })
+                                @Html.TextAreaFor(x => x.ArızaAcıklaması, new { @class = "form-control", type = "text", placeholder = "Lütfen Arıza Hakkında Açıklama Yapiniz" })
+                              
                             </div>
                         </div>
                     </div>
@@ -86,7 +87,7 @@
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-2">
                                 @Html.LabelFor(x => x.Adres)
-                                @Html.TextBoxFor(x => x.Adres, new { @class = "form-control", type = "text", placeholder = "Lütfen Adresinizi Yaziniz." })
+                                @Html.TextAreaFor(x => x.Adres, new { @class = "form-control", type = "text", placeholder = "Lütfen Adresinizi Yaziniz." })
                                 @*TODO BURADA HARİTA İŞLEMLERİ OLCAK NORMALDE*@
                             </div>
                         </div>

@@ -84,6 +84,7 @@
     <Compile Include="Enums\Marka.cs" />
     <Compile Include="Enums\MessageStates.cs" />
     <Compile Include="Enums\IdentityRoles.cs" />
+    <Compile Include="Enums\TeknisyenArizaDurum.cs" />
     <Compile Include="IdentityModels\Role.cs" />
     <Compile Include="IdentityModels\User.cs" />
     <Compile Include="Models\ResponseData.cs" />

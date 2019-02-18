@@ -33,22 +33,32 @@ namespace TeknikServis.Entity.ViewModels.ArizaViewModels
 
         public string UserId { get; set; }
 
+        //TODO resimler için gerekli alanlar kısmı
         [DisplayName("Ürün Resmi Ekleyiniz :")]
         public string ArızaPath { get; set; }
         [DisplayName("Arızali Ürün Resmini Ekleyiniz :")]
         public HttpPostedFileBase PostedFileAriza { get; set; }
-        //todo view modelyapcaksın bu alanı resim için.
         [DisplayName("Fatura Resmini Ekleyiniz")]
         public string FaturaPath { get; set; }
         [DisplayName("Ürünün Fatura Resmini Ekleyiniz.")]
         public HttpPostedFileBase PostedFileFatura { get; set; }
+
+        //TODO TARİH KISMI
         [DisplayName("Arızanın Olusturuldugu Tarihi")]
         public DateTime ArizaOlusturmaTarihi { get; set; } = DateTime.Now;
         [DisplayName("Operator Kabul Tarihi")]
         public DateTime? OperatorKabulTarih { get; set; }
+        [DisplayName("Arıza Son Kontrol Tarihi")]
+        public DateTime? ArizaSonKontrolTarihi { get; set; }
+
         //todo çözüldügünde datetime.nowla atarsın otomatik
         public DateTime? ArizaCozulduguTarih { get; set; }
         //default olarak çözülemedi atadık.
+
+
+        //TODO ENUMS
+        [DisplayName("Çözüm Durumunu Seçiniz")]
+        public TeknisyenArizaDurum? TeknisyenArizaDurum { get; set; } 
         public ArizaDurum ArizaDurumu { get; set; } = ArizaDurum.Beklemede;
         [DisplayName("Ürün Tipini Seçiniz")]
         public BeyazEsyaTip BeyazEsya { get; set; }

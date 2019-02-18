@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
 using Microsoft.AspNet.Identity;
 using TeknikServis.BLL.Repository;
+using TeknikServis.Entity.Enums;
 using TeknikServis.Entity.ViewModels;
 using TeknikServis.Entity.ViewModels.ArizaViewModels;
 
@@ -65,10 +67,46 @@ namespace TeknikServis.Web.UI.Controllers
             }
        
         }
-
-        public ActionResult TeknisyenArızaBildiriOnayla(ArizaViewModel model)
+        [HttpGet]
+        public async Task<ActionResult> TeknisyenArızaBildiriOnayla(ArizaViewModel model)
         {
-            return View();
+            try
+            {
+                //if (!ModelState.IsValid)
+                //{
+                //    RedirectToAction("TeknisyenArizaRapor", "Teknisyen", model);
+                //}
+
+               var ariza= await new ArizaKayitRepo().GetByIdAsync(model.ArizaId);
+               if (model.TeknisyenArizaDurum == null)
+               {
+                   return RedirectToAction("TeknisyenArizaRapor", "Teknisyen", model);
+               }
+               ariza.TeknisyenArizaAciklama = model.TeknisyenArizaAciklama;
+               ariza.TeknisyenArizaDurum = model.TeknisyenArizaDurum;
+               ariza.ArizaSonKontrolTarihi=DateTime.Now;
+               if (model.TeknisyenArizaDurum == TeknisyenArizaDurum.Çözüldü)
+               {
+                    ariza.ArizaCozulduguTarih=DateTime.Now;
+               }
+
+               new ArizaKayitRepo().Update(ariza);
+               TempData["Message"] = $"{model.ArizaId} no lu Kayıt Raporu Alınmıştır. İyi çalışamlar";
+              return RedirectToAction("Index", "Teknisyen");
+
+            }
+            catch (Exception ex)
+            {
+                TempData["Model"] = new ErrorViewModel()
+                {
+                    Text = $"Bir hata oluştu {ex.Message}",
+                    ActionName = "Index",
+                    ControllerName = "Teknisyen",
+                    ErrorCode = 500
+                };
+                return RedirectToAction("Error", "Home");
+            }
+     
         }
 
     }

@@ -32,11 +32,13 @@
                 <tr>
                    
                     <th class="text-center">Arıza Kayıt No</th>
-                    <th class="text-center">Arıza Durum</th>
+                    <th class="text-center">Arıza Takip</th>
+                    <th class="text-center">Arıza Durumu</th>
+                    <th class="text-center">Teknisyen Açıklaması</th>
                     <th class="text-center">Operator İsimö</th>
                     <th class="text-center">Teknisyen İsim</th>
                     <th class="text-center">Teknisyen Telefon</th>
-                    <th class="text-center" style="width: 10%;">Actions</th>
+                    <th class="text-center" style="width: 10%;">Ana Sayfa</th>
                 </tr>
             </thead>
             <tbody>
@@ -55,6 +57,9 @@
                     <tr class="@(data2.OperatorKabul==false ? "bg-red":"bg-green")">
                         <td class="font-300 text-center">@(i + 1)</td>
                         <td class="font-300 text-center">@(data2.ArizaDurumu)</td>
+                        <td class="font-300 text-center">@(data2.TeknisyenArizaDurum==null ? data2.TeknisyenArizaDurum = TeknisyenArizaDurum.KontrolEdilmedi: data2.TeknisyenArizaDurum)</td>
+                        <td class="font-300 text-center">@(data2.TeknisyenArizaAciklama==null ? "Kontrol Edilmedi":data2.TeknisyenArizaAciklama )</td>
+
                         <td class="font-300 text-center">@(data2.OperatorId==null ? "Operator Onaylamadı":dataOperator.Name+" "+dataOperator.Surname)</td>
                         <td class="font-300 text-center">@((data2.TeknisyenId==null)? "Teknisyen Atanmadı" : dataTeknisyen.Name + " " + dataTeknisyen.Surname)</td>
                         <td class="font-300 text-center">@((data2.TeknisyenId==null)?"Teknisyen atanmadı": data2.Telno)</td>
