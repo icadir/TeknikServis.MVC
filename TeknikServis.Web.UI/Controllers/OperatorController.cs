@@ -21,7 +21,10 @@ namespace TeknikServis.Web.UI.Controllers
         public ActionResult Index()
         {
             // TODO mapperları yapalım.
-            var data = new ArizaKayitRepo().GetAll(x => x.OperatorKabul == false).Select(x => Mapper.Map<ArizaViewModel>(x)).ToList();
+            var data = new ArizaKayitRepo()
+                .GetAll(x => x.OperatorKabul == false)
+                .Select(x => Mapper.Map<ArizaViewModel>(x))
+                .ToList();
 
             return View(data);
         }
@@ -158,21 +161,19 @@ namespace TeknikServis.Web.UI.Controllers
            
             try
             {
-                //TODO Beyin yanması  ve yapılacaklar .
+               
                 //TODO Burayı Base kontrollıra Tası .
-                //TODO Hocaya Dropdownlistfor u sor . Id olarak nasıl  çekeriz sor. Sonra buradaki gereksizleri temizle.
                 //TODO Projede kaldıgınyer ArizaList sayfasında teknisyen ata diyince gelen ekranda teknisyen seçip Atama işlemini yapıcaksın. Teknisyen sayfası yapıcaksın . teknisyen atandıgı yerde müsteriye ve teknisyene mail atıcaksın.
-                //TODO Teknisyen için  İşi var İşi yok nasıl kontrol edilir sor. Yani Users Tablosuna Bir Alan mı eklenicek Bool olarak teknisyen atanırken o userın işi var gelicek ? 
-                //TODO HOCAYI BIRAKMA HEPSİNİ SORRRRr :D
                 //TODO User alanına veya teknisyenlere özel olarak uzmanlık vs nasıl eklenebilir soralım hocaya eger olursa buarada combo boxta uzmanlık alanını getiririz. zaten
                 var RoleTeknisyenler = NewRoleManager().FindByName("Teknisyen").Users.Select(x => x.UserId).ToList();
                     for (int i = 0; i < RoleTeknisyenler.Count; i++)
                     {
+                        //Enttiy e bir tane bu operator var mı ile alakalı bir alan ekle . veya böyle birşey mantık şöyle olmalı çektigin teknisyen listesini gezerek bu teknisyenin şuanda bir çalışıyor mu? Zor biraz.
                         var User = NewUserManager().FindById(RoleTeknisyenler[i]);
                         Teknisyenler.Add(new SelectListItem()
                         {
                             //TODO User alanına veya teknisyenlere özel olarak uzmanlık vs nasıl eklenebilir soralım hocaya eger olursa buarada combo boxta uzmanlık alanını getiririz. zaten İşi varmı yokmuyu nasıl ekliceksek aynı mantık olabilir.
-                            Text = User.Name + " "+ User.Surname,
+                            Text = User.Name + " "+ User.Surname, 
                             Value = User.Id
                         });        
                     }
