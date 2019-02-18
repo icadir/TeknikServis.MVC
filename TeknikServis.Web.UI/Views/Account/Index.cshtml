@@ -37,8 +37,8 @@
                     <div class="container">
                         <!-- Section Content -->
                         <div class="p-y-lg text-center">
-                            <h1 class="display-2">My Account Login</h1>
-                            <p class="text-muted">Unlimited ideas. Unlimited power. Unlimited joy. Unlimited opportunities.</p>
+                            <h1 class="display-2">FITech Giriş Sayfası</h1>
+                            <p class="text-muted">Bi sıkıntı mı var o zaman FITECH yanınızda...Alakasız!!!</p>
                             <form action="@Url.Action("ExternalLogin","Account")" method="post">
                                 @Html.AntiForgeryToken()
                                 <div class="access_social">
@@ -76,14 +76,20 @@
                                         @using (Html.BeginForm("Login", "Account", FormMethod.Post))
                                         {
                                             @Html.AntiForgeryToken()
-                                            <div class="form-group">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="ion-person"></i></span>
                                                 @Html.LabelFor(x => x.LoginViewModel.UserName, new { @class = "sr-only" })
                                                 @Html.TextBoxFor(x => x.LoginViewModel.UserName, new { @class = "form-control", placeholder = "Kullanıcı Adı" })
                                             </div>
-                                            <div class="form-group">
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="ion-ios-keypad fa-1x"></i></span>
                                                 @Html.LabelFor(x => x.LoginViewModel.Password, new { @class = "sr-only" })
                                                 @Html.TextBoxFor(x => x.LoginViewModel.Password, new { @class = "form-control", placeholder = "Şifre", type = "password" })
                                             </div>
+                                        </div>
                                             <div class="form-group">
                                                 <label for="RememberMe" class="css-input switch switch-sm switch-app">
                                                     @Html.CheckBoxFor(x => x.LoginViewModel.RememberMe)<span></span> Remember me

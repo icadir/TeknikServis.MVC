@@ -4,7 +4,7 @@
     <div class="app-layout-drawer-scroll">
         <!-- Drawer logo -->
         <div id="logo" class="drawer-header">
-            <a href="index.html"><img class="img-responsive" src="~/assets/img/logo/logo-backend.png" title="AppUI" alt="AppUI" /></a>
+            <i class="fa fa-cogs fa-2x">FİTECH<br/>Beyaz Ölüm</i>
         </div>
         <!-- Drawer navigation -->
         <nav class="drawer-main">
@@ -16,27 +16,27 @@
                 <li class="nav-item">
                     <a href="frontend_home.html"><i class="ion-ios-monitor-outline"></i> Frontend</a>
                 </li>
-                <li class="nav-item nav-drawer-header">Components</li>
+                <li class="nav-item nav-drawer-header">Kullanıcılar</li>
                 <li class="nav-item nav-item-has-subnav">
-                    <a href="javascript:void(0)"><i class="ion-ios-calculator-outline"></i> UI Elements</a>
+                    <a href="javascript:void(0)"> <i class="ion-android-person fa-2x"></i>Admin</a>
                     <ul class="nav nav-subnav">
                         <li>
-                            <a href="base_ui_buttons.html">Buttons</a>
+                            <a href="@Url.Action("Index","Admin")">Admin AnaSayfa</a>
                         </li>
                         <li>
-                            <a href="base_ui_cards.html">Cards</a>
+                            <a href="@Url.Action("EditUser","Admin")">Kullanıcı Ayarı</a>
                         </li>
                         <li>
-                            <a href="base_ui_cards_api.html">Cards API</a>
+                            <a href="@Url.Action("Index","Operator")">Operator Indexi</a>
                         </li>
                         <li>
-                            <a href="base_ui_layout.html">Layout</a>
+                            <a href="@Url.Action("ArizaDetay","Operator")">Operator Arizadetay</a>
                         </li>
                         <li>
-                            <a href="base_ui_grid.html">Grid</a>
+                            <a href="@Url.Action("Index","Musteri")">musteri Indexi</a>
                         </li>
                         <li>
-                            <a href="base_ui_icons.html">Icons</a>
+                            <a href="@Url.Action("ArizaTakip","Musteri")">müsteri arıza takip</a>
                         </li>
                         <li>
                             <a href="base_ui_modals_tooltips.html">Modals / Tooltips</a>
@@ -62,19 +62,19 @@
                     </ul>
                 </li>
                 <li class="nav-item nav-item-has-subnav">
-                    <a href="javascript:void(0)"><i class="ion-ios-compose-outline"></i> Forms</a>
+                    <a href="javascript:void(0)"><i class="ion-android-people fa-2x"></i>Operatör</a>
                     <ul class="nav nav-subnav">
                         <li>
-                            <a href="base_forms_elements.html">Elements</a>
+                            <a href="@Url.Action("Index","Operator")">Operator Anasayfa</a>
                         </li>
                         <li>
-                            <a href="base_forms_samples.html">Samples</a>
+                            <a href="@Url.Action("ArizaDetay","Operator")">Operator Arizadetay</a>
                         </li>
                         <li>
-                            <a href="base_forms_pickers_select.html">Pickers &amp; Select</a>
+                            <a href="@Url.Action("ArizaList","Operator")">Operator Arizalsitesiy</a>
                         </li>
                         <li>
-                            <a href="base_forms_validation.html">Validation</a>
+                            <a href="@Url.Action("OPArizaDetay","Operator")">Operator Detayımsı</a>
                         </li>
                         <li>
                             <a href="base_forms_wizard.html">Wizard</a>
@@ -82,7 +82,7 @@
                     </ul>
                 </li>
                 <li class="nav-item nav-item-has-subnav">
-                    <a href="javascript:void(0)"><i class="ion-ios-list-outline"></i> Tables</a>
+                    <a href="javascript:void(0)"><i class="ion-android-people fa-2x"></i>Teknisyen</a>
                     <ul class="nav nav-subnav">
                         <li>
                             <a href="base_tables_styles.html">Styles</a>
@@ -101,34 +101,15 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item nav-item-has-subnav active open">
-                    <a href="javascript:void(0)"><i class="ion-ios-browsers-outline"></i> Pages</a>
-                    <ul class="nav nav-subnav">
-                        <li class="active">
-                            <a href="base_pages_blank.html">Blank</a>
-                        </li>
-                        <li>
-                            <a href="base_pages_inbox.html">Inbox</a>
-                        </li>
-                        <li>
-                            <a href="base_pages_invoice.html">Invoice</a>
-                        </li>
-                        <li>
-                            <a href="base_pages_profile.html">Profile</a>
-                        </li>
-                        <li>
-                            <a href="base_pages_search.html">Search</a>
-                        </li>
-                    </ul>
-                </li>
+               
                 <li class="nav-item nav-item-has-subnav">
-                    <a href="javascript:void(0)"><i class="ion-social-javascript-outline"></i> JS plugins</a>
+                    <a href="javascript:void(0)"><i class="ion-ios-people fa-2x"></i> Müsteri</a>
                     <ul class="nav nav-subnav">
                         <li>
-                            <a href="base_js_maps.html">Maps</a>
+                            <a href="@Url.Action("Index","Musteri")">Ariza Bildirimi</a>
                         </li>
                         <li>
-                            <a href="base_js_sliders.html">Sliders</a>
+                            <a href="@Url.Action("ArizaTakip","Musteri")">Arıza Takip</a>
                         </li>
                         <li>
                             <a href="base_js_charts_flot.html">Charts - Flot</a>
