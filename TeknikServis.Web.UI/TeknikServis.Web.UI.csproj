@@ -238,6 +238,8 @@
     <Content Include="assets\js\plugins\slick\slick.min.css" />
     <Content Include="assets\js\plugins\slick\slick.min.js" />
     <Content Include="assets\js\plugins\sparkline\jquery.sparkline.min.js" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\ionicons.svg" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -278,6 +280,14 @@
     <Content Include="assets\js\plugins\slick\fonts\slick.eot" />
     <Content Include="assets\js\plugins\slick\fonts\slick.ttf" />
     <Content Include="assets\js\plugins\slick\fonts\slick.woff" />
+    <Content Include="fonts\ionicons.woff" />
+    <Content Include="fonts\ionicons.ttf" />
+    <Content Include="fonts\ionicons.eot" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_LayoutMain.cshtml" />
     <Content Include="Views\Shared\Partial\_HeaderPartial.cshtml" />
