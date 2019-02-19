@@ -3,7 +3,60 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
+@section top{
+    <link rel="stylesheet" href="~/assets/js/plugins/slick/slick.min.css" />
+    <link rel="stylesheet" href="~/assets/js/plugins/slick/slick-theme.min.css" />
 
-<h2>Hoşgeldiniz İsmail ve Furkan Beyler</h2>
+  
+}
 
 
+<div class="section">
+    <div class="container-fluid p-y-md">
+        <!-- Image Sliders -->
+        <h2 class="section-title">Image Sliders</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Slider Autoplay -->
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Autoplay</h4>
+                    </div>
+                    <div class="card-block p-a-0">
+                        <!-- Slider with autoplay -->
+                        <div class="js-slider" data-slider-dots="true" data-slider-autoplay="true" data-slider-autoplay-speed="3000">
+                            <div>
+                                <img class="img-responsive" src="~/assets/img/photos/photo3.jpg" alt="" />
+                            </div>
+                            <div>
+                                <img class="img-responsive" src="~/assets/img/photos/photo2.jpg" alt="" />
+                            </div>
+                            <div>
+                                <img class="img-responsive" src="~/assets/img/photos/photo1.jpg" alt="" />
+                            </div>
+                        </div>
+                        <!-- End Slider with autoplay -->
+                    </div>
+                </div>
+                <!-- End Slider Autoplay -->
+            </div>
+        </div>
+        <!-- .row -->
+    </div>
+    <!-- .container-fluid -->
+</div>
+
+
+@section bottom
+{
+    <!-- Page Plugins -->
+    <script src="~/assets/js/plugins/slick/slick.min.js"></script>
+
+    <!-- Page JS Code -->
+    <script>
+        $(function () {
+            // Init page helpers (Slick Slider plugin)
+            App.initHelpers('slick');
+        });
+    </script>
+}
