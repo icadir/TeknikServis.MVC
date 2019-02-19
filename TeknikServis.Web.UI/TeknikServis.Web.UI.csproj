@@ -309,6 +309,9 @@
     <Content Include="Views\Operator\OPArizaDetay.cshtml" />
     <Content Include="Views\Teknisyen\Index.cshtml" />
     <Content Include="Views\Teknisyen\TeknisyenArizaRapor.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Team.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
