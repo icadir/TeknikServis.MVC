@@ -17,5 +17,10 @@ namespace TeknikServis.Web.UI.Controllers
         {
             return View();
         }
+
+        public ActionResult Harita()
+        {
+            return View();
+        }
     }
 }
