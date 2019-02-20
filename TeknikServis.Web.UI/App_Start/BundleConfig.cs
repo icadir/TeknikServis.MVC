@@ -22,7 +22,7 @@ namespace TeknikServis.Web.UI.App_Start
                 ));
 
             bundles.Add(new StyleBundle("~/bundle/css").Include(
-                "~/assets/css/ionicons.css",
+                //"~/assets/css/ionicons.css",
                 //"~/assets/css/font-awesome.css",
                 "~/assets/css/bootstrap.css",
                 "~/assets/css/app.css",
