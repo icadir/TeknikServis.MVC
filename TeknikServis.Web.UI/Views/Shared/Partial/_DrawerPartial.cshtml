@@ -9,13 +9,22 @@
         <!-- Drawer navigation -->
         <nav class="drawer-main">
             <ul class="nav nav-drawer">
-                <li class="nav-item nav-drawer-header">Apps</li>
-                <li class="nav-item">
-                    <a href="index.html"><i class="ion-ios-speedometer-outline"></i> Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a href="frontend_home.html"><i class="ion-ios-monitor-outline"></i> Frontend</a>
-                </li>
+                <li class="nav-item nav-drawer-header">Markalarımız</li>
+                <li class="nav-item nav-item-has-subnav">
+                    <a href="javascript:void(0)"><i class="ion-android-people fa-2x"></i>Markalarımız</a>
+                    <ul class="nav nav-subnav">
+                        <li>
+                            <a href="https://www.arcelik.com.tr">Arçelik</a>
+                        </li>
+                        <li>
+                            <a href="https://www.samsung.com/tr">Samsung</a>
+                        </li>
+                        <li>
+                            <a href="https://www.bosch-home.com.tr/">Bosch</a>
+                        </li>
+
+                    </ul>
+                </li>               
                 <li class="nav-item nav-drawer-header">Kullanıcılar</li>
                 @if (HttpContext.Current.User.IsInRole("Admin"))
                 {
@@ -40,15 +49,7 @@
                             <li>
                                 <a href="@Url.Action("ArizaTakip", "Musteri")">müsteri arıza takip</a>
                             </li>
-                            <li>
-                                <a href="base_ui_modals_tooltips.html">Modals / Tooltips</a>
-                            </li>
-                            <li>
-                                <a href="base_ui_alerts_notify.html">Alerts / Notify</a>
-                            </li>
-                            <li>
-                                <a href="base_ui_pagination.html">Pagination</a>
-                            </li>
+
                         </ul>
                     </li>
                 }
@@ -69,9 +70,7 @@
                             <li>
                                 <a href="@Url.Action("OPArizaDetay", "Operator")">Operator Detayımsı</a>
                             </li>
-                            <li>
-                                <a href="base_forms_wizard.html">Wizard</a>
-                            </li>
+
                         </ul>
                     </li>
                 }
@@ -83,16 +82,7 @@
                             <li>
                                 <a href="@Url.Action("Index", "Teknisyen")">Teknisyen Index</a>
                             </li>
-                           
-                            <li>
-                                <a href="base_tables_tools.html">Tools</a>
-                            </li>
-                            <li>
-                                <a href="base_tables_pricing.html">Pricing</a>
-                            </li>
-                            <li>
-                                <a href="base_tables_datatables.html">Wizard</a>
-                            </li>
+
                         </ul>
                     </li>
                 }
@@ -107,21 +97,7 @@
                             <li>
                                 <a href="@Url.Action("ArizaTakip", "Musteri")">Arıza Takip</a>
                             </li>
-                            <li>
-                                <a href="base_js_charts_flot.html">Charts - Flot</a>
-                            </li>
-                            <li>
-                                <a href="base_js_charts_chartjs.html">Charts - Chart.js</a>
-                            </li>
-                            <li>
-                                <a href="base_js_charts_sparkline.html">Charts - Sparkline</a>
-                            </li>
-                            <li>
-                                <a href="base_js_draggable.html">Draggable</a>
-                            </li>
-                            <li>
-                                <a href="base_js_syntax_highlight.html">Syntax highlight</a>
-                            </li>
+
                         </ul>
                     </li>
                 }

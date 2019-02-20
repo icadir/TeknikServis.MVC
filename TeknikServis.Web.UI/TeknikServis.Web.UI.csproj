@@ -248,6 +248,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\ionicons.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Image\bulasik.jpg" />
+    <Content Include="Image\buzdolabi2000.png" />
+    <Content Include="Image\camasir.png" />
+    <Content Include="Image\camasir2000.jpg" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
