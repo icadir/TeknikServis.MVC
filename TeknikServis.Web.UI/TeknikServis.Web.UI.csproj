@@ -252,6 +252,10 @@
     <Content Include="Image\buzdolabi2000.png" />
     <Content Include="Image\camasir.png" />
     <Content Include="Image\camasir2000.jpg" />
+    <Content Include="Image\IMG_E4588.JPG" />
+    <Content Include="Image\IMG_E4589.JPG" />
+    <Content Include="Image\IMG_E4590.JPG" />
+    <Content Include="Image\IMG_E4591.JPG" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
