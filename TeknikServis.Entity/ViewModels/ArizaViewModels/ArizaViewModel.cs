@@ -73,5 +73,21 @@ namespace TeknikServis.Entity.ViewModels.ArizaViewModels
         public string OperatorId { get; set; }
         public string TeknisyenId { get; set; }
 
+
+
+        //TODO ANKET KISMI
+        [DisplayName("Teknisyenin Konu Hakkında Bilgisi Yeterli miydi ?")]
+        public AnketEnum TeknisyenBilgiPuani { get; set; }
+        [DisplayName("Teknisyenin Size Karşı Davranışı nasıldı ?")]
+        public AnketEnum TeknisyenDavranisPuani { get; set; }
+        [DisplayName("Çözüm Sürecinde Fitech Çalışanlarının iletişimi Nasıldı ?")]
+        public AnketEnum FitechDavranisPuani { get; set; }
+        [DisplayName("FiTechten Memnun Kaldınız mı ?")]
+        public AnketEnum HizmetPuanı { get; set; }
+        [DisplayName("FİTech Hakkındaki Görüşleriniz.")]
+        public string FitechHakkindakiGorusler { get; set; }
+
+        public bool AnketYapildimi { get; set; } = false;
+
     }
 }

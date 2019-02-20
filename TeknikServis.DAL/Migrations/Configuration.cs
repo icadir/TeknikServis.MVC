@@ -9,7 +9,7 @@ namespace TeknikServis.DAL.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(TeknikServis.DAL.MyContext context)

@@ -1,0 +1,144 @@
+﻿@using Microsoft.AspNet.Identity
+@using TeknikServis.BLL.Identity
+@model TeknikServis.Entity.Entitties.ArızaKayıt
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<h2 class="section-title">Wizards with Progress</h2>
+<div class="row">
+    <div class="col-lg-6 col-lg-offset-3">
+        <!-- Simple Classic Progress Wizard (.js-wizard-simple class is initialized in js/pages/base_forms_wizard.js) -->
+        <!-- For more examples please check http://vadimg.com/twitter-bootstrap-wizard-example/ -->
+        <div class="card js-wizard-simple">
+            <!-- Step Tabs -->
+            <ul class="nav nav-tabs nav-justified">
+                <li class="active">
+                    <a href="#simple-classic-progress-step1" data-toggle="tab">Teknisyen</a>
+                </li>
+                <li>
+                    <a href="#simple-classic-progress-step2" data-toggle="tab">Fitech<span class="ion-alert"></span> iletişim</a>
+                </li>
+                <li>
+
+                    <a href="#simple-classic-progress-step3" data-toggle="tab">Fitech<span class="ion-alert"></span> Düşünceleriniz.</a>
+                </li>
+            </ul>
+            <!-- End Step Tabs -->
+            <!-- Form -->
+            @*<div>
+                <p class="text-muted">@Html.ValidationSummary()</p>
+                <h3>@TempData["Message"]</h3>
+            </div>*@
+            @using (Html.BeginForm("AnketKabul", "Anket", FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+             
+                @Html.Hidden("MusteriId", HttpContext.Current.User.Identity.GetUserId())
+                @Html.HiddenFor(x=>x.Id)
+                <!-- Steps Progress -->
+                <div class="card-block b-b">
+                    <div class="wizard-progress progress progress-mini m-b-0">
+                        <div class="progress-bar progress-bar-green" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 0"></div>
+                    </div>
+                </div>
+                <!-- End Steps Progress -->
+                <!-- Steps Content -->
+                <div class="card-block tab-content">
+
+                    <!-- Step 1 -->
+                    <div class="tab-pane fade fade-up in m-t-md m-b-lg active" id="simple-classic-progress-step1">
+                        <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-2">
+                                @Html.LabelFor(x => x.TeknisyenDavranisPuani)
+                                @Html.EnumDropDownListFor(x => x.TeknisyenDavranisPuani, new { @class = "form-control", size = "1" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-2">
+                                @Html.LabelFor(x => x.TeknisyenBilgiPuani)
+                                @Html.EnumDropDownListFor(x => x.TeknisyenBilgiPuani, new { @class = "form-control", size = "1" })
+                            </div>
+                        </div>
+                       
+                      
+                    </div>
+                    <!-- End Step 1 -->
+                    <!-- Step 2 -->
+                    <div class="tab-pane fade fade-up m-t-md m-b-lg" id="simple-classic-progress-step2">
+                        <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-2">
+                                @Html.LabelFor(x => x.FitechDavranisPuani)
+                                @Html.EnumDropDownListFor(x => x.FitechDavranisPuani, new { @class = "form-control", size = "1" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-2">
+                                @Html.LabelFor(x => x.HizmetPuanı)
+                                @Html.EnumDropDownListFor(x => x.HizmetPuanı, new { @class = "form-control",size = "1"})
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Step 2 -->
+                    <!-- Step 3 -->
+                    <div class="tab-pane fade fade-up m-t-md m-b-lg" id="simple-classic-progress-step3">
+                        <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-2">
+                                @Html.LabelFor(x => x.FitechHakkindakiGorusler)
+                                @Html.TextAreaFor(x => x.FitechHakkindakiGorusler, new { @class = "form-control",type="text", placeholder = "Lütfen Düşüncelerinizi Yazınız" })
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Step 3 -->
+
+
+                </div>
+                <!-- End Steps Content -->
+                <!-- Steps Navigation -->
+                <div class="card-block b-t">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <button class="wizard-prev btn btn-default" type="button">Önceki</button>
+                        </div>
+                        <div class="col-xs-6 text-right">
+                            <button class="wizard-next btn btn-info" type="button">Sonraki</button>
+                            <button class="wizard-finish btn btn-app" type="submit" id="kaydetx"><i class="ion-checkmark m-r-xs"></i> Kaydet</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Steps Navigation -->
+            }
+
+
+            <!-- End Form -->
+        </div>
+        <!-- .card -->
+        <!-- End Simple Classic Progress Wizard -->
+    </div>
+    <!-- .col-lg-6 -->
+    <!-- .col-lg-6 -->
+
+</div>
+
+@section bottom
+{
+
+    <!-- Page JS Plugins -->
+    <script src="~/assets/js/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+    <script src="~/assets/js/plugins/jquery-validation/jquery.validate.min.js"></script>
+    <script src="~/assets/js/plugins/bootstrap-notify/bootstrap-notify.min.js"></script>
+
+    <!-- Page JS Code -->
+    <script src="~/assets/js/pages/base_forms_wizard.js"></script>
+    <script>
+        //$(function () {
+        //    $("#kaydetx").click(function () {
+        //        $.notify({
+        //            message: "Kaydınız Alınmıştır. Teşekkür ederiz.",
+        //            title: "Servis MESAJI -",
+        //            type: "success"
+        //        });
+        //    });
+        //})
+    </script>
+}
