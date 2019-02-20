@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Data.Entity;
+using TeknikServis.Entity.Anket;
 using TeknikServis.Entity.Entitties;
 using TeknikServis.Entity.IdentityModels;
 

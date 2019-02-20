@@ -78,7 +78,9 @@
   <ItemGroup>
     <Compile Include="Abstracts\BaseEntity.cs" />
     <Compile Include="Abstracts\BaseEntity2.cs" />
+    <Compile Include="Anket\Anket.cs" />
     <Compile Include="Entitties\ArızaKayıt.cs" />
+    <Compile Include="Enums\AnketEnum.cs" />
     <Compile Include="Enums\ArizaDurum.cs" />
     <Compile Include="Enums\BeyazEsyaTip.cs" />
     <Compile Include="Enums\Marka.cs" />

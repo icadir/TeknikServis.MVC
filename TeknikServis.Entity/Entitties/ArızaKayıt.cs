@@ -44,7 +44,7 @@ namespace TeknikServis.Entity.Entitties
         public DateTime ArizaOlusturmaTarihi { get; set; } = DateTime.Now;
         [DisplayName("Operator Kabul Tarihi")]
         public DateTime? OperatorKabulTarih { get; set; }
-    //todo çözüldügünde datetime.nowla atarsın otomatik
+        //todo çözüldügünde datetime.nowla atarsın otomatik
         public DateTime? ArizaCozulduguTarih { get; set; }
         [DisplayName("Arıza Son Kontrol Tarihi")]
         public DateTime? ArizaSonKontrolTarihi { get; set; }
@@ -61,8 +61,11 @@ namespace TeknikServis.Entity.Entitties
 
         //todo otomatik olarak false sen operator sayfasında false olanları getirirsin. eger onaylarsa yeni bir sayfasına true olanları alırsın. ve orda yönlendirmeyi yaparsın. Yerse belki ariza durum a da onaylandi eklenebilir.
         public bool OperatorKabul { get; set; } = false;
-        
+
         //TODO Operatör icin bool alan.
+        public string AnketCode { get; set; }
+
+  
 
 
         [Required]
@@ -76,5 +79,23 @@ namespace TeknikServis.Entity.Entitties
         public User Operator { get; set; }
         [ForeignKey("TeknisyenId")]
         public User Teknisyen { get; set; }
+
+
+        //TODO ANKET KISMI
+
+        [DisplayName("Teknisyenin Konu Hakkında Bilgisi Yeterli miydi ?")]
+        public AnketEnum TeknisyenBilgiPuani { get; set; }
+        [DisplayName("Teknisyenin Size Karşı Davranışı nasıldı ?")]
+        public AnketEnum TeknisyenDavranisPuani { get; set; }
+        [DisplayName("Çözüm Sürecinde Fitech Çalışanlarının iletişimi Nasıldı ?")]
+        public AnketEnum FitechDavranisPuani { get; set; }
+        [DisplayName("FiTechten Memnun Kaldınız mı ?")]
+        public AnketEnum HizmetPuanı { get; set; }
+        [DisplayName("FİTech Hakkındaki Görüşleriniz.")]
+        public string FitechHakkindakiGorusler { get; set; }
+
+        //TODO anket yapıldımı için alan.
+        public bool AnketYapildimi { get; set; } = false;
+
     }
 }
