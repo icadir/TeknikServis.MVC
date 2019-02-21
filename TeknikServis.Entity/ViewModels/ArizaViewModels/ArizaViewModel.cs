@@ -66,6 +66,8 @@ namespace TeknikServis.Entity.ViewModels.ArizaViewModels
         [DisplayName("Teknisyen Arıza Açıklaması")]
         public string TeknisyenArizaAciklama { get; set; }
 
+        //TODO Bosta alan teknisyenleri için
+        public bool TeknisyenIstemi { get; set; } = false;
 
 
         [Required]
