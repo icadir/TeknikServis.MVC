@@ -21,8 +21,20 @@ namespace TeknikServis.Web.UI.Controllers
         // GET: Account
         public ActionResult Index()
         {
-            if (HttpContext.GetOwinContext().Authentication.User.Identity.IsAuthenticated)
-                return RedirectToAction("Index", "Home");
+            if (HttpContext.GetOwinContext().Authentication.User.Identity.IsAuthenticated && HttpContext.GetOwinContext().Authentication.User.IsInRole("Admin"))
+                return RedirectToAction("Index", "Admin");
+
+            if (HttpContext.GetOwinContext().Authentication.User.Identity.IsAuthenticated && HttpContext.GetOwinContext().Authentication.User.IsInRole("Operator"))
+                return RedirectToAction("Index", "Operator");
+
+            if (HttpContext.GetOwinContext().Authentication.User.Identity.IsAuthenticated && HttpContext.GetOwinContext().Authentication.User.IsInRole("Musteri"))
+                return RedirectToAction("Index", "Musteri");
+
+            if (HttpContext.GetOwinContext().Authentication.User.Identity.IsAuthenticated && HttpContext.GetOwinContext().Authentication.User.IsInRole("Teknisyen"))
+                return RedirectToAction("Index", "Teknisyen");
+
+            //if (HttpContext.GetOwinContext().Authentication.User.Identity.IsAuthenticated)
+            //    return RedirectToAction("Index", "Home");
             return View();
         }
         [HttpPost]
@@ -124,7 +136,7 @@ namespace TeknikServis.Web.UI.Controllers
                 {
                     IsPersistent = model.LoginViewModel.RememberMe
                 }, userIdentity);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Account");
             }
             catch (Exception ex)
             {

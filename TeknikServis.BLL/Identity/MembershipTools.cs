@@ -44,7 +44,7 @@ namespace TeknikServis.BLL.Identity
             {
                 var id = HttpContext.Current.User.Identity.GetUserId();
                 if (string.IsNullOrEmpty(id))
-                    return "/assets/img/avatars/avatar3.jpg";
+                    return "~/Image/fitech.jpg";
 
                 user = NewUserManager().FindById(id);
             }
@@ -52,7 +52,7 @@ namespace TeknikServis.BLL.Identity
             {
                 user = NewUserManager().FindById(userId);
                 if (user == null)
-                    return "/assets/img/avatars/avatar3.jpg";
+                    return "~/Image/fitech.jpg";
             }
 
             return $"{user.AvatarPath}";
