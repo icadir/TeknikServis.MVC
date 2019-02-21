@@ -44,7 +44,9 @@ namespace TeknikServis.Entity.Entitties
         public DateTime ArizaOlusturmaTarihi { get; set; } = DateTime.Now;
         [DisplayName("Operator Kabul Tarihi")]
         public DateTime? OperatorKabulTarih { get; set; }
-        //todo çözüldügünde datetime.nowla atarsın otomatik
+        [DisplayName("Operator Teknisyen Atadıgı Tarih")]
+        public DateTime? TeknisyenAtandigiTarih { get; set; }
+        [DisplayName("Arızanın Çözüldüğü Tarih")]
         public DateTime? ArizaCozulduguTarih { get; set; }
         [DisplayName("Arıza Son Kontrol Tarihi")]
         public DateTime? ArizaSonKontrolTarihi { get; set; }

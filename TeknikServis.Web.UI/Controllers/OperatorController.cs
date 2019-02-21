@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using TeknikServis.BLL.Repository;
+using TeknikServis.BLL.Services.Senders;
 using TeknikServis.Entity.Entitties;
 using TeknikServis.Entity.Enums;
 using TeknikServis.Entity.IdentityModels;
@@ -128,17 +129,50 @@ namespace TeknikServis.Web.UI.Controllers
         //TODO TEknisyen atamayı burada yap
         public async Task<ActionResult> TeknisyenAta(ArizaViewModel model)
         {
-            //TODO NOT Eger bir yerlerde program view modelden patlarsa string birşeyler EKledik ondandır.
+           
             try
             {
-                //TODO Teknisyen atandıgı tarihde eklenebilir istenirse.
+               
                 var ariza = new ArizaKayitRepo().GetById(model.ArizaId);
                 ariza.TeknisyenId = model.UserId;
                 ariza.ArizaDurumu = ArizaDurum.TeknisyenAtandi;
                 ariza.TeknisyenIstemi = true;
+                ariza.TeknisyenAtandigiTarih = DateTime.Now;
                 new ArizaKayitRepo().Update(ariza);
-                var teknisyen = await NewUserStore().FindByIdAsync(ariza.TeknisyenId);
-                //TODO Musteriye ve Teknisyene mail gönder. 
+               
+                var opId = HttpContext.User.Identity.GetUserId();
+                var teknisyen = NewUserManager().FindById(ariza.TeknisyenId);
+                var userOperator =  NewUserManager().FindById(opId);
+                var musteri = NewUserManager().FindById(ariza.MusteriId);
+    
+
+
+                string SiteUrl = Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host +
+                                 (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port);
+                var emailService = new EmailService();
+
+                // teknisyene Mail gönderiyor test ok.
+                #region TEKNİSYENE MAİL GÖNDERME OK
+
+                var body = $"Merhaba <b> {teknisyen.Name} {teknisyen.Surname}</b><br>  Size {userOperator.Name} {userOperator.Surname} isimli çalışanımız tarafından bir Arıza Gönderilmiştir.  Aşagıdaki Linke tıklayarak arızayı detaylı bir şekilde görebilirsiniz..<br>İyi Çalışmalar dileriz. FiTech <br> <a href='{SiteUrl}/Teknisyen/TeknisyenArizaRapor/{ariza.Id}' >Arıza Detayları için tıklayınız. </a> ";
+                await emailService.SendAsync(new IdentityMessage()
+                {
+                    Body = body,
+                    Subject = "Ariza İş Bildirimi"
+                }, teknisyen.Email);
+                #endregion
+
+                #region MÜSTERİYE MAİL GÖNDERME
+                var bodyMusteri = $"Merhaba <b> {musteri.Name} {musteri.Surname}</b><br>  Sizin Acmıs oldugunuz {ariza.Id}'nolu kayıta {teknisyen.Name} {teknisyen.Surname} isimli çalışanımız yönlendirilmiştir<br> Fitech İyi Günler Diler.</a> ";
+                await emailService.SendAsync(new IdentityMessage()
+                {
+                    Body = bodyMusteri,
+                    Subject = "Ariza Teknisyen Bilgisi"
+                }, musteri.Email);
+
+
+                #endregion
+
                 TempData["Message"] = $"{ariza.Id} nolu arızaya {teknisyen.Name}  {teknisyen.Surname} atanmıştır.İyi çalışmalar.";
 
                 return RedirectToAction("Index", "Operator");

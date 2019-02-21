@@ -43,15 +43,17 @@ namespace TeknikServis.Entity.ViewModels.ArizaViewModels
         [DisplayName("Ürünün Fatura Resmini Ekleyiniz.")]
         public HttpPostedFileBase PostedFileFatura { get; set; }
 
+
         //TODO TARİH KISMI
         [DisplayName("Arızanın Olusturuldugu Tarihi")]
         public DateTime ArizaOlusturmaTarihi { get; set; } = DateTime.Now;
         [DisplayName("Operator Kabul Tarihi")]
         public DateTime? OperatorKabulTarih { get; set; }
+        [DisplayName("Operator Teknisyen Atadıgı Tarih")]
+        public DateTime? TeknisyenAtandigiTarih { get; set; }
         [DisplayName("Arıza Son Kontrol Tarihi")]
         public DateTime? ArizaSonKontrolTarihi { get; set; }
-
-        //todo çözüldügünde datetime.nowla atarsın otomatik
+        [DisplayName("Arızanın Çözüldüğü Tarih")]
         public DateTime? ArizaCozulduguTarih { get; set; }
         //default olarak çözülemedi atadık.
 

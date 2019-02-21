@@ -101,7 +101,6 @@ namespace TeknikServis.Web.UI.Controllers
 
                     string SiteUrl = Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host +
                                      (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port);
-                    var x = new Anket();
                     var emailService = new EmailService();
                     var body = $"Merhaba <b></b><br>FİTech için geri döüşleriniz çok önemli. 5 Dakikanızı ayırarak anketimizi doldurabilirsiniz. Aşagıdaki Linke tıklayarak anket sayfasına gidebilirsiniz.<br> <a href='{SiteUrl}/Anket/Index?code={ariza.AnketCode}' >Anket'e Gitmek için Tıklayınız. </a> ";
                     await emailService.SendAsync(new IdentityMessage()
