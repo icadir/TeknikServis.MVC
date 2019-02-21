@@ -57,6 +57,7 @@ namespace TeknikServis.Web.UI.Controllers
         {
             //ikisiylede bulabilirsin o anki sistemde online olanı
             //var OpertatorId = HttpContext.User.Identity.GetUserId();
+
             var OpertatorId = System.Web.HttpContext.Current.User.Identity.GetUserId();
             try
             {

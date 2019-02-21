@@ -5,7 +5,8 @@
         Çözüldü,
         EksikParça,
         Beklemede,
-        KontrolEdilmedi
+        KontrolEdilmedi,
+     
 
     }
 }

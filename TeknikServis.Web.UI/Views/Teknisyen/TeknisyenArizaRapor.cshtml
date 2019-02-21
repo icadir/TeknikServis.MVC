@@ -20,7 +20,7 @@
                     var data = MembershipTools.GetMusteri(Model.MusteriId);
 
                     @Html.HiddenFor(x => x.ArizaId)
-                    @Html.HiddenFor(x=>x.MusteriId)
+                    @Html.HiddenFor(x => x.MusteriId)
                     <h4 class="m-t-sm m-b">Arıza Kontrol Bildiri</h4>
                     <div class="form-group row">
                         <div class="col-xs-6">
@@ -32,6 +32,17 @@
                             @Html.Label("", "Müşterinin Soyadı")
 
                             @Html.TextBox("data.Surname", data.Surname, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-6">
+                            @Html.Label("", "Müşterinin Telefonu")
+                            @Html.TextBoxFor(x=>x.Telno, new { @class = "form-control", @readonly = "readonly" })
+
+                        </div>
+                        <div class="col-xs-6">
+                            @Html.Label("", "Müşterinin Adresi")
+                            @Html.TextAreaFor(x=>x.Adres,new { @class = "form-control", @readonly = "readonly" }) })
                         </div>
                     </div>
                     <div class="form-group row">
@@ -63,12 +74,6 @@
 
                     <div class="row narrow-gutter">
                         <div class="col-xs-12">
-                            @*//TODO unutmazsan sor hocaya. burada yapmak istedigimiz daha önceden bunu operator almıssa arıza onaylama butonu onayladı veya pasif veya gelmesin vs*@
-                            @*@(Model.OperatorKabul==false? "<a href="+Url.Action("ArizaDetay","Operator",new {id=data2.ArizaId})+ "class='btn btn-xs btn-default'"+"title='Arıza Detay'"+"></a>":"Belalım")*@
-                            @*<a href="@Url.Action("TeknisyenArızaBildiriOnayla", "Teknisyen", new {id = Model.ArizaId})" class="btn btn-app btn-block hidden-xs" title="Arıza Rapor Gönder">
-                                    Arıza Kontrol Raporu Gönder
-                                </a>*@
-
                             <div class="col-md-12">
                                 <button class="btn btn-app-purple btn-block" type="submit">Arıza Kontrol Raporu Gönder</button>
                             </div>

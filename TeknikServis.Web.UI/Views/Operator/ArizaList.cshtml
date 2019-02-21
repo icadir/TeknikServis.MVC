@@ -1,4 +1,5 @@
 ﻿@using TeknikServis.BLL.Identity
+@using TeknikServis.Entity.Enums
 @model List<TeknikServis.Entity.ViewModels.ArizaViewModels.ArizaViewModel>
 
 @{
@@ -35,6 +36,8 @@
                     <th class="text-center">Arıza Durum</th>
                     <th class="text-center">Teknisyen İsim</th>
                     <th class="text-center">Teknisyen Telefon</th>
+                    <th class="text-center">Teknisyen Arıza Durumu</th>
+                    <th class="text-center">Teknisyen Arıza Açıklaması</th>
                     <th class="text-center" style="width: 10%;">Teknisyen Ata</th>
                 </tr>
             </thead>
@@ -53,6 +56,8 @@
                         <td class="font-300 text-center">@(data2.ArizaDurumu)</td>
                         <td class="font-300 text-center">@((data2.TeknisyenId == null) ? "Teknisyen Atanmadı" : dataTeknisyen.Name + " " + dataTeknisyen.Surname)</td>
                         <td class="font-300 text-center">@((data2.TeknisyenId == null) ? "Teknisyen atanmadı" : data2.Telno)</td>
+                        <td class="font-300 text-center">@(data2.TeknisyenArizaDurum ?? TeknisyenArizaDurum.KontrolEdilmedi)</td>
+                        <td class="font-300 text-center">@(data2.TeknisyenArizaAciklama ?? "Kontrol Edilmedi")</td>
 
                         <td class="text-center">
                             <div class="btn-group">
