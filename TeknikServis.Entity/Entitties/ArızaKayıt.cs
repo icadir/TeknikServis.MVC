@@ -65,7 +65,8 @@ namespace TeknikServis.Entity.Entitties
         //TODO Operatör icin bool alan.
         public string AnketCode { get; set; }
 
-  
+        //TODO Bosta alan teknisyenleri için
+        public bool TeknisyenIstemi { get; set; } = false;
 
 
         [Required]

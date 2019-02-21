@@ -94,8 +94,8 @@ namespace TeknikServis.Web.UI.Controllers
                 if (model.TeknisyenArizaDurum == TeknisyenArizaDurum.Çözüldü)
                 {
                     ariza.ArizaCozulduguTarih = DateTime.Now;
-
                     var user = NewUserManager().FindById(model.MusteriId);
+                    ariza.TeknisyenIstemi = false;
                     ariza.AnketCode = StringHelpers.GetCode();
                     new ArizaKayitRepo().Update(ariza);
 
