@@ -248,14 +248,19 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\ionicons.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Image\Aykut.JPG" />
+    <Content Include="Image\Bugra.JPG" />
     <Content Include="Image\bulasik.jpg" />
     <Content Include="Image\buzdolabi2000.png" />
     <Content Include="Image\camasir.png" />
     <Content Include="Image\camasir2000.jpg" />
-    <Content Include="Image\IMG_E4588.JPG" />
+    <Content Include="Image\fatih.JPG" />
+    <Content Include="Image\fitech.jpg" />
+    <Content Include="Image\Furki.JPG" />
     <Content Include="Image\IMG_E4589.JPG" />
     <Content Include="Image\IMG_E4590.JPG" />
     <Content Include="Image\IMG_E4591.JPG" />
+    <Content Include="Image\ismo.JPG" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
