@@ -18,6 +18,7 @@
     <link href="~/assets/css/ionicons.css" rel="stylesheet" />
     @Styles.Render("~/bundle/css")
     @RenderSection("top", false)
+    <link href="~/css/lightbox.min.css" rel="stylesheet" />
 </head>
 <body class="app-ui layout-has-drawer layout-has-fixed-header">
     <div class="app-layout-canvas">
@@ -38,6 +39,7 @@
         </div>
         <!-- .app-layout-container -->
     </div>
+
     <!-- .app-layout-canvas -->
     <!-- Apps Modal -->
     <!-- Opens from the button in the header -->
@@ -47,5 +49,7 @@
     <!-- AppUI Core JS: jQuery, Bootstrap, slimScroll, scrollLock and App.js -->
     @Scripts.Render("~/bundle/js")
     @RenderSection("bottom", false)
+    <script src="~/js/lightbox-plus-jquery.min.js"></script>
+    <script src="~/js/lightbox.js"></script>
 </body>
 </html>

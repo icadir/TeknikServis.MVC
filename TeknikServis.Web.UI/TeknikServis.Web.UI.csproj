@@ -241,6 +241,8 @@
     <Content Include="assets\js\plugins\sparkline\jquery.sparkline.min.js" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="css\lightbox.css" />
+    <Content Include="css\lightbox.min.css" />
     <Content Include="fonts\bootstrap\fontawesome-webfont.svg" />
     <Content Include="fonts\bootstrap\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\bootstrap\ionicons.svg" />
@@ -248,6 +250,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\ionicons.svg" />
     <Content Include="Global.asax" />
+    <Content Include="images\close.png" />
+    <Content Include="images\loading.gif" />
+    <Content Include="images\next.png" />
+    <Content Include="images\prev.png" />
     <Content Include="Image\Aykut.JPG" />
     <Content Include="Image\Bugra.JPG" />
     <Content Include="Image\bulasik.jpg" />
@@ -261,6 +267,10 @@
     <Content Include="Image\IMG_E4590.JPG" />
     <Content Include="Image\IMG_E4591.JPG" />
     <Content Include="Image\ismo.JPG" />
+    <Content Include="js\lightbox-plus-jquery.js" />
+    <Content Include="js\lightbox-plus-jquery.min.js" />
+    <Content Include="js\lightbox.js" />
+    <Content Include="js\lightbox.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -329,6 +339,8 @@
     <Content Include="fonts\bootstrap\ionicons.eot" />
     <Content Include="fonts\bootstrap\ionicons.ttf" />
     <Content Include="fonts\bootstrap\ionicons.woff" />
+    <Content Include="js\lightbox-plus-jquery.min.map" />
+    <Content Include="js\lightbox.min.map" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_LayoutMain.cshtml" />
     <Content Include="Views\Shared\Partial\_HeaderPartial.cshtml" />
