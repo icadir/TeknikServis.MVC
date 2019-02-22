@@ -54,6 +54,7 @@ namespace TeknikServis.Web.UI.Controllers
             {
                 var ariza = new ArizaKayitRepo().GetById(id);
                 var data = Mapper.Map<ArizaViewModel>(ariza);
+                data.ArızaPath = ariza.Fotograflar.Select(y => y.Yol).ToList();
                 return View(data);
 
             }
