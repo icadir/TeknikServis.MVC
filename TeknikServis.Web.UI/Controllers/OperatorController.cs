@@ -37,7 +37,9 @@ namespace TeknikServis.Web.UI.Controllers
             try
             {
                 var x = await new ArizaKayitRepo().GetByIdAsync(id);
+             
                 var data = Mapper.Map<ArizaViewModel>(x);
+                data.ArızaPath = x.Fotograflar.Select(y => y.Yol).ToList();
                 return View(data);
             }
             catch (Exception ex)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -34,7 +35,7 @@ namespace TeknikServis.Entity.Entitties
 
         //TODO resimler için gerekli alanlar kısmı
         [DisplayName("Ürün Resmi Ekleyiniz")]
-        public string ArızaPath { get; set; }
+        public List<string> ArızaPath { get; set; }
         //todo view modelyapcaksın bu alanı resim için.
         [DisplayName("Fatura Resmini Ekleyiniz")]
         public string FaturaPath { get; set; }
@@ -99,6 +100,9 @@ namespace TeknikServis.Entity.Entitties
 
         //TODO anket yapıldımı için alan.
         public bool AnketYapildimi { get; set; } = false;
+
+
+        public virtual List<Fotograf> Fotograflar { get; set; } = new List<Fotograf>();
 
     }
 }

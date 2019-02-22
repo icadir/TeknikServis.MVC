@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
+using TeknikServis.Entity.Entitties;
 using TeknikServis.Entity.Enums;
 
 namespace TeknikServis.Entity.ViewModels.ArizaViewModels
@@ -35,9 +37,9 @@ namespace TeknikServis.Entity.ViewModels.ArizaViewModels
 
         //TODO resimler için gerekli alanlar kısmı
         [DisplayName("Ürün Resmi Ekleyiniz :")]
-        public string ArızaPath { get; set; }
+        public List<string> ArızaPath { get; set; }
         [DisplayName("Arızali Ürün Resmini Ekleyiniz :")]
-        public HttpPostedFileBase PostedFileAriza { get; set; }
+        public List<HttpPostedFileBase> PostedFileAriza { get; set; }
         [DisplayName("Fatura Resmini Ekleyiniz")]
         public string FaturaPath { get; set; }
         [DisplayName("Ürünün Fatura Resmini Ekleyiniz.")]
@@ -93,5 +95,6 @@ namespace TeknikServis.Entity.ViewModels.ArizaViewModels
 
         public bool AnketYapildimi { get; set; } = false;
 
+        public virtual List<Fotograf> Fotograflar { get; set; } = new List<Fotograf>();
     }
 }

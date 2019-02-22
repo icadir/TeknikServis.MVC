@@ -48,35 +48,6 @@ namespace TeknikServis.Web.UI.Controllers
             var userManager = NewUserManager().FindById(model.MusteriId);
             try
             {
-                #region ArızaResimİşlemi
-                if (model.PostedFileAriza != null &&
-                    model.PostedFileAriza.ContentLength > 0)
-                {
-                    var file = model.PostedFileAriza;
-                    string fileName = Path.GetFileNameWithoutExtension(file.FileName);
-                    string extName = Path.GetExtension(file.FileName);
-                    fileName = StringHelpers.UrlFormatConverter(fileName);
-                    fileName += StringHelpers.GetCode();
-                    var klasoryolu = Server.MapPath("~/Ariza/");
-                    var dosyayolu = Server.MapPath("~/Ariza/") + fileName + extName;
-
-                    if (!Directory.Exists(klasoryolu))
-                        Directory.CreateDirectory(klasoryolu);
-                    file.SaveAs(dosyayolu);
-
-                    WebImage img = new WebImage(dosyayolu);
-                    img.Resize(250, 250, false);
-                    img.AddTextWatermark("FİTech");
-                    img.Save(dosyayolu);
-                    var oldPath = model.ArızaPath;
-                    model.ArızaPath = "/Ariza/" + fileName + extName;
-
-                    System.IO.File.Delete(Server.MapPath(oldPath));
-                }
-
-
-                #endregion
-
                 #region FaturaResimİşlemleri
                 if (model.PostedFileFatura != null &&
                     model.PostedFileFatura.ContentLength > 0)
@@ -117,10 +88,47 @@ namespace TeknikServis.Web.UI.Controllers
                     Email = model.Email,
                     OperatorKabul = false,
                     Telno = model.Telno,
-                    ArızaPath = model.ArızaPath,
                     FaturaPath = model.FaturaPath,
                 };
                 new ArizaKayitRepo().Insert(data);
+
+
+                #region ArızaResimİşlemi
+                if (model.PostedFileAriza.Count > 0)
+                {
+                    model.PostedFileAriza.ForEach(file =>
+                    {
+                        if (file != null && file.ContentLength > 0)
+                        {
+
+                            string fileName = Path.GetFileNameWithoutExtension(file.FileName);
+                            string extName = Path.GetExtension(file.FileName);
+                            fileName = StringHelpers.UrlFormatConverter(fileName);
+                            fileName += StringHelpers.GetCode();
+                            var klasoryolu = Server.MapPath("~/Upload/");
+                            var dosyayolu = Server.MapPath("~/Upload/") + fileName + extName;
+
+                            if (!Directory.Exists(klasoryolu))
+                                Directory.CreateDirectory(klasoryolu);
+                            file.SaveAs(dosyayolu);
+
+                            WebImage img = new WebImage(dosyayolu);
+                            img.Resize(250, 250, false);
+                            img.Save(dosyayolu);
+
+                            new FotografRepo().Insert(new Fotograf()
+                            {
+                                ArizaId = data.Id,
+                                Yol = "/Upload/" + fileName + extName
+                            });
+                        }
+                    });
+                }
+                new ArizaKayitRepo().Update(data);
+
+                #endregion
+
+
                 var emailService = new EmailService();
                 var body = $"Merhaba <b>{userManager.Name} {userManager.Surname}</b><br>Arıza Kaydınız Oluşturulmuştur. En kısa zamanda arızanız giderilicektir.<br>Fitech Mutlu Günler Diler.<br>  ";
                 emailService.Send(new IdentityMessage() { Body = body, Subject = $"{userManager.UserName} Arıza Kaydı" }, model.Email);

@@ -5,6 +5,9 @@
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
 
+@section top{
+    <link href="~/assets/css/lightbox.min.css" rel="stylesheet" />
+}
 <h2 class="text-center">Ariza Detay</h2>
 
 <div class="col-md-6 col-md-offset-3">
@@ -21,49 +24,55 @@
                     <div class="form-group row">
                         <div class="col-xs-6">
                             @*<label for="exampleInputName1">First name</label>*@
-                            @Html.Label("","Müşterinin Adı")
+                            @Html.Label("", "Müşterinin Adı")
                             @*<input type="text" class="form-control" id="exampleInputName1">*@
-                            @Html.TextBox("data.Name", data.Name, new {@class="form-control",@readonly="readonly"})
-                        
+                            @Html.TextBox("data.Name", data.Name, new { @class = "form-control", @readonly = "readonly" })
+
                         </div>
                         <div class="col-xs-6">
-                            @Html.Label("","Müşterinin Soyadı")
-            
-                            @Html.TextBox("data.Surname", data.Surname, new {@class="form-control",@readonly="readonly"})
+                            @Html.Label("", "Müşterinin Soyadı")
+
+                            @Html.TextBox("data.Surname", data.Surname, new { @class = "form-control", @readonly = "readonly" })
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-xs-6">
-                            @Html.Label("","Müşteri Email")
-                            @Html.TextBox("data.Email", data.Email, new {@class="form-control",@readonly="readonly"})
+                            @Html.Label("", "Müşteri Email")
+                            @Html.TextBox("data.Email", data.Email, new { @class = "form-control", @readonly = "readonly" })
                         </div>
-                        <div class="col-xs-6"> 
+                        <div class="col-xs-6">
                             @Html.LabelFor(x => x.Telno)
-                            @Html.TextBoxFor(x => x.Telno, new {@class = "form-control", @readonly = "readonly"})
+                            @Html.TextBoxFor(x => x.Telno, new { @class = "form-control", @readonly = "readonly" })
                         </div>
                     </div>
                     <div class="form-group">
-                        @Html.Label("","Adres Bilgisi")
-                        @Html.TextAreaFor(x=>x.Adres, new { @class = "form-control", @readonly = "readonly" })
+                        @Html.Label("", "Adres Bilgisi")
+                        @Html.TextAreaFor(x => x.Adres, new { @class = "form-control", @readonly = "readonly" })
                     </div>
 
                     <div class="form-group row">
                         <div class="col-xs-6">
-                            @Html.Label("","Arızalı Ürün Resmi")
-                            <img src="@(string.IsNullOrEmpty(Model.ArızaPath) ? "/assets/img/avatars/avatar3.jpg" : Model.ArızaPath)" class="img-avatar-96" width="100" height="100"/>
+                            @Html.Label("", "Arızalı Ürün Resmi")
+                            @for (int i = 0; i < Model.ArızaPath.Count; i++)
+                            {
+                                var cx = Model.ArızaPath[i];
+                                <a href="@cx" rel="lightbox">
+                                    <img src="@cx" class="img-avatar-96" width="100" height="100">
+                                </a>
+                            }
                         </div>
                         <div class="col-xs-6">
-                            @Html.Label("","Ürün Fatura Bilgisi")
-                            <img src="@(string.IsNullOrEmpty(Model.FaturaPath) ? "/assets/img/avatars/avatar3.jpg" : Model.FaturaPath)" class="img-avatar-96" width="100" height="100"/>
+                            @Html.Label("", "Ürün Fatura Bilgisi")
+                            <img src="@(string.IsNullOrEmpty(Model.FaturaPath) ? "/assets/img/avatars/avatar3.jpg" : Model.FaturaPath)" class="img-avatar-96" width="100" height="100" />
                         </div>
-                       
+
                     </div>
                     <div class="row narrow-gutter">
                         <div class="col-xs-12">
-                            @*//TODO unutmazsan sor hocaya. burada yapmak istedigimiz daha önceden bunu operator almıssa arıza onaylama butonu onayladı veya pasif veya gelmesin vs*@ 
+                            @*//TODO unutmazsan sor hocaya. burada yapmak istedigimiz daha önceden bunu operator almıssa arıza onaylama butonu onayladı veya pasif veya gelmesin vs*@
                             @*@(Model.OperatorKabul==false? "<a href="+Url.Action("ArizaDetay","Operator",new {id=data2.ArizaId})+ "class='btn btn-xs btn-default'"+"title='Arıza Detay'"+"></a>":"Belalım")*@
                             <a href="@Url.Action("ArizaKabul", "Operator", new {id = Model.ArizaId})" class="btn btn-app btn-block hidden-xs" title="Arıza Kabul">
-                             Arızayı Onayla
+                                Arızayı Onayla
                             </a>
                         </div>
                     </div>
@@ -80,3 +89,7 @@
     </div>
     <!-- .card -->
 </div>
+@section bottom{
+    <script src="~/assets/js/lightbox-plus-jquery.min.js"></script>
+    <script src="~/assets/js/lightbox.js"></script>
+}

@@ -16,6 +16,7 @@ namespace TeknikServis.DAL
         }
 
         public virtual DbSet<ArızaKayıt> ArizaKayitlari { get; set; }
+        public virtual DbSet<Fotograf> Fotograflar { get; set; }
         public DateTime InstanceDate { get; set; }
     }
 }
