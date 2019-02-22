@@ -18,10 +18,13 @@
                 <span class="navbar-page-title">
                     @ViewBag.Title
                 </span>
-            </div>
+            </div>     
             <div class="collapse navbar-collapse" id="header-navbar-collapse">
+                <div class="col-md-3" id="logo">
+                    <i class="fa fa-cogs fa-2x">FİTECH<br /></i>
+                </div>
                 <!-- Header search form -->
-                <form class="navbar-form navbar-left app-search-form" role="search">
+                <form class="navbar-form navbar-left app-search-form col-md-9" role="search">
                     <div class="form-group">
                         <div class="input-group">
                             <input class="form-control" type="search" id="search-input" placeholder="Ara..." />
@@ -49,8 +52,8 @@
                 </ul>
                 <!-- .navbar-left -->
                 <ul class="nav navbar-nav navbar-right navbar-toolbar hidden-sm hidden-xs">
-              
-        
+
+
                     <li class="dropdown dropdown-profile">
                         <a href="javascript:void(0)" data-toggle="dropdown">
                             <span class="m-r-sm">@MembershipTools.GetNameSurname(null)<span class="caret"></span></span>
@@ -61,14 +64,110 @@
                                 Pages
                             </li>
                             <li>
-                                <a href="@Url.Action("UserProfile","Account")">Profil</a>
+                                <a href="@Url.Action("UserProfile", "Account")">Profil</a>
                             </li>
                             <li>
-                                <a href="@Url.Action("Logout","Account")">Çıkış</a>
+                                <a href="@Url.Action("Logout", "Account")">Çıkış</a>
                             </li>
                         </ul>
+                        @if (HttpContext.Current.User.IsInRole("Admin"))
+                        {
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li class="dropdown-header">
+                                    Pages
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index", "Admin")">Admin AnaSayfa</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("EditUser", "Admin")">Kullanıcı Ayarı</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index", "Operator")">Operator Indexi</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("ArizaDetay", "Operator")">Operator Arizadetay</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index", "Musteri")">musteri Indexi</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("ArizaTakip", "Musteri")">müsteri arıza takip</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("UserProfile", "Account")">Profil</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Logout", "Account")">Çıkış</a>
+                                </li>
+                            </ul>
+                        }
+                        @if (HttpContext.Current.User.IsInRole("Operator"))
+                        {
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li class="dropdown-header">
+                                    Pages
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index", "Operator")">Operator Anasayfa</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("ArizaDetay", "Operator")">Operator Arizadetay</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("ArizaList", "Operator")">Operator Arizalsitesiy</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("OPArizaDetay", "Operator")">Operator Detayımsı</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("UserProfile", "Account")">Profil</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Logout", "Account")">Çıkış</a>
+                                </li>
+                            </ul>
+                        }
+                        @if (HttpContext.Current.User.IsInRole("Teknisyen"))
+                        {
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li class="dropdown-header">
+                                    Pages
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index", "Teknisyen")">Teknisyen Index</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("UserProfile", "Account")">Profil</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Logout", "Account")">Çıkış</a>
+                                </li>
+                            </ul>
+                        }
+                        @if (HttpContext.Current.User.IsInRole("Musteri"))
+                        {
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li class="dropdown-header">
+                                    Pages
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index", "Musteri")">Ariza Bildirimi</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("ArizaTakip", "Musteri")">Arıza Takip</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("UserProfile", "Account")">Profil</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Logout", "Account")">Çıkış</a>
+                                </li>
+                            </ul>
+                        }
                     </li>
                 </ul>
+                        
                 <!-- .navbar-right -->
             </div>
         </div>
