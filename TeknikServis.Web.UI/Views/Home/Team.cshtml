@@ -3,7 +3,9 @@
     ViewBag.Title = "Team";
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
-
+@section top{
+    <link href="~/assets/css/lightbox.min.css" rel="stylesheet" />
+}
 <!-- Page header -->
 <div class="page-header bg-app bg-inverse">
     <div class="container">
@@ -20,14 +22,14 @@
 <div class="p-y-lg bg-white">
     <div class="container">
         <p class="lead text-center">
-           Genç, dinamik, çalışkan ve çiğ etle beslenen kadrosuyla ekibimiz hizmete hazırdır.
+            Genç, dinamik, çalışkan ve çiğ etle beslenen kadrosuyla ekibimiz hizmete hazırdır.
         </p>
 
         <!-- Section Content -->
         <div class="row p-t-lg p-b-xl">
             <div class="col-md-3">
                 <div class="p-x-md text-center">
-                    <div class="p-x">                      
+                    <div class="p-x">
                         <a href="~/Image/ismo.JPG" rel="lightbox"><img class="img-responsive img-rounded" src="~/Image/ismo.JPG" /> </a>
                     </div>
                     <h4>İsmail Çadır <br> <small class="text-muted">HA CEO</small></h4>
@@ -36,8 +38,8 @@
             </div>
             <div class="col-md-3">
                 <div class="p-x-md text-center">
-                    <div class="p-x">                        
-                        <a href="~/Image/Furki.JPG" rel="lightbox"><img class="img-responsive img-rounded"  src="~/Image/Furki.JPG" /> </a>
+                    <div class="p-x">
+                        <a href="~/Image/Furki.JPG" rel="lightbox"><img class="img-responsive img-rounded" src="~/Image/Furki.JPG" /> </a>
                     </div>
                     <h4>Furkan Kılıç <br> <small class="text-muted">Genel Müdür</small></h4>
                     <p>Hamsi sever</p>
@@ -45,9 +47,9 @@
             </div>
             <div class="col-md-3">
                 <div class="p-x-md text-center">
-                    <div class="p-x">                     
-                <a href="~/Image/IMG_E4591.JPG" rel="lightbox"><img class="img-responsive img-rounded" src="~/Image/IMG_E4591.JPG" /> </a>
-                    </div>                    
+                    <div class="p-x">
+                        <a href="~/Image/IMG_E4591.JPG" rel="lightbox"><img class="img-responsive img-rounded" src="~/Image/IMG_E4591.JPG" /> </a>
+                    </div>
                     <h4>Mücahit Seba <br> <small class="text-muted">Operatör</small></h4>
                     <p>calıs lan.</p>
                 </div>
@@ -55,8 +57,8 @@
             <div class="col-md-3">
                 <div class="p-x-md text-center">
                     <div class="p-x">
-                        <a href="~/Image/fatih.JPG" rel="lightbox"><img class="img-responsive img-rounded" src="~/Image/fatih.JPG" /> </a>                   
-                    </div>                   
+                        <a href="~/Image/fatih.JPG" rel="lightbox"><img class="img-responsive img-rounded" src="~/Image/fatih.JPG" /> </a>
+                    </div>
                     <h4>Fatih Hançer <br> <small class="text-muted">Operatör</small></h4>
                     <p>Boş yapmayı sever.</p>
                 </div>
@@ -66,7 +68,7 @@
 
             <div class="col-md-3">
                 <div class="p-x-md text-center">
-                    <div class="p-x">                        
+                    <div class="p-x">
                         <a href="~/Image/IMG_E4589.JPG" rel="lightbox"><img class="img-responsive img-rounded" src="~/Image/IMG_E4589.JPG" /> </a>
                     </div>
                     <h4>Kubilay Yazı <br> <small class="text-muted">Teknisyen</small></h4>
@@ -76,7 +78,7 @@
             <div class="col-md-3">
                 <div class="p-x-md text-center">
                     <div class="p-x">
-                        <a href="~/Image/IMG_E4590.JPG" rel="lightbox"><img class="img-responsive img-rounded"  src="~/Image/IMG_E4590.JPG" /> </a>
+                        <a href="~/Image/IMG_E4590.JPG" rel="lightbox"><img class="img-responsive img-rounded" src="~/Image/IMG_E4590.JPG" /> </a>
                     </div>
                     <h4>Oğuzhan Dereci <br> <small class="text-muted">Teknisyen</small></h4>
                     <p>Moruk her işi yapar.</p>
@@ -108,3 +110,7 @@
     </div>
 </div>
 <!-- End Team -->
+@section bottom{
+    <script src="~/assets/js/lightbox-plus-jquery.min.js"></script>
+    <script src="~/assets/js/lightbox.js"></script>
+}
