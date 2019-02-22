@@ -271,6 +271,7 @@
     <Content Include="assets\js\lightbox-plus-jquery.min.js" />
     <Content Include="assets\js\lightbox.js" />
     <Content Include="assets\js\lightbox.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

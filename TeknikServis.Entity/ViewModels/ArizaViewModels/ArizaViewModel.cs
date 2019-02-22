@@ -28,9 +28,9 @@ namespace TeknikServis.Entity.ViewModels.ArizaViewModels
         [DisplayName("İletişim Maili")]
         public string Email { get; set; }
 
-        [DisplayName("Enlem Giriniz :")]
+ 
         public string Enlem { get; set; }
-        [DisplayName("Boylam Giriniz :")]
+  
         public string Boylam { get; set; }
 
         public string UserId { get; set; }

@@ -77,7 +77,7 @@
                             <div class="col-sm-8 col-sm-offset-2">
                                 @Html.LabelFor(x => x.ArızaAcıklaması)
                                 @Html.TextAreaFor(x => x.ArızaAcıklaması, new { @class = "form-control", type = "text", placeholder = "Lütfen Arıza Hakkında Açıklama Yapiniz" })
-                              
+
                             </div>
                         </div>
                     </div>
@@ -90,6 +90,22 @@
                                 @Html.TextAreaFor(x => x.Adres, new { @class = "form-control", type = "text", placeholder = "Lütfen Adresinizi Yaziniz." })
                                 @*TODO BURADA HARİTA İŞLEMLERİ OLCAK NORMALDE*@
                             </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.Enlem, new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(x => x.Enlem, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.Boylam, new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-10">
+                                @Html.TextBoxFor(x => x.Boylam, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div id="harita"></div>
+                            <input type="button" id="btnkonum" value="Konum Getir" class="btn btn-primary" />
                         </div>
                     </div>
                     <!-- End Step 2 -->
@@ -145,7 +161,65 @@
     <!-- .col-lg-6 -->
 
 </div>
+<script src="~/Scripts/jquery-3.1.1.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZvxb5BAGPyDnBg5uaoB-U3y0se0KeAqo"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+    $("#btnkonum").click(function () {
+        navigator.geolocation.getCurrentPosition(koordinat);
+    });
+    function koordinat(position) {
+        var enlem = $("#Enlem").val();
+        var boylam = $("#Boylam").val();
+        var enlemboylam = new google.maps.LatLng(enlem, boylam);
+        var ayar = {
+            center: enlemboylam,
+            zoom: 15,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            mapTypeControl: true,
+            navigationControlOptions: { style: google.maps.NavigationControlStyle.SMALL }
+        };
+        var haritatutucu = document.getElementById("harita");
+        var googleHarita = new google.maps.Map(haritatutucu, ayar);
+        var imlec = new google.maps.Marker({
+            position: enlemboylam,
+            map: googleHarita,
+            title: "Konumunuz"
+        });
+        googleHarita.addListener("click", function () {
+            imlec.setMap(null);
+        });
+        googleHarita.addListener("click", function (e) {
+            placeMarkerAndPanTo(e.latLng, googleHarita);
+        });
+        function placeMarkerAndPanTo(latLng, map) {
+            imlec = new google.maps.Marker({
+                position: latLng,
+                map: map
+            });
+            $("#Enlem").val(latLng.lat());
+            $("#Boylam").val(latLng.lng());
+        };
+    };
+    function init() {
+        navigator.geolocation.getCurrentPosition(koordinat);
+    };
+    init();
 
+</script>
+<style>
+
+    #harita {
+        width: 100%;
+        height: 400px;
+        background-color: grey;
+    }
+
+    .check {
+        opacity: 0.5;
+        color: #996;
+    }
+</style>
 @section bottom
 {
 
@@ -157,14 +231,14 @@
     <!-- Page JS Code -->
     <script src="~/assets/js/pages/base_forms_wizard.js"></script>
     <script>
-        //$(function () {
-        //    $("#kaydetx").click(function () {
-        //        $.notify({
-        //            message: "Kaydınız Alınmıştır. Teşekkür ederiz.",
-        //            title: "Servis MESAJI -",
-        //            type: "success"
-        //        });
-        //    });
-        //})
+                        //$(function () {
+                        //    $("#kaydetx").click(function () {
+                        //        $.notify({
+                        //            message: "Kaydınız Alınmıştır. Teşekkür ederiz.",
+                        //            title: "Servis MESAJI -",
+                        //            type: "success"
+                        //        });
+                        //    });
+                        //})
     </script>
 }
