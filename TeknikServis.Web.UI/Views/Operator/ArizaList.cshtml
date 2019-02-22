@@ -21,13 +21,11 @@
 
 <div class="card">
     <div class="card-header">
-        <h4 class="text-center">Merhaba @MembershipTools.GetNameSurname(null)</h4><br />
-    </div>
-    <div class="card-header">
+        <h5 class="text-center">Merhaba @MembershipTools.GetNameSurname(null)</h5><br />
         <h4 class="text-center">İyi Çalışmalar Dileriz. FiTech<span class="ion-alert"></span></h4>
     </div>
+   
     <div class="card-block">
-        <!-- DataTables init on table by adding .js-dataTable-full class, functionality initialized in js/pages/base_tables_datatables.js -->
         <table class="table table-bordered table-striped table-vcenter dataTable">
             <thead>
                 <tr>
@@ -48,9 +46,6 @@
 
                     var data2 = Model[i];
 
-                    @*<tr class="@(data.EmailConfirmed?"":"bg-yellow")">*@
-
-                    //TODO bi normal yapıyor bi renkli yapıyor  renkde problem oluyor . ama digerlerinde çalışıyor.
                     <tr class="@(data2.OperatorKabul==false ? "bg-red":"bg-green")">
                         <td class="font-300 text-center">@(i + 1)</td>
                         <td class="font-300 text-center">@(data2.ArizaDurumu)</td>
