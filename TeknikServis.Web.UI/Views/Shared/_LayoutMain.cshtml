@@ -20,11 +20,11 @@
     @RenderSection("top", false)
   
 </head>
-<body class="app-ui layout-has-drawer layout-has-fixed-header">
+<body class="app-ui layout-has-fixed-header">
     <div class="app-layout-canvas">
         <div class="app-layout-container">
             <!-- Drawer -->
-            @{Html.RenderAction("DrawerPartial", "Partial");}
+            @*@{Html.RenderAction("DrawerPartial", "Partial");}*@
             <!-- End drawer -->
             <!-- Header -->
             @{Html.RenderAction("HeaderPartial", "Partial");}
