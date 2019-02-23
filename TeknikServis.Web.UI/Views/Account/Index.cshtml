@@ -31,9 +31,9 @@
         <div class="app-layout-container">
             <!-- Header -->
             <!-- End header -->
-            <main class="app-layout-content">
+            <main class="app-layout-content bg-gray-light">
                 <!-- Page header -->
-                <div class="page-header bg-green bg-inverse">
+                <div class="page-header bg-primary bg-inverse">
                     <div class="container">
                         <!-- Section Content -->
                         <div class="p-y-lg text-center">
@@ -95,8 +95,8 @@
                                                     @Html.CheckBoxFor(x => x.LoginViewModel.RememberMe)<span></span> Remember me
                                                 </label>
                                             </div>
-                                            <button type="submit" class="btn btn-app btn">Giriş Yap</button>
-                                            <a href="@Url.Action("RecoverPassword", "Account")" class="btn btn-app btn">
+                                            <button type="submit" class="btn btn-primary btn">Giriş Yap</button>
+                                            <a href="@Url.Action("RecoverPassword", "Account")" class="btn btn-primary btn">
                                                 Şifremi Unuttum
                                             </a>
                                         }
@@ -145,7 +145,7 @@
                                                     @Html.TextBoxFor(x => x.RegisterViewModel.ConfirmPassword, new { @class = "form-control", placeholder = "Şifre Tekrar", type = "password" })
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn btn-app btn-block">Kayıt Ol</button>
+                                            <button type="submit" class="btn btn-primary btn-block">Kayıt Ol</button>
                                         }
                                     </div>
                                     <!-- .card-block -->
@@ -191,7 +191,7 @@
                 </div>
                 <!-- End modal -->
             </main>
-            <footer class="app-layout-footer">
+            <footer class="app-layout-footer bg-primary">
                 <div class="container p-y-md">
                     <div class="pull-right hidden-sm hidden-xs">
                         <a href="https://shapebootstrap.net/item/1525731-appui-admin-frontend-template/?ref=rustheme" target="_blank" rel="nofollow">Purchase a license</a>

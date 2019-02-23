@@ -1,7 +1,7 @@
 ﻿@using TeknikServis.BLL.Identity
 <header class="app-layout-header">
     <nav class="navbar navbar-default">
-        <div class="container-fluid">
+        <div class="container-fluid " style="background-color:black">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-navbar-collapse" aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span>
@@ -35,7 +35,9 @@
                     </div>
                 </form>
                 <ul id="main-menu" class="nav navbar-nav navbar-left">
-
+                    <li>
+                        <a href="@Url.Action("Index","Home")">Anasayfa</a>
+                    </li>
                     <li>
                         <a href="@Url.Action("About","Home")">Hakkimizda</a>
                     </li>
@@ -77,22 +79,22 @@
                                     Pages
                                 </li>
                                 <li>
-                                    <a href="@Url.Action("Index", "Admin")">Admin AnaSayfa</a>
+                                    <a href="@Url.Action("Index", "Admin")">AnaSayfa</a>
                                 </li>
                                 <li>
                                     <a href="@Url.Action("EditUser", "Admin")">Kullanıcı Ayarı</a>
                                 </li>
                                 <li>
-                                    <a href="@Url.Action("Index", "Operator")">Operator Indexi</a>
+                                    <a href="@Url.Action("Index", "Operator")">Operatör Anasayfa</a>
                                 </li>
                                 <li>
-                                    <a href="@Url.Action("ArizaDetay", "Operator")">Operator Arizadetay</a>
+                                    <a href="@Url.Action("Index", "Teknisyen")">Teknisyen Anasayfa</a>
                                 </li>
                                 <li>
-                                    <a href="@Url.Action("Index", "Musteri")">musteri Indexi</a>
+                                    <a href="@Url.Action("Index", "Musteri")">Müşteri Anasayfa</a>
                                 </li>
                                 <li>
-                                    <a href="@Url.Action("ArizaTakip", "Musteri")">müsteri arıza takip</a>
+                                    <a href="@Url.Action("ArizaTakip", "Musteri")">Müşteri ArızaTakip</a>
                                 </li>
                                 <li>
                                     <a href="@Url.Action("UserProfile", "Account")">Profil</a>
@@ -109,16 +111,16 @@
                                     Pages
                                 </li>
                                 <li>
-                                    <a href="@Url.Action("Index", "Operator")">Operator Anasayfa</a>
+                                    <a href="@Url.Action("Index", "Operator")">Anasayfa</a>
                                 </li>
                                 <li>
-                                    <a href="@Url.Action("ArizaDetay", "Operator")">Operator Arizadetay</a>
+                                    <a href="@Url.Action("ArizaDetay", "Operator")">Ariza Detayı</a>
                                 </li>
                                 <li>
-                                    <a href="@Url.Action("ArizaList", "Operator")">Operator Arizalsitesiy</a>
+                                    <a href="@Url.Action("ArizaList", "Operator")">Ariza Listesi</a>
                                 </li>
                                 <li>
-                                    <a href="@Url.Action("OPArizaDetay", "Operator")">Operator Detayımsı</a>
+                                    <a href="@Url.Action("OPArizaDetay", "Operator")">Operator Arıza Detay</a>
                                 </li>
                                 <li>
                                     <a href="@Url.Action("UserProfile", "Account")">Profil</a>
@@ -135,7 +137,7 @@
                                     Pages
                                 </li>
                                 <li>
-                                    <a href="@Url.Action("Index", "Teknisyen")">Teknisyen Index</a>
+                                    <a href="@Url.Action("Index", "Teknisyen")">Anasayfa</a>
                                 </li>
                                 <li>
                                     <a href="@Url.Action("UserProfile", "Account")">Profil</a>
