@@ -8,6 +8,10 @@
 
 <h2 class="section-title">Wizards with Progress</h2>
 <div class="row">
+    <div>
+        <p class="text-muted">@Html.ValidationSummary()</p>
+        <h3>@TempData["Message"]</h3>
+    </div>
     <div class="col-lg-6 col-lg-offset-3">
         <!-- Simple Classic Progress Wizard (.js-wizard-simple class is initialized in js/pages/base_forms_wizard.js) -->
         <!-- For more examples please check http://vadimg.com/twitter-bootstrap-wizard-example/ -->
@@ -27,13 +31,10 @@
             </ul>
             <!-- End Step Tabs -->
             <!-- Form -->
-            <div>
-                <p class="text-muted">@Html.ValidationSummary()</p>
-                <h3>@TempData["Message"]</h3>
-            </div>
 
 
-            @using (Html.BeginForm("ArizaKayitEkle", "Musteri", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+
+            @using (Html.BeginForm("ArizaKayitEkle", "Musteri", FormMethod.Post, new {@class = "form-horizontal", enctype = "multipart/form-data"}))
             {
                 @Html.AntiForgeryToken()
                 @Html.Hidden("MusteriId", HttpContext.Current.User.Identity.GetUserId())
@@ -52,7 +53,7 @@
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-2">
                                 @Html.LabelFor(x => x.BeyazEsya)
-                                @Html.EnumDropDownListFor(x => x.BeyazEsya, "Ürün Seçiniz", new { @class = "form-control", size = "1" })
+                                @Html.EnumDropDownListFor(x => x.BeyazEsya, "Ürün Seçiniz", new {@class = "form-control", size = "1"})
 
                             </div>
                         </div>
@@ -62,7 +63,7 @@
                                 @*<label for="simple-classic-progress-firstname">First Name</label>*@
                                 @Html.LabelFor(x => x.Email)
                                 @*<input class="form-control" type="text" id="simple-classic-progress-firstname" name="simple-classic-progress-firstname" placeholder="Please enter your first name"/>*@
-                                @Html.TextBoxFor(x => x.Email, new { @class = "form-control", type = "email", placeholder = "İletişim maili" })
+                                @Html.TextBoxFor(x => x.Email, new {@class = "form-control", type = "email", placeholder = "İletişim maili"})
                             </div>
                         </div>
                         <div class="form-group">
@@ -70,13 +71,13 @@
 
                                 @Html.LabelFor(x => x.Telno)
 
-                                @Html.TextBoxFor(x => x.Telno, new { @class = "form-control", type = "text", placeholder = "İletişim telno" })
+                                @Html.TextBoxFor(x => x.Telno, new {@class = "form-control", type = "text", placeholder = "İletişim telno"})
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-2">
                                 @Html.LabelFor(x => x.ArızaAcıklaması)
-                                @Html.TextAreaFor(x => x.ArızaAcıklaması, new { @class = "form-control", type = "text", placeholder = "Lütfen Arıza Hakkında Açıklama Yapiniz" })
+                                @Html.TextAreaFor(x => x.ArızaAcıklaması, new {@class = "form-control", type = "text", placeholder = "Lütfen Arıza Hakkında Açıklama Yapiniz"})
 
                             </div>
                         </div>
@@ -87,25 +88,25 @@
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-2">
                                 @Html.LabelFor(x => x.Adres)
-                                @Html.TextAreaFor(x => x.Adres, new { @class = "form-control", type = "text", placeholder = "Lütfen Adresinizi Yaziniz." })
+                                @Html.TextAreaFor(x => x.Adres, new {@class = "form-control", type = "text", placeholder = "Lütfen Adresinizi Yaziniz."})
                                 @*TODO BURADA HARİTA İŞLEMLERİ OLCAK NORMALDE*@
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(x => x.Enlem, new { @class = "col-sm-2 control-label" })
+                            @Html.LabelFor(x => x.Enlem, new {@class = "col-sm-2 control-label"})
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(x => x.Enlem, new { @class = "form-control" })
+                                @Html.TextBoxFor(x => x.Enlem, new {@class = "form-control"})
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(x => x.Boylam, new { @class = "col-sm-2 control-label" })
+                            @Html.LabelFor(x => x.Boylam, new {@class = "col-sm-2 control-label"})
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(x => x.Boylam, new { @class = "form-control" })
+                                @Html.TextBoxFor(x => x.Boylam, new {@class = "form-control"})
                             </div>
                         </div>
                         <div class="form-group">
                             <div id="harita"></div>
-                            <input type="button" id="btnkonum" value="Konum Getir" class="btn btn-primary" />
+                            <input type="button" id="btnkonum" value="Konum Getir" class="btn btn-primary"/>
                         </div>
                     </div>
                     <!-- End Step 2 -->
@@ -114,13 +115,13 @@
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-2">
                                 @Html.LabelFor(x => x.PostedFileAriza)
-                                @Html.TextBoxFor(x => x.PostedFileAriza, new { @class = "form-control", type = "file", multiple = true })
+                                @Html.TextBoxFor(x => x.PostedFileAriza, new {@class = "form-control", type = "file", multiple = true})
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-2">
                                 @Html.LabelFor(x => x.PostedFileFatura)
-                                @Html.TextBoxFor(x => x.PostedFileFatura, new { @class = "form-control", type = "file", multiple = false })
+                                @Html.TextBoxFor(x => x.PostedFileFatura, new {@class = "form-control", type = "file", multiple = false})
                             </div>
                         </div>
                         <div class="form-group">

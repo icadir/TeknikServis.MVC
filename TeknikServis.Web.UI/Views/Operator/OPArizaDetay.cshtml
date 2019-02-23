@@ -68,7 +68,14 @@
                     <div class="form-group row">
                         <div class="col-xs-6">
                             @Html.Label("", "Arızalı Ürün Resmi")
-                            <img src="@(string.IsNullOrEmpty(Model.ArızaPath) ? "~/assets/img/avatars/avatar3.jpg" : Model.ArızaPath)" class="img-avatar-96" width="100" height="100" />
+                          
+                            @for (int i = 0; i < Model.ArızaPath.Count; i++)
+                            {
+                                var cx = Model.ArızaPath[i];
+                                <a href="@cx" rel="lightbox">
+                                    <img src="@cx" class="img-avatar-96" width="100" height="100">
+                                </a>
+                            }
                         </div>
                         <div class="col-xs-6">
                             @Html.Label("", "Ürün Fatura Bilgisi")

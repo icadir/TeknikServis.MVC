@@ -108,7 +108,7 @@ namespace TeknikServis.Web.UI.Controllers
                     {
                         Body = body,
                         Subject = "Anket"
-                    }, user.Email);
+                    }, model.Email);
 
                 }
 

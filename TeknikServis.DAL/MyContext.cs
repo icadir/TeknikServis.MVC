@@ -7,7 +7,7 @@ using TeknikServis.Entity.IdentityModels;
 
 namespace TeknikServis.DAL
 {
-    public class MyContext:IdentityDbContext<User>
+    public class MyContext : IdentityDbContext<User>
     {
         public MyContext()
             : base("name=MyCon")
@@ -17,6 +17,7 @@ namespace TeknikServis.DAL
 
         public virtual DbSet<ArızaKayıt> ArizaKayitlari { get; set; }
         public virtual DbSet<Fotograf> Fotograflar { get; set; }
+        public virtual DbSet<ArizaLOG> ArizaLogs { get; set; }
         public DateTime InstanceDate { get; set; }
     }
 }

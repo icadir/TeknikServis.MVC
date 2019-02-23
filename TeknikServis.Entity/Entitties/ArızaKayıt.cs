@@ -104,5 +104,7 @@ namespace TeknikServis.Entity.Entitties
 
         public virtual List<Fotograf> Fotograflar { get; set; } = new List<Fotograf>();
 
+        public virtual ICollection<ArizaLOG> ArizaLogs { get; set; }=new HashSet<ArizaLOG>();
+
     }
 }

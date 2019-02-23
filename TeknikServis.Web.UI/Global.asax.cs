@@ -6,6 +6,8 @@ using System.Web.Routing;
 using TeknikServis.BLL.Identity;
 using TeknikServis.Entity.IdentityModels;
 using TeknikServis.Web.UI.App_Start;
+using System.Linq;
+using TeknikServis.BLL.Helpers;
 
 namespace TeknikServis.Web.UI
 {
@@ -17,7 +19,8 @@ namespace TeknikServis.Web.UI
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AutoMapperConfig.RegisterMappings();
-
+            var userManager = MembershipTools.NewUserManager();
+            var userStore = MembershipTools.NewUserStore();
             var roller = Enum.GetNames(typeof(IdentityRoles));
 
             var roleManager = MembershipTools.NewRoleManager();
@@ -28,6 +31,10 @@ namespace TeknikServis.Web.UI
                     {
                        Name=rol,
                     });
+            }
+            if (!userStore.Users.Any())
+            {
+                DataHelper.DataEkle();
             }
         }
     }

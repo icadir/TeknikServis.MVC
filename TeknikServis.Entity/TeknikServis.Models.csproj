@@ -79,6 +79,7 @@
     <Compile Include="Abstracts\BaseEntity.cs" />
     <Compile Include="Abstracts\BaseEntity2.cs" />
     <Compile Include="Anket\Anket.cs" />
+    <Compile Include="Entitties\ArizaLOG.cs" />
     <Compile Include="Entitties\ArızaKayıt.cs" />
     <Compile Include="Entitties\Fotograf.cs" />
     <Compile Include="Enums\AnketEnum.cs" />
