@@ -76,7 +76,7 @@ namespace TeknikServis.Web.UI.Controllers
                     }
                     else
                     {
-                        await userManager.AddToRoleAsync(newUser.Id, "User");
+                        await userManager.AddToRoleAsync(newUser.Id, "Musteri");
                     }
 
                     string SiteUrl = Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host +
