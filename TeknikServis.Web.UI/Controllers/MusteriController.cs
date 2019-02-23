@@ -92,6 +92,15 @@ namespace TeknikServis.Web.UI.Controllers
                 };
                 new ArizaKayitRepo().Insert(data);
 
+                var LogMusteri = new ArizaLOG
+                {
+                    CreatedDate = DateTime.Now,
+                    ArızaId = data.Id,
+                    Aciklama = $"{data.Id}'nolu kayıt {userManager.Name} {userManager.Surname} İsimli Müşteri Tarafından Oluşturuldu.",
+                    YapanınRolu = IdentityRoles.Musteri,
+                };
+                new ArizaLogRepo().Insert(LogMusteri);
+
 
                 #region ArızaResimİşlemi
                 if (model.PostedFileAriza.Count > 0)

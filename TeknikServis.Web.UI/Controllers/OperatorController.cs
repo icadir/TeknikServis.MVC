@@ -22,12 +22,37 @@ namespace TeknikServis.Web.UI.Controllers
         // GET: Operator
         public ActionResult Index()
         {
-            // TODO mapperları yapalım.
+         
             var data = new ArizaKayitRepo()
                 .GetAll(x => x.OperatorKabul == false)
-                .Select(x => Mapper.Map<ArizaViewModel>(x))
+                .Select(x=>Mapper.Map<ArizaViewModel>(x))
                 .ToList();
+            //    .Select(x => new ArizaViewModel()
+            //{
+            //    Adres = x.Adres,
+            //    AnketYapildimi = x.AnketYapildimi,
+            //    ArizaDurumu = x.ArizaDurumu,
+            //    ArizaCozulduguTarih = x.ArizaCozulduguTarih,
+            //    ArizaId = x.Id,
+            //    ArizaOlusturmaTarihi = x.ArizaOlusturmaTarihi,
+            //    ArızaAcıklaması = x.ArızaAcıklaması,
+            //    ArizaSonKontrolTarihi = x.ArizaSonKontrolTarihi,
+            //    BeyazEsya = x.BeyazEsya,
+            //    Email = x.Email,
+            //    MusteriId = x.MusteriId,
+            //    OperatorId = x.OperatorId,
+            //    OperatorKabulTarih = x.OperatorKabulTarih,
+            //    Telno = x.Telno,
+            //    TeknisyenArizaAciklama = x.TeknisyenArizaAciklama,
+            //    TeknisyenAtandigiTarih = x.TeknisyenAtandigiTarih,
+            //    TeknisyenId = x.TeknisyenId,
+            //    TeknisyenIstemi = x.TeknisyenIstemi,
+            //    OperatorKabul = x.OperatorKabul,
+            //    Boylam = x.Boylam,
+            //    Enlem = x.Enlem,
+            //    FaturaPath = x.FaturaPath,
 
+            //})
             return View(data);
         }
 
@@ -65,6 +90,7 @@ namespace TeknikServis.Web.UI.Controllers
             try
             {
                 var ariza = await new ArizaKayitRepo().GetByIdAsync(id);
+                var Operator = await NewUserManager().FindByIdAsync(OpertatorId);
                 if (ariza == null)
                 {
                     RedirectToAction("Index", "Operator");
@@ -75,13 +101,20 @@ namespace TeknikServis.Web.UI.Controllers
                     ariza.OperatorKabul = true;
                     ariza.OperatorId = OpertatorId;
                     ariza.ArizaDurumu = ArizaDurum.OperatorTakibeAldı;
-
                     new ArizaKayitRepo().Update(ariza);
-                    RedirectToAction("Index", "Operator");
+                    var OperatorLog = new ArizaLOG
+                    {
+                        CreatedDate = DateTime.Now,
+                        ArızaId = id,
+                        Aciklama = $"Ariza'nız {Operator.Name} {Operator.Surname} isimli Operator Tarafından Onaylanmıştır.",
+                        YapanınRolu = IdentityRoles.Teknisyen
+                    };
+                    new ArizaLogRepo().Insert(OperatorLog);
+                    RedirectToAction("ArizaList", "Operator");
                     //TODO Müşteriye Mail gönderilir bilgilendirme belki
                 }
 
-                return RedirectToAction("Index", "Operator");
+                return RedirectToAction("ArizaList", "Operator");
 
             }
 
@@ -141,13 +174,20 @@ namespace TeknikServis.Web.UI.Controllers
                 ariza.TeknisyenIstemi = true;
                 ariza.TeknisyenAtandigiTarih = DateTime.Now;
                 new ArizaKayitRepo().Update(ariza);
-               
+
                 var opId = HttpContext.User.Identity.GetUserId();
                 var teknisyen = NewUserManager().FindById(ariza.TeknisyenId);
                 var userOperator =  NewUserManager().FindById(opId);
                 var musteri = NewUserManager().FindById(ariza.MusteriId);
-    
 
+                var OperatorLog = new ArizaLOG
+                {
+                    CreatedDate = DateTime.Now,
+                    ArızaId = model.ArizaId,
+                    Aciklama = $"Ariza'nız {userOperator.Name} {userOperator.Surname} isimli Operator Tarafından {teknisyen.Name} {teknisyen.Surname} Teknisyene Bildirilmiştir.",
+                    YapanınRolu = IdentityRoles.Teknisyen
+                };
+                new ArizaLogRepo().Insert(OperatorLog);
 
                 string SiteUrl = Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host +
                                  (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port);
@@ -170,7 +210,7 @@ namespace TeknikServis.Web.UI.Controllers
                 {
                     Body = bodyMusteri,
                     Subject = "Ariza Teknisyen Bilgisi"
-                }, musteri.Email);
+                }, model.Email);
 
 
                 #endregion

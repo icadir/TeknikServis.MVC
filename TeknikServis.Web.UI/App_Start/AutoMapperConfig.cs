@@ -6,6 +6,7 @@ using AutoMapper;
 using TeknikServis.Entity.Anket;
 using TeknikServis.Entity.Entitties;
 using TeknikServis.Entity.ViewModels.ArizaViewModels;
+using TeknikServis.Entity.ViewModels.LogViewModel;
 
 namespace TeknikServis.Web.UI.App_Start
 {
@@ -13,11 +14,21 @@ namespace TeknikServis.Web.UI.App_Start
     {
         public static void RegisterMappings()
         {
-            Mapper.Initialize(cfg => { ArizaKayitMap(cfg); });
-           
+            Mapper.Initialize(cfg =>
+            {
+                ArizaKayitMap(cfg);
+                ArizaLogMap(cfg);
+
+            });
+
+
         }
 
-     
+        private static void ArizaLogMap(IMapperConfigurationExpression cfg)
+        {
+            cfg.CreateMap<ArizaLOG, ArizaLogViewModel>().ReverseMap();
+        }
+
 
         private static void ArizaKayitMap(IMapperConfigurationExpression cfg)
         {

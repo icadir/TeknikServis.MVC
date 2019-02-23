@@ -83,6 +83,7 @@
     <Compile Include="Identity\MembershipTools.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ArizaKayitRepo.cs" />
+    <Compile Include="Repository\ArizaLogRepo.cs" />
     <Compile Include="Repository\FotografRepo.cs" />
     <Compile Include="Repository\RepositoryBase.cs" />
     <Compile Include="Services\Senders\EmailService.cs" />

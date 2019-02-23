@@ -10,9 +10,12 @@ using TeknikServis.BLL.Helpers;
 using TeknikServis.BLL.Repository;
 using TeknikServis.BLL.Services.Senders;
 using TeknikServis.Entity.Anket;
+using TeknikServis.Entity.Entitties;
 using TeknikServis.Entity.Enums;
+using TeknikServis.Entity.IdentityModels;
 using TeknikServis.Entity.ViewModels;
 using TeknikServis.Entity.ViewModels.ArizaViewModels;
+using TeknikServis.Entity.ViewModels.LogViewModel;
 using static TeknikServis.BLL.Identity.MembershipTools;
 
 namespace TeknikServis.Web.UI.Controllers
@@ -55,6 +58,21 @@ namespace TeknikServis.Web.UI.Controllers
                 var ariza = new ArizaKayitRepo().GetById(id);
                 var data = Mapper.Map<ArizaViewModel>(ariza);
                 data.ArızaPath = ariza.Fotograflar.Select(y => y.Yol).ToList();
+                //ilgili log kayıtları getiriyor. o arizaya ait.
+                var Logs = new ArizaLogRepo().GetAll()
+                    .Where(u => u.ArızaId == id)
+                    .OrderByDescending(u => u.CreatedDate)
+                    .ToList();
+
+
+                //data.ArizaLogViewModels.Clear();
+                //gelen logkayitlarini mapper ile view model e çevirip. arizaviewmoedeki alana ekliyoruz.
+                //BURADA VİEWMODEL YAPAMADIK NEDEN BAK SOR ...
+                foreach (ArizaLOG log in Logs)
+                {
+
+                    data.ArizaLogs.Add(log);
+                }
                 return View(data);
 
             }
@@ -85,11 +103,10 @@ namespace TeknikServis.Web.UI.Controllers
                     return RedirectToAction("TeknisyenArizaRapor", "Teknisyen", model);
                 }
                 ariza.TeknisyenArizaAciklama = model.TeknisyenArizaAciklama;
-
                 ariza.TeknisyenArizaDurum = model.TeknisyenArizaDurum;
                 ariza.ArizaSonKontrolTarihi = DateTime.Now;
-
-
+                var TeknisyenId = System.Web.HttpContext.Current.User.Identity.GetUserId();
+                var teknisyen = await NewUserManager().FindByIdAsync(TeknisyenId);
                 //musteri ıd vs gelmiyor onları getir . userı bul mail e gönder
 
                 if (model.TeknisyenArizaDurum == TeknisyenArizaDurum.Çözüldü)
@@ -112,7 +129,15 @@ namespace TeknikServis.Web.UI.Controllers
 
                 }
 
+                var TeknisyenLog = new ArizaLOG
+                {
+                    ArızaId = model.ArizaId,
+                    YapanınRolu = IdentityRoles.Teknisyen,
+                    CreatedDate = DateTime.Now,
+                    Aciklama = $"Arıza Kontrol Edildi. Kontrol sonucu {model.TeknisyenArizaAciklama} notu bırakıldı .Son Durum {model.TeknisyenArizaDurum}",
 
+                };
+                new ArizaLogRepo().Insert(TeknisyenLog);
                 TempData["Message"] = $"{model.ArizaId} no lu Kayıt Raporu Alınmıştır. İyi çalışamlar";
                 return RedirectToAction("Index", "Teknisyen");
 

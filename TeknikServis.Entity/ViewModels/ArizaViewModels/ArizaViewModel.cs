@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Web;
 using TeknikServis.Entity.Entitties;
 using TeknikServis.Entity.Enums;
+using TeknikServis.Entity.ViewModels.LogViewModel;
 
 namespace TeknikServis.Entity.ViewModels.ArizaViewModels
 {
@@ -79,7 +80,8 @@ namespace TeknikServis.Entity.ViewModels.ArizaViewModels
         public string OperatorId { get; set; }
         public string TeknisyenId { get; set; }
 
-
+        //TODO arizaLogViewModel için
+        public List<ArizaLOG> ArizaLogs { get; set; }
 
         //TODO ANKET KISMI
         [DisplayName("Teknisyenin Konu Hakkında Bilgisi Yeterli miydi ?")]
@@ -96,5 +98,7 @@ namespace TeknikServis.Entity.ViewModels.ArizaViewModels
         public bool AnketYapildimi { get; set; } = false;
 
         public virtual List<Fotograf> Fotograflar { get; set; } = new List<Fotograf>();
+
+
     }
 }

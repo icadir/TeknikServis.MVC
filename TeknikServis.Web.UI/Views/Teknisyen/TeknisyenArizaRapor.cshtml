@@ -1,4 +1,6 @@
 ﻿@using TeknikServis.BLL.Identity
+@using TeknikServis.Entity.Entitties
+@using TeknikServis.Entity.IdentityModels
 @model TeknikServis.Entity.ViewModels.ArizaViewModels.ArizaViewModel
 
 @{
@@ -11,7 +13,7 @@
 }
 <h2 class="text-center">Teknisyen Arıza Kontrol Raporu</h2>
 
-<div class="col-md-6 col-md-offset-3">
+<div class="col-md-8">
     <div class="card">
         <div class="card-block tab-content">
             <div class="tab-pane fade active in" id="profile-tab1">
@@ -23,7 +25,7 @@
 
                     @Html.HiddenFor(x => x.ArizaId)
                     @Html.HiddenFor(x => x.MusteriId)
-                    @Html.HiddenFor(x=>x.Email)
+                    @Html.HiddenFor(x => x.Email)
                     <h4 class="m-t-sm m-b">Arıza Kontrol Bildiri</h4>
                     <div class="form-group row">
                         <div class="col-xs-6">
@@ -64,7 +66,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                          <div class="col-xs-6">
+                        <div class="col-xs-6">
                             @Html.Label("", "Arızalı Ürün Resimleri")
                             @for (int i = 0; i < Model.ArızaPath.Count; i++)
                             {
@@ -102,6 +104,52 @@
     </div>
     <!-- .card -->
 </div>
+
+<div class="col-md-4">
+    <div class="panel">
+        <div class="panel-heading">
+            <h3 class="panel-title">Olaylar</h3><h3></h3>
+        </div><br />
+        <div class="panel-body">
+            <div class="timeline">
+                <!-- Timeline header -->
+                <div class="timeline-header">
+                    <div class="timeline-header-title bg-info">Şimdi</div>
+                </div>
+
+                @foreach (ArizaLOG log in Model.ArizaLogs)
+                {
+                    <div class="timeline-entry">
+                        <div class="timeline-stat">
+                            @switch (log.YapanınRolu)
+                            {
+                                case IdentityRoles.Operator:
+                                    <div class="timeline-icon bg-success"><i class="fa fa-clipboard fa-lg"></i> </div>
+                                    break;
+                                case IdentityRoles.Musteri:
+                                    <div class="timeline-icon bg-info"><i class="fa fa-check fa-lg"></i> </div>
+                                    break;
+                                case IdentityRoles.Teknisyen:
+                                    <div class="timeline-icon bg-warning"><i class="fa fa-briefcase fa-lg"></i> </div>
+                                    break;
+                                default:
+                                    <div class="timeline-icon bg-purple"><i class="fa fa-check fa-lg"></i> </div>
+                                    break;
+                            }
+                        </div>
+                        <div class="timeline-label">
+                            @log.CreatedDate
+                            <h3>@log.Aciklama</h3>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <!--===================================================-->
+        <!-- End Striped Table -->
+    </div>
+</div>
+
 
 @section bottom{
     <script src="~/assets/js/lightbox-plus-jquery.min.js"></script>

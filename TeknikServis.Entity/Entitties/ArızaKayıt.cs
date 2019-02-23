@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using TeknikServis.Entity.Enums;
 using TeknikServis.Entity.IdentityModels;
+using TeknikServis.Entity.ViewModels.LogViewModel;
 using TeknikServis.Web.UI.Abstracts;
 
 namespace TeknikServis.Entity.Entitties
