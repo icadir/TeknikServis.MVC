@@ -87,7 +87,7 @@ namespace TeknikServis.Web.UI.Controllers
                         YapanınRolu = IdentityRoles.Teknisyen
                     };
                     new ArizaLogRepo().Insert(OperatorLog);
-                    RedirectToAction("ArizaList", "Operator");
+                    return RedirectToAction("ArizaList", "Operator");
                     //TODO Müşteriye Mail gönderilir bilgilendirme belki
                 }
 
@@ -218,9 +218,10 @@ namespace TeknikServis.Web.UI.Controllers
             {
 
                 ViewBag.TeknisyenK = BostaOlanTeknisyenler();
-                var data = new ArizaKayitRepo()
-                    .GetAll(x => x.Id == id)
-                    .Select(x => Mapper.Map<ArizaViewModel>(x)).FirstOrDefault();
+                var ariza = new ArizaKayitRepo().GetById(id);
+                var data = Mapper.Map<ArizaViewModel>(ariza);
+                data.ArızaPath = ariza.Fotograflar.Select(y => y.Yol).ToList();
+
                 return View(data);
             }
             catch (Exception ex)

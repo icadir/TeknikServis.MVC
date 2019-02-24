@@ -61,6 +61,8 @@ namespace TeknikServis.Web.UI.Controllers
                 }
 
             }
+
+            return Teknisyenler;
         }
     }
 }
