@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AutoMapper;
+using Microsoft.AspNet.Identity;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
-using AutoMapper;
-using Microsoft.AspNet.Identity;
 using TeknikServis.BLL.Helpers;
 using TeknikServis.BLL.Repository;
 using TeknikServis.BLL.Services.Senders;
-using TeknikServis.Entity.Anket;
 using TeknikServis.Entity.Entitties;
 using TeknikServis.Entity.Enums;
 using TeknikServis.Entity.IdentityModels;
 using TeknikServis.Entity.ViewModels;
 using TeknikServis.Entity.ViewModels.ArizaViewModels;
-using TeknikServis.Entity.ViewModels.LogViewModel;
 using static TeknikServis.BLL.Identity.MembershipTools;
 
 namespace TeknikServis.Web.UI.Controllers

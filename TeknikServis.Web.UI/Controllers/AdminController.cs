@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
+using AutoMapper;
 using Microsoft.AspNet.Identity;
 using TeknikServis.BLL.Helpers;
+using TeknikServis.BLL.Repository;
 using TeknikServis.BLL.Services.Senders;
 using TeknikServis.Entity.Models;
 using TeknikServis.Entity.ViewModels;
+using TeknikServis.Entity.ViewModels.ArizaViewModels;
 using static TeknikServis.BLL.Identity.MembershipTools;
 
 namespace TeknikServis.Web.UI.Controllers
@@ -257,6 +260,16 @@ namespace TeknikServis.Web.UI.Controllers
             }
 
             return RedirectToAction("EditUser", new { id = userId });
+        }
+
+        public ActionResult ArizaDetayList()
+        {
+            var data = new ArizaKayitRepo()
+                .GetAll()
+                .Select(x => Mapper.Map<ArizaViewModel>(x))
+                .OrderBy(x=>x.ArizaOlusturmaTarihi)
+                .ToList();
+            return View(data);
         }
     }
 }
