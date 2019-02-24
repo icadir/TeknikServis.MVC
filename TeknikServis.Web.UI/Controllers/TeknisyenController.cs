@@ -115,7 +115,7 @@ namespace TeknikServis.Web.UI.Controllers
                 {
                     ariza.ArizaCozulduguTarih = DateTime.Now;
                     var user = NewUserManager().FindById(model.MusteriId);
-                    ariza.TeknisyenIstemi = false;
+                    ariza.TeknisyenDurumu = TeknisyenDurumu.Bosta;
                     ariza.AnketCode = StringHelpers.GetCode();
                     new ArizaKayitRepo().Update(ariza);
 

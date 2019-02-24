@@ -22,10 +22,10 @@ namespace TeknikServis.Web.UI.Controllers
         // GET: Operator
         public ActionResult Index()
         {
-         
+
             var data = new ArizaKayitRepo()
                 .GetAll(x => x.OperatorKabul == false)
-                .Select(x=>Mapper.Map<ArizaViewModel>(x))
+                .Select(x => Mapper.Map<ArizaViewModel>(x))
                 .ToList();
             //    .Select(x => new ArizaViewModel()
             //{
@@ -165,20 +165,20 @@ namespace TeknikServis.Web.UI.Controllers
         //TODO TEknisyen atamayı burada yap
         public async Task<ActionResult> TeknisyenAta(ArizaViewModel model)
         {
-           
+
             try
             {
-               
+
                 var ariza = new ArizaKayitRepo().GetById(model.ArizaId);
                 ariza.TeknisyenId = model.UserId;
                 ariza.ArizaDurumu = ArizaDurum.TeknisyenAtandi;
-                ariza.TeknisyenIstemi = true;
+                ariza.TeknisyenDurumu = TeknisyenDurumu.Calısıyor;
                 ariza.TeknisyenAtandigiTarih = DateTime.Now;
                 new ArizaKayitRepo().Update(ariza);
 
                 var opId = HttpContext.User.Identity.GetUserId();
                 var teknisyen = NewUserManager().FindById(ariza.TeknisyenId);
-                var userOperator =  NewUserManager().FindById(opId);
+                var userOperator = NewUserManager().FindById(opId);
                 var musteri = NewUserManager().FindById(ariza.MusteriId);
 
                 var OperatorLog = new ArizaLOG
@@ -251,7 +251,7 @@ namespace TeknikServis.Web.UI.Controllers
                 var RoleTeknisyenler = NewRoleManager().FindByName("Teknisyen").Users.Select(x => x.UserId).ToList();
 
                 //TEknisyen atanmıs tabloda teknisyen istemisi true yapmıstım. yani burada hala çözülmemiş olan arıza kayıtlarını listeledim. ve aşagıda foreach ile dönerrek bu teknisyenleri idlerini tüm tablo ile karşılaştırdım. ye eşit olmayanları listeye ekledim eşit olmayan demek şuan işte degil demektir. En son proje çözüldü olayında kullanıcıya mail gönderirken bu alanı yani teknisyen istemi alanını false yapıyoruzki artık o teknisyen bosa cıkmıs olsun.
-                var isteOlanTeknisyenler = new ArizaKayitRepo().GetAll(x => x.TeknisyenIstemi = true).ToList();
+                var isteOlanTeknisyenler = new ArizaKayitRepo().GetAll().ToList();
                 for (int i = 0; i < RoleTeknisyenler.Count; i++)
                 {
 

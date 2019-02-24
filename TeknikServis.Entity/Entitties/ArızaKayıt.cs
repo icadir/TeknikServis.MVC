@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 using TeknikServis.Entity.Enums;
 using TeknikServis.Entity.IdentityModels;
 using TeknikServis.Entity.ViewModels.LogViewModel;
@@ -70,7 +71,7 @@ namespace TeknikServis.Entity.Entitties
         public string AnketCode { get; set; }
 
         //TODO Bosta alan teknisyenleri için
-        public bool TeknisyenIstemi { get; set; } = false;
+        public TeknisyenDurumu TeknisyenDurumu { get; set; } = TeknisyenDurumu.Bosta;
 
 
         [Required]
@@ -105,7 +106,7 @@ namespace TeknikServis.Entity.Entitties
 
         public virtual List<Fotograf> Fotograflar { get; set; } = new List<Fotograf>();
 
-        public virtual ICollection<ArizaLOG> ArizaLogs { get; set; }=new HashSet<ArizaLOG>();
+        public virtual ICollection<ArizaLOG> ArizaLogs { get; set; } = new HashSet<ArizaLOG>();
 
     }
 }

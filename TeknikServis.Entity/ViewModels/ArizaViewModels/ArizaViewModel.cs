@@ -29,9 +29,9 @@ namespace TeknikServis.Entity.ViewModels.ArizaViewModels
         [DisplayName("İletişim Maili")]
         public string Email { get; set; }
 
- 
+
         public string Enlem { get; set; }
-  
+
         public string Boylam { get; set; }
 
         public string UserId { get; set; }
@@ -63,7 +63,7 @@ namespace TeknikServis.Entity.ViewModels.ArizaViewModels
 
         //TODO ENUMS
         [DisplayName("Çözüm Durumunu Seçiniz")]
-        public TeknisyenArizaDurum? TeknisyenArizaDurum { get; set; } 
+        public TeknisyenArizaDurum? TeknisyenArizaDurum { get; set; }
         public ArizaDurum ArizaDurumu { get; set; } = ArizaDurum.Beklemede;
         [DisplayName("Ürün Tipini Seçiniz")]
         public BeyazEsyaTip BeyazEsya { get; set; }
@@ -72,7 +72,7 @@ namespace TeknikServis.Entity.ViewModels.ArizaViewModels
         public string TeknisyenArizaAciklama { get; set; }
 
         //TODO Bosta alan teknisyenleri için
-        public bool TeknisyenIstemi { get; set; } = false;
+        public TeknisyenDurumu TeknisyenDurumu { get; set; } = TeknisyenDurumu.Bosta;
 
 
         [Required]

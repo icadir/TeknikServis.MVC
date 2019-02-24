@@ -89,6 +89,7 @@
     <Compile Include="Enums\MessageStates.cs" />
     <Compile Include="Enums\IdentityRoles.cs" />
     <Compile Include="Enums\TeknisyenArizaDurum.cs" />
+    <Compile Include="Enums\TeknisyenDurumu.cs" />
     <Compile Include="IdentityModels\Role.cs" />
     <Compile Include="IdentityModels\User.cs" />
     <Compile Include="Models\ResponseData.cs" />
