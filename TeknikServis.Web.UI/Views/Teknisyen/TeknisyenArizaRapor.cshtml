@@ -67,7 +67,7 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-xs-6">
-                            @Html.Label("", "Arızalı Ürün Resimleri")
+                            @Html.Label("", "Arızalı Ürün Resimleri")<br />
                             @for (int i = 0; i < Model.ArızaPath.Count; i++)
                             {
                                 var cx = Model.ArızaPath[i];
@@ -78,7 +78,7 @@
                         </div>
                         <div class="col-xs-6">
                             @Html.Label("", "Ürün Fatura Bilgisi")
-                            <img src="@(string.IsNullOrEmpty(Model.FaturaPath) ? "/assets/img/avatars/avatar3.jpg" : Model.FaturaPath)" class="img-avatar-96" width="100" height="100" />
+                            <img src="@(string.IsNullOrEmpty(Model.FaturaPath) ? "~/assets/img/avatars/avatar3.jpg" : Model.FaturaPath)" class="img-avatar-96" width="100" height="100" />
                         </div>
 
                     </div>

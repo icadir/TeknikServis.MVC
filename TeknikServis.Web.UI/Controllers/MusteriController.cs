@@ -114,8 +114,8 @@ namespace TeknikServis.Web.UI.Controllers
                             string extName = Path.GetExtension(file.FileName);
                             fileName = StringHelpers.UrlFormatConverter(fileName);
                             fileName += StringHelpers.GetCode();
-                            var klasoryolu = Server.MapPath("~/Upload/");
-                            var dosyayolu = Server.MapPath("~/Upload/") + fileName + extName;
+                            var klasoryolu = Server.MapPath("~/Ariza/");
+                            var dosyayolu = Server.MapPath("~/Ariza/") + fileName + extName;
 
                             if (!Directory.Exists(klasoryolu))
                                 Directory.CreateDirectory(klasoryolu);
@@ -128,7 +128,7 @@ namespace TeknikServis.Web.UI.Controllers
                             new FotografRepo().Insert(new Fotograf()
                             {
                                 ArizaId = data.Id,
-                                Yol = "/Upload/" + fileName + extName
+                                Yol = "/Ariza/" + fileName + extName
                             });
                         }
                     });
