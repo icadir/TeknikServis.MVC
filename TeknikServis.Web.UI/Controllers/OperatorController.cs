@@ -87,11 +87,11 @@ namespace TeknikServis.Web.UI.Controllers
                         YapanınRolu = IdentityRoles.Teknisyen
                     };
                     new ArizaLogRepo().Insert(OperatorLog);
-                    return RedirectToAction("ArizaList", "Operator");
+                    return RedirectToAction("Index", "Operator");
                     //TODO Müşteriye Mail gönderilir bilgilendirme belki
                 }
 
-                return RedirectToAction("ArizaList", "Operator");
+                return RedirectToAction("Index", "Operator");
 
             }
 

@@ -69,7 +69,9 @@
                         </div>
                         <div class="col-xs-6">
                             @Html.Label("", "Ürün Fatura Bilgisi")
-                            <img src="@(string.IsNullOrEmpty(Model.FaturaPath) ? "~/assets/img/avatars/avatar3.jpg" : Model.FaturaPath)" class="img-avatar-96" width="100" height="100" />
+                            <a href="@(string.IsNullOrEmpty(Model.FaturaPath) ? "~/assets/img/avatars/avatar3.jpg" : Model.FaturaPath)" rel="lightbox">
+                                <img src="@(string.IsNullOrEmpty(Model.FaturaPath) ? "~/assets/img/avatars/avatar3.jpg" : Model.FaturaPath)" class="img-avatar-96" width="100" height="100" />
+                            </a>
                         </div>
 
                     </div>

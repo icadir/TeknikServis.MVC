@@ -1,10 +1,15 @@
 ﻿
+@using Microsoft.AspNet.Identity
 @using TeknikServis.BLL.Identity
+@using TeknikServis.BLL.Repository
+@using TeknikServis.Entity.Enums
 @model List<TeknikServis.Entity.ViewModels.ArizaViewModels.ArizaViewModel>
 
 @{
     ViewBag.Title = "Operator Ana Sayfa";
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
+    var teknisyenId = HttpContext.Current.User.Identity.GetUserId();
+    var TeknisyeneAitList = new ArizaKayitRepo().GetAll(x => x.OperatorId == teknisyenId);
  
 }
 
@@ -13,7 +18,60 @@
 
     <!-- Page JS Plugins CSS -->
     <link rel="stylesheet" href="~/assets/js/plugins/datatables/jquery.dataTables.min.css" />
+    <link rel="stylesheet" id="css-font-awesome" href="~/assets/css/font-awesome.css" />
+    <link rel="stylesheet" id="css-ionicons" href="~/assets/css/ionicons.css" />
 }
+    <div class="card">
+        <div class="card-header">
+            <h5 class="text-center">Merhaba @MembershipTools.GetNameSurname(null) - İyi Çalışmalar Dileriz. FiTech<span class="ion-alert"></span></h5><br />
+        </div>
+
+        <div class="card-block">
+            <table class="table table-bordered table-striped table-vcenter dataTable">
+                <thead>
+                    <tr>
+
+                        <th class="text-center">Arıza Kayıt No</th>
+                        <th class="text-center">Arıza Durum</th>
+                        <th class="text-center">Teknisyen İsim</th>
+                        <th class="text-center">Teknisyen Telefon</th>
+                        <th class="text-center">Teknisyen Arıza Durumu</th>
+                        <th class="text-center">Teknisyen Arıza Açıklaması</th>
+                        <th class="text-center" style="width: 10%;">Teknisyen Ata</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < TeknisyeneAitList.Count; i++)
+                    {
+                        var dataTeknisyen = MembershipTools.GetMusteri(TeknisyeneAitList[i].TeknisyenId);
+
+                        var data2 = TeknisyeneAitList[i];
+
+                        <tr class="@(data2.OperatorKabul==false ? "bg-red":"bg-green")">
+                            <td class="font-300 text-center">@(i + 1)</td>
+                            <td class="font-300 text-center">@(data2.ArizaDurumu)</td>
+                            <td class="font-300 text-center">@((data2.TeknisyenId == null) ? "Teknisyen Atanmadı" : dataTeknisyen.Name + " " + dataTeknisyen.Surname)</td>
+                            <td class="font-300 text-center">@((data2.TeknisyenId == null) ? "Teknisyen atanmadı" : data2.Telno)</td>
+                            <td class="font-300 text-center">@(data2.TeknisyenArizaDurum ?? TeknisyenArizaDurum.KontrolEdilmedi)</td>
+                            <td class="font-300 text-center">@(data2.TeknisyenArizaAciklama ?? "Kontrol Edilmedi")</td>
+
+                            <td class="text-center">
+                                <div class="btn-group">
+                                    <a href="@Url.Action("OPArizaDetay", "Operator", new {id=data2.Id})" class="btn btn-xs btn-default" title="Teknisyen Ata">
+                                        <i class="ion-android-arrow-up">Teknisyen Ata</i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- .card-block -->
+    </div>
+
+
+
 
 <div class="card">
     <div class="card-header">
@@ -23,7 +81,7 @@
                 <p><strong>Başarılı! </strong> @TempData["Message"]</p>
             </div>
         }
-        <h4 class="text-center">Operator Arıza Sayfası</h4>
+        <h4 class="text-center">Onaylanmamış Arıza Listesi</h4>
     </div>
   
     <div class="card-block">

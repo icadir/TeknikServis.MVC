@@ -6,6 +6,12 @@
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
 
+@section top{
+    <link href="~/assets/css/lightbox.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/assets/js/plugins/slick/slick.min.css" />
+    <link rel="stylesheet" href="~/assets/js/plugins/slick/slick-theme.min.css" />
+
+}
 <h2 class="text-center">Ariza Detay</h2>
 
 <div class="col-md-12">
@@ -20,16 +26,16 @@
                     @Html.HiddenFor(x => x.ArizaId)
 
                     <h4 class="m-t-sm m-b">Teknisyen Atama Sayfası</h4>
-                                                           <br/>
+                    <br />
 
                     <div class="form-group row">
                         <div class="col-md-12">
                             @Html.Label("Teknisyen Seçiniz", new { @class = "col-md-3 control-label" })
                             <div class="col-md-6">
                                 @*TODO buradaki x.UserId sayafaya gelen modelde olmalı. ona göre anlıyor. ve tipi de geldigi gibi olmalı. string geliyorsa string int ise int*@
-                                @Html.DropDownListFor(x => x.UserId, (List<SelectListItem>)ViewBag.TeknisyenK, new { @class = "form-control", size = "1"})
+                                @Html.DropDownListFor(x => x.UserId, (List<SelectListItem>)ViewBag.TeknisyenK, new { @class = "form-control", size = "1" })
                             </div>
-                            <br/>
+                            <br />
                             <div class="row narrow-gutter">
                                 <div class="col-md-12">
                                     <button class="btn btn-app-purple btn-block" type="submit">Teknisyen Ata</button>
@@ -40,7 +46,7 @@
 
                     <div class="form-group row">
                         <div class="col-xs-6">
-                            @Html.Label("", "Müşterinin Adı")          
+                            @Html.Label("", "Müşterinin Adı")
                             @Html.TextBox("data.Name", data.Name, new { @class = "form-control", @readonly = "readonly" })
 
                         </div>
@@ -68,7 +74,7 @@
                     <div class="form-group row">
                         <div class="col-xs-6">
                             @Html.Label("", "Arızalı Ürün Resmi")
-                          
+
                             @for (int i = 0; i < Model.ArızaPath.Count; i++)
                             {
                                 var cx = Model.ArızaPath[i];
@@ -79,7 +85,9 @@
                         </div>
                         <div class="col-xs-6">
                             @Html.Label("", "Ürün Fatura Bilgisi")
+                            <a href="@(string.IsNullOrEmpty(Model.FaturaPath) ? "/assets/img/avatars/avatar3.jpg" : Model.FaturaPath)" rel="lightbox">
                             <img src="@(string.IsNullOrEmpty(Model.FaturaPath) ? "/assets/img/avatars/avatar3.jpg" : Model.FaturaPath)" class="img-avatar-96" width="100" height="100" />
+                            </a>
                         </div>
 
                     </div>
@@ -104,7 +112,8 @@
 @section bottom
 {
     <script src="~/assets/js/plugins/select2/select2.full.min.js"></script>
-
+    <script src="~/assets/js/lightbox-plus-jquery.min.js"></script>
+    <script src="~/assets/js/lightbox.js"></script>
     <script>
         $(function () {
             App.initHelpers(['select2']);
