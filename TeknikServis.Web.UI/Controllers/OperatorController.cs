@@ -17,7 +17,8 @@ using static TeknikServis.BLL.Identity.MembershipTools;
 
 namespace TeknikServis.Web.UI.Controllers
 {
-    public class OperatorController : Controller
+    [Authorize(Roles = "Admin,Operator")]
+    public class OperatorController : BaseController
     {
         // GET: Operator
         public ActionResult Index()
@@ -27,32 +28,7 @@ namespace TeknikServis.Web.UI.Controllers
                 .GetAll(x => x.OperatorKabul == false)
                 .Select(x => Mapper.Map<ArizaViewModel>(x))
                 .ToList();
-            //    .Select(x => new ArizaViewModel()
-            //{
-            //    Adres = x.Adres,
-            //    AnketYapildimi = x.AnketYapildimi,
-            //    ArizaDurumu = x.ArizaDurumu,
-            //    ArizaCozulduguTarih = x.ArizaCozulduguTarih,
-            //    ArizaId = x.Id,
-            //    ArizaOlusturmaTarihi = x.ArizaOlusturmaTarihi,
-            //    ArızaAcıklaması = x.ArızaAcıklaması,
-            //    ArizaSonKontrolTarihi = x.ArizaSonKontrolTarihi,
-            //    BeyazEsya = x.BeyazEsya,
-            //    Email = x.Email,
-            //    MusteriId = x.MusteriId,
-            //    OperatorId = x.OperatorId,
-            //    OperatorKabulTarih = x.OperatorKabulTarih,
-            //    Telno = x.Telno,
-            //    TeknisyenArizaAciklama = x.TeknisyenArizaAciklama,
-            //    TeknisyenAtandigiTarih = x.TeknisyenAtandigiTarih,
-            //    TeknisyenId = x.TeknisyenId,
-            //    TeknisyenIstemi = x.TeknisyenIstemi,
-            //    OperatorKabul = x.OperatorKabul,
-            //    Boylam = x.Boylam,
-            //    Enlem = x.Enlem,
-            //    FaturaPath = x.FaturaPath,
 
-            //})
             return View(data);
         }
 
@@ -235,47 +211,13 @@ namespace TeknikServis.Web.UI.Controllers
 
         }
 
-
-        List<SelectListItem> Teknisyenler = new List<SelectListItem>();
         public ActionResult OPArizaDetay(int id)
         {
 
             try
             {
 
-                //TODO Burayı Base kontrollıra Tası .
-                //TODO Projede kaldıgınyer ArizaList sayfasında teknisyen ata diyince gelen ekranda teknisyen seçip Atama işlemini yapıcaksın. Teknisyen sayfası yapıcaksın . teknisyen atandıgı yerde müsteriye ve teknisyene mail atıcaksın.
-                //TODO User alanına veya teknisyenlere özel olarak uzmanlık vs nasıl eklenebilir soralım hocaya eger olursa buarada combo boxta uzmanlık alanını getiririz. zaten
-
-                //Tüm Teknisyenleri çekiyorm.
-                var RoleTeknisyenler = NewRoleManager().FindByName("Teknisyen").Users.Select(x => x.UserId).ToList();
-
-               //ariza tablosuna bir alan ekledim teknisyen durum çalışıyor,hasta,botagibi. üst tarafta bütün teknisyenleri çakiyorum. aşagıda bu teknisyenleri gezerek bir sorgu atıyorum herseferinde . eger bu teknisn ıdsındeki kişi arıza tablomda var Ve oldugu tabloda çalışıyor duumda ise bu teknisyen çalışıyordur diyip. geçiyorum . ama eger null geliyorsa bu teknisyen çalışmıyordur diyorum ve ekliyorum.
-
-
-                for (int i = 0; i < RoleTeknisyenler.Count; i++)
-                {
-                    var calisiyormu = new ArizaKayitRepo().GetAll().FirstOrDefault(x => x.TeknisyenId == RoleTeknisyenler[i] && x.TeknisyenDurumu == TeknisyenDurumu.Calısıyor);
-
-                    if (calisiyormu == null)
-                    {
-                        var User = NewUserManager().FindById(RoleTeknisyenler[i]);
-
-                    
-                            Teknisyenler.Add(new SelectListItem()
-                            {
-                                //TODO User alanına veya teknisyenlere özel olarak uzmanlık vs nasıl eklenebilir soralım hocaya eger olursa buarada combo boxta uzmanlık alanını getiririz. zaten İşi varmı yokmuyu nasıl ekliceksek aynı mantık olabilir.
-                                Text = User.Name + " " + User.Surname,
-                                Value = User.Id
-                            });
-                        
-                    }
-
-
-                }
-
-
-                ViewBag.TeknisyenK = Teknisyenler;
+                ViewBag.TeknisyenK = BostaOlanTeknisyenler();
                 var data = new ArizaKayitRepo()
                     .GetAll(x => x.Id == id)
                     .Select(x => Mapper.Map<ArizaViewModel>(x)).FirstOrDefault();

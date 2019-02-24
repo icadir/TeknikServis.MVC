@@ -19,7 +19,7 @@ using static TeknikServis.BLL.Identity.MembershipTools;
 namespace TeknikServis.Web.UI.Controllers
 {
     [Authorize(Roles = "Admin,Musteri")]
-    public class MusteriController : Controller
+    public class MusteriController : BaseController
     {
         // GET: Musteri
 

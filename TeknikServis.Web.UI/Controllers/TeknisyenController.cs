@@ -20,7 +20,8 @@ using static TeknikServis.BLL.Identity.MembershipTools;
 
 namespace TeknikServis.Web.UI.Controllers
 {
-    public class TeknisyenController : Controller
+    [Authorize(Roles = "Admin,Operator,Teknisyen")]
+    public class TeknisyenController : BaseController
     {
         // GET: Teknisyen
         public ActionResult Index()
