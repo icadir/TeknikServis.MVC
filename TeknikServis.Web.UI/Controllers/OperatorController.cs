@@ -250,28 +250,30 @@ namespace TeknikServis.Web.UI.Controllers
                 //Tüm Teknisyenleri çekiyorm.
                 var RoleTeknisyenler = NewRoleManager().FindByName("Teknisyen").Users.Select(x => x.UserId).ToList();
 
-                //TEknisyen atanmıs tabloda teknisyen istemisi true yapmıstım. yani burada hala çözülmemiş olan arıza kayıtlarını listeledim. ve aşagıda foreach ile dönerrek bu teknisyenleri idlerini tüm tablo ile karşılaştırdım. ye eşit olmayanları listeye ekledim eşit olmayan demek şuan işte degil demektir. En son proje çözüldü olayında kullanıcıya mail gönderirken bu alanı yani teknisyen istemi alanını false yapıyoruzki artık o teknisyen bosa cıkmıs olsun.
-                var isteOlanTeknisyenler = new ArizaKayitRepo().GetAll().ToList();
+               //ariza tablosuna bir alan ekledim teknisyen durum çalışıyor,hasta,botagibi. üst tarafta bütün teknisyenleri çakiyorum. aşagıda bu teknisyenleri gezerek bir sorgu atıyorum herseferinde . eger bu teknisn ıdsındeki kişi arıza tablomda var Ve oldugu tabloda çalışıyor duumda ise bu teknisyen çalışıyordur diyip. geçiyorum . ama eger null geliyorsa bu teknisyen çalışmıyordur diyorum ve ekliyorum.
+
+
                 for (int i = 0; i < RoleTeknisyenler.Count; i++)
                 {
+                    var calisiyormu = new ArizaKayitRepo().GetAll().FirstOrDefault(x => x.TeknisyenId == RoleTeknisyenler[i] && x.TeknisyenDurumu == TeknisyenDurumu.Calısıyor);
 
-                    var User = NewUserManager().FindById(RoleTeknisyenler[i]);
-                    foreach (var item in isteOlanTeknisyenler)
+                    if (calisiyormu == null)
                     {
-                        if (item.TeknisyenId != User.Id)
-                        {
+                        var User = NewUserManager().FindById(RoleTeknisyenler[i]);
+
+                    
                             Teknisyenler.Add(new SelectListItem()
                             {
                                 //TODO User alanına veya teknisyenlere özel olarak uzmanlık vs nasıl eklenebilir soralım hocaya eger olursa buarada combo boxta uzmanlık alanını getiririz. zaten İşi varmı yokmuyu nasıl ekliceksek aynı mantık olabilir.
                                 Text = User.Name + " " + User.Surname,
                                 Value = User.Id
                             });
-
-                        }
-
+                        
                     }
 
+
                 }
+
 
                 ViewBag.TeknisyenK = Teknisyenler;
                 var data = new ArizaKayitRepo()
