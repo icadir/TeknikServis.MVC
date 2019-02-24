@@ -79,7 +79,7 @@
                         <td>@(data2.ArizaCozulduguTarih ?? data2.ArizaCozulduguTarih )</td>
                         <td class="text-center">
                             <div class="btn-group">
-                                <a href="@Url.Action("TeknisyenArizaRapor", "Teknisyen", new {id = data2.ArizaId})" class="btn btn-xs btn-info" title="ArızaListTakip">
+                                <a href="@Url.Action("ArizaDurumGor", "Admin", new {id = data2.ArizaId})" class="btn btn-xs btn-info" title="ArızaListTakip">
                                     <i class="ion-edit"></i>
                                 </a>
                             </div>

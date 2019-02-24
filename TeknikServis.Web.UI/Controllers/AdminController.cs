@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity;
 using TeknikServis.BLL.Helpers;
 using TeknikServis.BLL.Repository;
 using TeknikServis.BLL.Services.Senders;
+using TeknikServis.Entity.Entitties;
 using TeknikServis.Entity.Models;
 using TeknikServis.Entity.ViewModels;
 using TeknikServis.Entity.ViewModels.ArizaViewModels;
@@ -264,12 +265,64 @@ namespace TeknikServis.Web.UI.Controllers
 
         public ActionResult ArizaDetayList()
         {
-            var data = new ArizaKayitRepo()
-                .GetAll()
-                .Select(x => Mapper.Map<ArizaViewModel>(x))
-                .OrderBy(x=>x.ArizaOlusturmaTarihi)
-                .ToList();
-            return View(data);
+            try
+            {
+                var data = new ArizaKayitRepo()
+                    .GetAll()
+                    .Select(x => Mapper.Map<ArizaViewModel>(x))
+                    .OrderBy(x=>x.ArizaOlusturmaTarihi)
+                    .ToList();
+                return View(data);
+            }
+            catch (Exception ex)
+            {
+                TempData["Model"] = new ErrorViewModel()
+                {
+                    Text = $"Bir hata oluştu {ex.Message}",
+                    ActionName = "Index",
+                    ControllerName = "Home",
+                    ErrorCode = 500
+                };
+                return RedirectToAction("Error", "Home");
+            }
+          
+        }
+
+        public ActionResult ArizaDurumGor(int id)
+        {
+            try
+            {
+                var ariza = new ArizaKayitRepo().GetById(id);
+                var data = Mapper.Map<ArizaViewModel>(ariza);
+                data.ArızaPath = ariza.Fotograflar.Select(y => y.Yol).ToList();
+                //ilgili log kayıtları getiriyor. o arizaya ait.
+                var Logs = new ArizaLogRepo().GetAll()
+                    .Where(u => u.ArızaId == id)
+                    .OrderByDescending(u => u.CreatedDate)
+                    .ToList();
+                data.ArizaLogs.Clear();
+
+                foreach (ArizaLOG log in Logs)
+                {
+
+                    data.ArizaLogs.Add(log);
+                }
+                return View(data);
+
+            }
+            catch (Exception ex)
+            {
+                TempData["Model"] = new ErrorViewModel()
+                {
+                    Text = $"Bir hata oluştu {ex.Message}",
+                    ActionName = "Index",
+                    ControllerName = "Home",
+                    ErrorCode = 500
+                };
+                return RedirectToAction("Error", "Home");
+
+            }
+          
         }
     }
 }
