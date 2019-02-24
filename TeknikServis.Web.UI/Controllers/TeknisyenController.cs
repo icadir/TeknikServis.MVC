@@ -64,7 +64,7 @@ namespace TeknikServis.Web.UI.Controllers
                     .Where(u => u.ArızaId == id)
                     .OrderByDescending(u => u.CreatedDate)
                     .ToList();
-
+                data.ArizaLogs.Clear();
 
                 //data.ArizaLogViewModels.Clear();
                 //gelen logkayitlarini mapper ile view model e çevirip. arizaviewmoedeki alana ekliyoruz.
@@ -125,8 +125,10 @@ namespace TeknikServis.Web.UI.Controllers
                                      (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port);
                     var emailService = new EmailService();
                     var body = $"Merhaba {musteri.Name} {musteri.Surname} <b></b><br>FİTech için geri döüşleriniz çok önemli. 5 Dakikanızı ayırarak anketimizi doldurabilirsiniz. Aşagıdaki Linke tıklayarak anket sayfasına gidebilirsiniz.<br> <a href='{SiteUrl}/Anket/Index?code={ariza.AnketCode}' >Anket'e Gitmek için Tıklayınız. </a> ";
+                   
                     await emailService.SendAsync(new IdentityMessage()
                     {
+                        
                         Body = body,
                         Subject = "Anket"
                     }, model.Email);
