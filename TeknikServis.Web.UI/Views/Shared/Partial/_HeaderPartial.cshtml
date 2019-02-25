@@ -18,10 +18,10 @@
                 <span class="navbar-page-title">
                     @ViewBag.Title
                 </span>
-            </div>     
+            </div>
             <div class="collapse navbar-collapse" id="header-navbar-collapse">
                 <div class="col-md-3" id="logo">
-                    <i class="fa fa-cogs fa-2x">FİTECH<br /></i>
+                    <i style="color: white;margin-top:15px;" class="fa fa-cogs fa-2x">FİTECH<br /></i>
                 </div>
                 <!-- Header search form -->
                 <form class="navbar-form navbar-left app-search-form col-md-9" role="search">
@@ -36,19 +36,19 @@
                 </form>
                 <ul id="main-menu" class="nav navbar-nav navbar-left">
                     <li>
-                        <a href="@Url.Action("Index","Home")">Anasayfa</a>
+                        <a style="color: white" href="@Url.Action("Index","Home")">Anasayfa</a>
                     </li>
                     <li>
-                        <a href="@Url.Action("About","Home")">Hakkimizda</a>
+                        <a style="color: white" href="@Url.Action("About","Home")">Hakkimizda</a>
                     </li>
 
                     <li class="active">
-                        <a href="@Url.Action("Team","Home")">Takım</a>
+                        <a style="color: white" href="@Url.Action("Team","Home")">Takım</a>
 
                     </li>
 
                     <li>
-                        <a href="@Url.Action("Contact","Home")">İletişim</a>
+                        <a style="color: white" href="@Url.Action("Contact","Home")">İletişim</astyle="color:>
                     </li>
 
                 </ul>
@@ -62,14 +62,9 @@
                             <img class="img-avatar img-avatar-48" src="@MembershipTools.GetAvatarPath(null)" />
                         </a>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            <li class="dropdown-header">
-                                Pages
-                            </li>
+                         
                             <li>
-                                <a href="@Url.Action("UserProfile", "Account")">Profil</a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("Logout", "Account")">Çıkış</a>
+                                <a href="@Url.Action("Login", "Account")">Giriş Yap</a>
                             </li>
                         </ul>
                         @if (HttpContext.Current.User.IsInRole("Admin"))
@@ -85,11 +80,15 @@
                                     <a href="@Url.Action("EditUser", "Admin")">Kullanıcı Ayarı</a>
                                 </li>
                                 <li>
+                                    <a href="@Url.Action("ArizaDetayList", "Admin")">Teknisyen Anasayfa</a>
+                                </li>
+                                <li>
                                     <a href="@Url.Action("Index", "Operator")">Operatör Anasayfa</a>
                                 </li>
                                 <li>
                                     <a href="@Url.Action("Index", "Teknisyen")">Teknisyen Anasayfa</a>
                                 </li>
+
                                 <li>
                                     <a href="@Url.Action("Index", "Musteri")">Müşteri Anasayfa</a>
                                 </li>
@@ -169,7 +168,7 @@
                         }
                     </li>
                 </ul>
-                        
+
                 <!-- .navbar-right -->
             </div>
         </div>
