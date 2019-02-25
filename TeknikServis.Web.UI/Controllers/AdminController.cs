@@ -294,7 +294,7 @@ namespace TeknikServis.Web.UI.Controllers
             {
                 var ariza = new ArizaKayitRepo().GetById(id);
                 var data = Mapper.Map<ArizaViewModel>(ariza);
-                data.ArızaPath = ariza.Fotograflar.Select(y => y.Yol).ToList();
+                data.ArızaPath = new FotografRepo().GetAll(z => z.ArizaId == id).Select(u => u.Yol).ToList();
                 //ilgili log kayıtları getiriyor. o arizaya ait.
                 var Logs = new ArizaLogRepo().GetAll()
                     .Where(u => u.ArızaId == id)

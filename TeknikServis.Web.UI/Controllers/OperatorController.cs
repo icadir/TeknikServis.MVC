@@ -41,7 +41,8 @@ namespace TeknikServis.Web.UI.Controllers
                 var x = new ArizaKayitRepo().GetById(id);
 
                 var data = Mapper.Map<ArizaViewModel>(x);
-                data.ArızaPath = x.Fotograflar.Select(y => y.Yol).ToList();
+                data.ArızaPath= new FotografRepo().GetAll(z => z.ArizaId == id).Select(u=>u.Yol).ToList();
+
                 return View(data);
             }
             catch (Exception ex)
@@ -220,7 +221,7 @@ namespace TeknikServis.Web.UI.Controllers
                 ViewBag.TeknisyenK = BostaOlanTeknisyenler();
                 var ariza = new ArizaKayitRepo().GetById(id);
                 var data = Mapper.Map<ArizaViewModel>(ariza);
-                data.ArızaPath = ariza.Fotograflar.Select(y => y.Yol).ToList();
+                data.ArızaPath = new FotografRepo().GetAll(z => z.ArizaId == id).Select(u => u.Yol).ToList();
 
                 return View(data);
             }
