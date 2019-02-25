@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Web;
+using TeknikServis.BLL.Repository;
 using TeknikServis.DAL;
+using TeknikServis.Entity.Entitties;
 using TeknikServis.Entity.IdentityModels;
 
 namespace TeknikServis.BLL.Identity
@@ -37,6 +41,7 @@ namespace TeknikServis.BLL.Identity
 
             return $"{user.Name} {user.Surname}";
         }
+
         public static string GetAvatarPath(string userId)
         {
             User user;
@@ -71,5 +76,111 @@ namespace TeknikServis.BLL.Identity
             }
 
         }
+
+        public static string TeknisyenBilgiPuanıGetir(string TeknisyenId)
+        {
+            var ToplamPuan = 0.0;
+            var teknisyen = NewUserManager().FindById(TeknisyenId);
+            if (teknisyen == null)
+                return "0";
+            var arizalar = new ArizaKayitRepo().GetAll(x => x.TeknisyenId == TeknisyenId && x.AnketYapildimi == true)
+                .ToList();
+            if (arizalar.Count <= 0)
+                return "Teknisyenin Puanı Yok";
+
+            foreach (var ariza in arizalar)
+            {
+
+                ToplamPuan += (int)ariza.TeknisyenBilgiPuani;
+
+            }
+
+            ToplamPuan = ToplamPuan / arizalar.Count();
+            return $"{ToplamPuan}";
+        }
+        public static string TeknisyenDavranisPuaniGetir(string TeknisyenId)
+        {
+            var ToplamPuan = 0.0;
+            var teknisyen = NewUserManager().FindById(TeknisyenId);
+            if (teknisyen == null)
+                return "0";
+            var arizalar = new ArizaKayitRepo().GetAll(x => x.TeknisyenId == TeknisyenId && x.AnketYapildimi == true)
+                .ToList();
+            if (arizalar.Count <= 0)
+                return "Teknisyenin Puanı Yok";
+
+            foreach (var ariza in arizalar)
+            {
+
+                ToplamPuan += (int)ariza.FitechDavranisPuani;
+
+            }
+
+            ToplamPuan = ToplamPuan / arizalar.Count();
+            return $"{ToplamPuan}";
+        }
+
+        public static string FitechDavranisPuanOrtalamasi()
+        {
+            var arizalar = new ArizaKayitRepo().GetAll(x=>x.AnketYapildimi==true).ToList();
+            if (arizalar.Count == 0)
+                return "Yapılan Anket Yok";
+            var ToplamPuan = 0.0;
+            foreach (var ariza in arizalar)
+            {
+                ToplamPuan += (int) ariza.FitechDavranisPuani;
+
+            }
+
+            ToplamPuan = ToplamPuan / arizalar.Count();
+            return $"Fitech Davranış Ortalaması : {ToplamPuan}";
+        }
+        public static string FitechHizmetPuaniOrtalamasi()
+        {
+            var arizalar = new ArizaKayitRepo().GetAll(x => x.AnketYapildimi == true).ToList();
+            if (arizalar.Count == 0)
+                return "Yapılan Anket Yok";
+            var ToplamPuan = 0.0;
+            foreach (var ariza in arizalar)
+            {
+                ToplamPuan += (int)ariza.HizmetPuanı;
+
+            }
+
+            ToplamPuan = ToplamPuan / arizalar.Count();
+            return $"Fitech Hizmet Puani Ortalaması : {ToplamPuan}";
+        }
+
+        public static string FitechTeknisyenBilgiPuanOrtalamasi()
+        {
+            var arizalar = new ArizaKayitRepo().GetAll(x => x.AnketYapildimi == true).ToList();
+            if (arizalar.Count == 0)
+                return "Yapılan Anket Yok";
+            var ToplamPuan = 0.0;
+            foreach (var ariza in arizalar)
+            {
+                ToplamPuan += (int)ariza.TeknisyenDavranisPuani;
+
+            }
+
+            ToplamPuan = ToplamPuan / arizalar.Count();
+            return $"Teknisyenlerin Toplam Bilgi Puan Ortalaması : {ToplamPuan}";
+        }
+        public static string FitechTeknisyenDavranisPuanOrtalamasi()
+        {
+            var arizalar = new ArizaKayitRepo().GetAll(x => x.AnketYapildimi == true).ToList();
+            if (arizalar.Count == 0)
+                return "Yapılan Anket Yok";
+            var ToplamPuan = 0.0;
+            foreach (var ariza in arizalar)
+            {
+                ToplamPuan += (int)ariza.TeknisyenDavranisPuani;
+
+            }
+
+            ToplamPuan = ToplamPuan / arizalar.Count();
+            return $"Teknisyenlerin Toplam Davranış Puanı Ortalaması : {ToplamPuan}";
+        }
+
     }
 }

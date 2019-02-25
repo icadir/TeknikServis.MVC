@@ -41,7 +41,7 @@ namespace TeknikServis.Web.UI.Controllers
                 TempData["Message"] = $"Bu anket sizin arızanıza tanımlanmamıştır. ";
                 RedirectToAction("Index", "Home");
             }
-
+            
 
 
             return View(ariza);
@@ -57,6 +57,7 @@ namespace TeknikServis.Web.UI.Controllers
                 ariza.TeknisyenBilgiPuani = model.TeknisyenBilgiPuani;
                 ariza.TeknisyenDavranisPuani = model.TeknisyenDavranisPuani;
                 ariza.HizmetPuanı = model.HizmetPuanı;
+                ariza.AnketYapildimi = true;
                 new ArizaKayitRepo().Update(ariza);
                 TempData["Message"] = $"Katıldıgınız için Teşekkür ederiz.";
                 return RedirectToAction("Index", "Home");
