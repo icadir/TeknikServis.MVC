@@ -325,6 +325,11 @@ namespace TeknikServis.Web.UI.Controllers
           
         }
 
-        public ActionResult
+        public ActionResult AnketPuanRapor()
+        {
+            var data = new ArizaKayitRepo().GetAll().ToList();
+            var RoleTeknisyenler = NewRoleManager().FindByName("Teknisyen").Users.Select(x => x.UserId).ToList();
+            return View(RoleTeknisyenler);
+        }
     }
 }

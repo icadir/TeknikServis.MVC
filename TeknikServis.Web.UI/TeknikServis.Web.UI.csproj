@@ -372,6 +372,7 @@
     <Content Include="Views\Anket\Index.cshtml" />
     <Content Include="Views\Admin\ArizaDetayList.cshtml" />
     <Content Include="Views\Admin\ArizaDurumGor.cshtml" />
+    <Content Include="Views\Admin\AnketPuanRapor.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
