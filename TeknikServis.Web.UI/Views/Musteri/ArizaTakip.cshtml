@@ -54,7 +54,7 @@
                     @*<tr class="@(data.EmailConfirmed?"":"bg-yellow")">*@
 
                     //TODO bi normal yapıyor bi renkli yapıyor  renkde problem oluyor . ama digerlerinde çalışıyor.
-                    <tr class="@(data2.OperatorKabul==false ? "bg-red":"bg-green")">
+                    <tr class="@(data2.OperatorKabul==false ? "success":"danger")">
                         <td class="font-300 text-center">@(i + 1)</td>
                         <td class="font-300 text-center">@(data2.ArizaDurumu)</td>
                         <td class="font-300 text-center">@(data2.TeknisyenArizaDurum==null ? data2.TeknisyenArizaDurum = TeknisyenArizaDurum.KontrolEdilmedi: data2.TeknisyenArizaDurum)</td>

@@ -1,5 +1,6 @@
 ﻿@using TeknikServis.BLL.Identity
 @using TeknikServis.Entity.Entitties
+@using TeknikServis.Entity.Enums
 @using TeknikServis.Entity.IdentityModels
 @model TeknikServis.Entity.ViewModels.ArizaViewModels.ArizaViewModel
 
@@ -26,7 +27,7 @@
                     @Html.HiddenFor(x => x.ArizaId)
                     @Html.HiddenFor(x => x.MusteriId)
                     @Html.HiddenFor(x => x.Email)
-                    @Html.HiddenFor(x=>x.OperatorId)
+                    @Html.HiddenFor(x => x.OperatorId)
                     <h4 class="m-t-sm m-b">Arıza Kontrol Bildiri</h4>
                     <div class="form-group row">
                         <div class="col-xs-6">
@@ -80,22 +81,33 @@
                         <div class="col-xs-6">
                             @Html.Label("", "Ürün Fatura Bilgisi")
                             <a href="@(string.IsNullOrEmpty(Model.FaturaPath) ? "~/assets/img/avatars/avatar3.jpg" : Model.FaturaPath)" rel="lightbox">
-                            <img src="@(string.IsNullOrEmpty(Model.FaturaPath) ? "~/assets/img/avatars/avatar3.jpg" : Model.FaturaPath)" class="img-avatar-96" width="100" height="100" />
+                                <img src="@(string.IsNullOrEmpty(Model.FaturaPath) ? "~/assets/img/avatars/avatar3.jpg" : Model.FaturaPath)" class="img-avatar-96" width="100" height="100" />
                             </a>
                         </div>
 
                     </div>
 
                     <div class="row narrow-gutter">
-                        <div class="col-xs-12">
-                            <div class="col-md-12">
-                                <button class="btn btn-app-purple btn-block" type="submit">Arıza Kontrol Raporu Gönder</button>
+                        @if (Model.TeknisyenArizaDurum!=TeknisyenArizaDurum.Çözüldü)               
+                        {
+                            <div class="col-xs-12">
+                                <div class="col-md-12">
+                                    <button class="btn btn-app-purple btn-block" type="submit">Arıza Kontrol Raporu Gönder</button>
+                                </div>
                             </div>
-                        </div>
+                        }
+                        else
+                        {
+                            <div class="row narrow-gutter">
+                                <div class="col-md-12">
+                                    <span class="icon-alert"> Bu Kayıt Çözülmüştür. Sadece Detayları Görebilirsiniz. </span>
+                                </div>
+                            </div>
+                        }
                     </div>
 
                 }
-            
+
             </div>
             <!-- End profile tab 1 -->
 
