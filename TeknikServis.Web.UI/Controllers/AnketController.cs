@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
+using Microsoft.AspNet.Identity;
 using TeknikServis.BLL.Repository;
 using TeknikServis.Entity.Anket;
 using TeknikServis.Entity.Entitties;
@@ -12,24 +13,36 @@ using TeknikServis.Entity.ViewModels.ArizaViewModels;
 
 namespace TeknikServis.Web.UI.Controllers
 {
-    public class AnketController : Controller
+    [Authorize(Roles = "Musteri")]
+    public class AnketController : BaseController
     {
         // GET: Anket
         public ActionResult Index(string code)
         {
-            var ariza= new ArizaKayitRepo().Queryable().FirstOrDefault(x => x.AnketCode == code);
+            var ariza = new ArizaKayitRepo().Queryable().FirstOrDefault(x => x.AnketCode == code);
+         
             if (ariza == null)
             {
-
+                TempData["Message"] = $"Böyle Bir Arıza Bulunamamıştır ";
+                RedirectToAction("Index", "Home");
             }
 
-            if (ariza.AnketYapildimi==true)
+            if (ariza.AnketYapildimi == true)
             {
                 TempData["Message"] = $"Bu anket daha önceden doldurulmustur. ";
                 RedirectToAction("Index", "Home");
             }
 
-        
+            //sistemdeki giriş yapmıs kişin idsını buluyorum.
+            var MusteriId = HttpContext.User.Identity.GetUserId();
+            //bulduugm Id  anket kodundaki buldugum id ile aynımı degilse gönderiyorum.
+            if (ariza.MusteriId != MusteriId)
+            {
+                TempData["Message"] = $"Bu anket sizin arızanıza tanımlanmamıştır. ";
+                RedirectToAction("Index", "Home");
+            }
+
+
 
             return View(ariza);
         }
@@ -46,7 +59,7 @@ namespace TeknikServis.Web.UI.Controllers
                 ariza.HizmetPuanı = model.HizmetPuanı;
                 new ArizaKayitRepo().Update(ariza);
                 TempData["Message"] = $"Katıldıgınız için Teşekkür ederiz.";
-               return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home");
 
             }
             else
@@ -54,7 +67,7 @@ namespace TeknikServis.Web.UI.Controllers
                 TempData["Message"] = $"Bir hata olustu.İyi günler";
                 return RedirectToAction("Index", "Home");
             }
-           
+
         }
     }
 }
