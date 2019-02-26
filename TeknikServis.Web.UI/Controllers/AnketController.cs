@@ -13,7 +13,7 @@ using TeknikServis.Entity.ViewModels.ArizaViewModels;
 
 namespace TeknikServis.Web.UI.Controllers
 {
-    [Authorize(Roles = "Musteri")]
+    [Authorize(Roles = "Admin,Musteri")]
     public class AnketController : BaseController
     {
         // GET: Anket

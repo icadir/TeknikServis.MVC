@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -6,6 +7,7 @@ using System.Web;
 using TeknikServis.BLL.Repository;
 using TeknikServis.DAL;
 using TeknikServis.Entity.Entitties;
+using TeknikServis.Entity.Enums;
 using TeknikServis.Entity.IdentityModels;
 
 namespace TeknikServis.BLL.Identity
@@ -122,13 +124,13 @@ namespace TeknikServis.BLL.Identity
 
         public static string FitechDavranisPuanOrtalamasi()
         {
-            var arizalar = new ArizaKayitRepo().GetAll(x=>x.AnketYapildimi==true).ToList();
+            var arizalar = new ArizaKayitRepo().GetAll(x => x.AnketYapildimi == true).ToList();
             if (arizalar.Count == 0)
                 return "Yapılan Anket Yok";
             var ToplamPuan = 0.0;
             foreach (var ariza in arizalar)
             {
-                ToplamPuan += (int) ariza.FitechDavranisPuani;
+                ToplamPuan += (int)ariza.FitechDavranisPuani;
 
             }
 
@@ -180,6 +182,22 @@ namespace TeknikServis.BLL.Identity
 
             ToplamPuan = ToplamPuan / arizalar.Count();
             return $"Teknisyenlerin Toplam Davranış Puanı Ortalaması : {ToplamPuan}";
+        }
+
+        public static string OrtalamaArizaCozumSuresi()
+        {
+            double ToplamGun = 0.0;
+            var cozulenArizalar = new ArizaKayitRepo().GetAll(x => x.TeknisyenArizaDurum == TeknisyenArizaDurum.Çözüldü).ToList();
+            foreach (var arizalar in cozulenArizalar)
+            {
+                TimeSpan Gun = arizalar.ArizaCozulduguTarih.Value -
+                               arizalar.ArizaOlusturmaTarihi;
+                ToplamGun += Gun.Seconds;
+            }
+
+            ToplamGun = ToplamGun / cozulenArizalar.Count();
+            return $"{ToplamGun.ToString("##.000")}";
+
         }
 
     }
