@@ -373,6 +373,7 @@
     <Content Include="Views\Admin\ArizaDetayList.cshtml" />
     <Content Include="Views\Admin\ArizaDurumGor.cshtml" />
     <Content Include="Views\Admin\AnketPuanRapor.cshtml" />
+    <Content Include="Views\Admin\Charts.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

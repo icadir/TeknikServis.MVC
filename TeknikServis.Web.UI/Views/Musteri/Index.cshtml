@@ -91,17 +91,17 @@
                                 @Html.TextAreaFor(x => x.Adres, new {@class = "form-control", type = "text", placeholder = "Lütfen Adresinizi Yaziniz."})
                                 @*TODO BURADA HARİTA İŞLEMLERİ OLCAK NORMALDE*@
                             </div>
-                        </div>
+                        </div>                 
                         <div class="form-group">
                             @Html.LabelFor(x => x.Enlem, new {@class = "col-sm-2 control-label"})
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(x => x.Enlem, new {@class = "form-control"})
+                                @Html.TextBoxFor(x => x.Enlem, new {@class = "form-control",id="enlem"})
                             </div>
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(x => x.Boylam, new {@class = "col-sm-2 control-label"})
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(x => x.Boylam, new {@class = "form-control"})
+                                @Html.TextBoxFor(x => x.Boylam, new {@class = "form-control",id="boylam"})
                             </div>
                         </div>
                         <div class="form-group">
@@ -166,12 +166,14 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZvxb5BAGPyDnBg5uaoB-U3y0se0KeAqo"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
-    $("#btnkonum").click(function () {
-        navigator.geolocation.getCurrentPosition(koordinat);
-    });
+
     function koordinat(position) {
-        var enlem = $("#Enlem").val();
-        var boylam = $("#Boylam").val();
+        console.log(position);
+        var e1 = position.coords.latitude, b1 = position.coords.longitude;
+        $("#enlem").val(e1.toString().replace(".", ","));
+        $("#boylam").val(b1.toString().replace(".", ","));
+        var enlem = position.coords.latitude ;
+        var boylam = position.coords.longitude;
         var enlemboylam = new google.maps.LatLng(enlem, boylam);
         var ayar = {
             center: enlemboylam,
@@ -198,8 +200,8 @@
                 position: latLng,
                 map: map
             });
-            $("#Enlem").val(latLng.lat());
-            $("#Boylam").val(latLng.lng());
+            $("#enlem").val(latLng.lat());
+            $("#boylam").val(latLng.lng());
         };
     };
     function init() {
@@ -232,14 +234,14 @@
     <!-- Page JS Code -->
     <script src="~/assets/js/pages/base_forms_wizard.js"></script>
     <script>
-                        //$(function () {
-                        //    $("#kaydetx").click(function () {
-                        //        $.notify({
-                        //            message: "Kaydınız Alınmıştır. Teşekkür ederiz.",
-                        //            title: "Servis MESAJI -",
-                        //            type: "success"
-                        //        });
-                        //    });
-                        //})
+        //$(function () {
+        //    $("#kaydetx").click(function () {
+        //        $.notify({
+        //            message: "Kaydınız Alınmıştır. Teşekkür ederiz.",
+        //            title: "Servis MESAJI -",
+        //            type: "success"
+        //        });
+        //    });
+        //})
     </script>
 }

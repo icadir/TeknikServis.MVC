@@ -39,11 +39,11 @@ namespace TeknikServis.Web.UI.Controllers
             //o anki sistemdeki kullanıcının idsini verir.
             //var asd = HttpContext.User.Identity.GetUserId();
             //
-            if (!ModelState.IsValid)
-            {
-                //Gelen model valid degiilse bu sayfaya yönlendirilip hatalar gösterilicek.
-                return RedirectToAction("Index", "Musteri", model);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    //Gelen model valid degiilse bu sayfaya yönlendirilip hatalar gösterilicek.
+            //    return RedirectToAction("Index", "Musteri", model);
+            //}
 
             var userManager = NewUserManager().FindById(model.MusteriId);
             try
@@ -89,6 +89,8 @@ namespace TeknikServis.Web.UI.Controllers
                     OperatorKabul = false,
                     Telno = model.Telno,
                     FaturaPath = model.FaturaPath,
+                    Enlem = model.Enlem,
+                    Boylam = model.Boylam
                 };
                 new ArizaKayitRepo().Insert(data);
 

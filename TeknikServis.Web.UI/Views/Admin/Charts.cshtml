@@ -1,0 +1,96 @@
+﻿
+@{
+    ViewBag.Title = "Charts";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<div class="row">
+
+    <!-- Pie Chart -->
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h4>Pie</h4>
+                <ul class="card-actions ">
+                    <li>
+                        <button type="button" data-toggle="card-action" data-action="refresh_toggle" data-action-mode="demo"><i class="ion-refresh"></i></button>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-block text-center">
+                <!-- Pie Chart Container -->
+                <div style="height: 330px;"><canvas class="js-chartjs-pie"></canvas></div>
+            </div>
+        </div>
+    </div>
+    <!-- End Pie Chart // .col-md-6 -->
+    <!-- .col-lg-6 -->
+    <!-- .col-lg-6 -->
+</div>
+
+
+@section bottom {
+    <script>
+        var BaseJsCharts = function () {
+            // Chart.js Charts: http://www.chartjs.org/docs
+            var initChartsChartJS = function () {
+
+                // Get Chart Containers
+                var $chartPieCnt = jQuery('.js-chartjs-pie')[0].getContext('2d'),
+
+
+                    // Set global chart options
+                    var $globalOptions = {
+                    scaleFontFamily: 'Roboto, Arial, sans-serif',
+                    scaleFontColor: App.colors.text_muted,
+                    scaleFontStyle: '500',
+                    tooltipTitleFontFamily: 'Roboto, Arial, sans-serif',
+                    tooltipCornerRadius: 2,
+                    maintainAspectRatio: false,
+                    responsive: true,
+                    animation: false,
+                };
+
+                // Polar/Pie/Donut Data
+                var $chartPolarPieDonutData = [{
+                    value: 56,
+                    color: App.colors.green,
+                    highlight: App.hexToRgba(App.colors.green, 70),
+                    label: 'Companies'
+                }, {
+                    value: 22,
+                    color: App.colors.orange,
+                    highlight: App.hexToRgba(App.colors.orange, 50),
+                    label: 'Users'
+                }, {
+                    value: 22,
+                    color: App.colors.blue,
+                    highlight: App.hexToRgba(App.colors.blue, 70),
+                    label: 'Revenue'
+                }];
+
+                // Init Charts
+
+                $chartPie = new Chart($chartPieCnt).Pie($chartPolarPieDonutData, $globalOptions);
+
+            };
+
+            return {
+                init: function () {
+                    // Init charts
+                    initChartsChartJS();
+                }
+            };
+        }();
+        // Initialize when page loads
+        jQuery(function () {
+            BaseJsCharts.init();
+        });
+    </script>
+    <!-- Page JS Plugins -->
+    <script src="assets/js/plugins/chartjs/Chart.min.js"></script>
+
+    <!-- Page JS Code -->
+    <script src="assets/js/pages/base_js_charts_chartjs.js"></script>
+}
+

@@ -331,5 +331,13 @@ namespace TeknikServis.Web.UI.Controllers
             var RoleTeknisyenler = NewRoleManager().FindByName("Teknisyen").Users.Select(x => x.UserId).ToList();
             return View(RoleTeknisyenler);
         }
+
+        public JsonResult Charts()
+        {
+            return Json(new ResponseData()
+            {
+                message = "asdasd",
+            },JsonRequestBehavior.AllowGet);
+        }
     }
 }

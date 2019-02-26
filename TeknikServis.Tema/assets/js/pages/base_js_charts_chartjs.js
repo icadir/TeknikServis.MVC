@@ -47,7 +47,7 @@ var BaseJsCharts = function() {
 				data: [15, 16, 20, 25, 23, 25, 32]
 			}]
 		};
-
+        
 		// Polar/Pie/Donut Data
 		var $chartPolarPieDonutData = [{
 			value: 56,
