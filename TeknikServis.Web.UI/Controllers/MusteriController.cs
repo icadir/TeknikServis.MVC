@@ -89,6 +89,8 @@ namespace TeknikServis.Web.UI.Controllers
                     OperatorKabul = false,
                     Telno = model.Telno,
                     FaturaPath = model.FaturaPath,
+                    Enlem = model.Enlem,
+                    Boylam = model.Boylam,
                  
                 };
                 new ArizaKayitRepo().Insert(data);

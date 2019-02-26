@@ -184,6 +184,7 @@
     <Content Include="assets\js\core\jquery.placeholder.min.js" />
     <Content Include="assets\js\core\jquery.scrollLock.min.js" />
     <Content Include="assets\js\core\jquery.slimscroll.min.js" />
+    <Content Include="assets\js\map.js" />
     <Content Include="assets\js\pages\base_forms_validation.js" />
     <Content Include="assets\js\pages\base_forms_wizard.js" />
     <Content Include="assets\js\pages\base_js_charts_chartjs.js" />

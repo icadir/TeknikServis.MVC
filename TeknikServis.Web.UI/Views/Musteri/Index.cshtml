@@ -6,6 +6,17 @@
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
 
+@section top{
+    <style type="text/css">
+
+        #map {
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+        }
+    </style>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+}
 <h2 class="section-title">Arıza Kayıt Sayfası</h2>
 <div class="row">
     <div>
@@ -34,7 +45,7 @@
 
 
 
-            @using (Html.BeginForm("ArizaKayitEkle", "Musteri", FormMethod.Post, new {@class = "form-horizontal", enctype = "multipart/form-data"}))
+            @using (Html.BeginForm("ArizaKayitEkle", "Musteri", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.Hidden("MusteriId", HttpContext.Current.User.Identity.GetUserId())
@@ -53,7 +64,7 @@
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-2">
                                 @Html.LabelFor(x => x.BeyazEsya)
-                                @Html.EnumDropDownListFor(x => x.BeyazEsya, "Ürün Seçiniz", new {@class = "form-control", size = "1"})
+                                @Html.EnumDropDownListFor(x => x.BeyazEsya, "Ürün Seçiniz", new { @class = "form-control", size = "1" })
 
                             </div>
                         </div>
@@ -63,7 +74,7 @@
                                 @*<label for="simple-classic-progress-firstname">First Name</label>*@
                                 @Html.LabelFor(x => x.Email)
                                 @*<input class="form-control" type="text" id="simple-classic-progress-firstname" name="simple-classic-progress-firstname" placeholder="Please enter your first name"/>*@
-                                @Html.TextBoxFor(x => x.Email, new {@class = "form-control", type = "email", placeholder = "İletişim maili"})
+                                @Html.TextBoxFor(x => x.Email, new { @class = "form-control", type = "email", placeholder = "İletişim maili" })
                             </div>
                         </div>
                         <div class="form-group">
@@ -71,13 +82,13 @@
 
                                 @Html.LabelFor(x => x.Telno)
 
-                                @Html.TextBoxFor(x => x.Telno, new {@class = "form-control", type = "text", placeholder = "İletişim telno"})
+                                @Html.TextBoxFor(x => x.Telno, new { @class = "form-control", type = "text", placeholder = "İletişim telno" })
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-2">
                                 @Html.LabelFor(x => x.ArızaAcıklaması)
-                                @Html.TextAreaFor(x => x.ArızaAcıklaması, new {@class = "form-control", type = "text", placeholder = "Lütfen Arıza Hakkında Açıklama Yapiniz"})
+                                @Html.TextAreaFor(x => x.ArızaAcıklaması, new { @class = "form-control", type = "text", placeholder = "Lütfen Arıza Hakkında Açıklama Yapiniz" })
 
                             </div>
                         </div>
@@ -88,25 +99,26 @@
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-2">
                                 @Html.LabelFor(x => x.Adres)
-                                @Html.TextAreaFor(x => x.Adres, new {@class = "form-control", type = "text", placeholder = "Lütfen Adresinizi Yaziniz."})
+                                @Html.TextAreaFor(x => x.Adres, new { @class = "form-control", type = "text", placeholder = "Lütfen Adresinizi Yaziniz." })
                                 @*TODO BURADA HARİTA İŞLEMLERİ OLCAK NORMALDE*@
                             </div>
-                        </div>                 
+                        </div>
                         <div class="form-group">
-                            @Html.LabelFor(x => x.Enlem, new {@class = "col-sm-2 control-label"})
+                            @Html.LabelFor(x => x.Enlem, new { @class = "col-sm-2 control-label" })
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(x => x.Enlem, new {@class = "form-control",id="enlem"})
+                                @Html.TextBoxFor(x => x.Enlem, new { @class = "form-control", id = "enlem", @readonly = "readonly" })
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(x => x.Boylam, new {@class = "col-sm-2 control-label"})
+                            @Html.LabelFor(x => x.Boylam, new { @class = "col-sm-2 control-label" })
                             <div class="col-sm-10">
-                                @Html.TextBoxFor(x => x.Boylam, new {@class = "form-control",id="boylam"})
+                                @Html.TextBoxFor(x => x.Boylam, new { @class = "form-control", id = "boylam", @readonly = "readonly" })
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div id="harita"></div>
-                            <input type="button" id="btnkonum" value="Konum Getir" class="btn btn-primary"/>
+                        <div id="map"></div>
+                        <div class="col-sm-2 control-label">
+                            <br />
+                            <input type="button" class="btn btn-danger" value="Bul" onclick="getLocation()" />
                         </div>
                     </div>
                     <!-- End Step 2 -->
@@ -115,13 +127,13 @@
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-2">
                                 @Html.LabelFor(x => x.PostedFileAriza)
-                                @Html.TextBoxFor(x => x.PostedFileAriza, new {@class = "form-control", type = "file", multiple = true})
+                                @Html.TextBoxFor(x => x.PostedFileAriza, new { @class = "form-control", type = "file", multiple = true })
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-2">
                                 @Html.LabelFor(x => x.PostedFileFatura)
-                                @Html.TextBoxFor(x => x.PostedFileFatura, new {@class = "form-control", type = "file", multiple = false})
+                                @Html.TextBoxFor(x => x.PostedFileFatura, new { @class = "form-control", type = "file", multiple = false })
                             </div>
                         </div>
                         <div class="form-group">
@@ -163,66 +175,7 @@
 
 </div>
 <script src="~/Scripts/jquery-3.1.1.js"></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZvxb5BAGPyDnBg5uaoB-U3y0se0KeAqo"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script>
 
-    function koordinat(position) {
-        console.log(position);
-        var e1 = position.coords.latitude, b1 = position.coords.longitude;
-        $("#enlem").val(e1.toString().replace(".", ","));
-        $("#boylam").val(b1.toString().replace(".", ","));
-        var enlem = position.coords.latitude ;
-        var boylam = position.coords.longitude;
-        var enlemboylam = new google.maps.LatLng(enlem, boylam);
-        var ayar = {
-            center: enlemboylam,
-            zoom: 15,
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-            mapTypeControl: true,
-            navigationControlOptions: { style: google.maps.NavigationControlStyle.SMALL }
-        };
-        var haritatutucu = document.getElementById("harita");
-        var googleHarita = new google.maps.Map(haritatutucu, ayar);
-        var imlec = new google.maps.Marker({
-            position: enlemboylam,
-            map: googleHarita,
-            title: "Konumunuz"
-        });
-        googleHarita.addListener("click", function () {
-            imlec.setMap(null);
-        });
-        googleHarita.addListener("click", function (e) {
-            placeMarkerAndPanTo(e.latLng, googleHarita);
-        });
-        function placeMarkerAndPanTo(latLng, map) {
-            imlec = new google.maps.Marker({
-                position: latLng,
-                map: map
-            });
-            $("#Enlem").val(latLng.lat());
-            $("#Boylam").val(latLng.lng());
-        };
-    };
-    function init() {
-        navigator.geolocation.getCurrentPosition(koordinat);
-    };
-    init();
-
-</script>
-<style>
-
-    #harita {
-        width: 100%;
-        height: 400px;
-        background-color: grey;
-    }
-
-    .check {
-        opacity: 0.5;
-        color: #996;
-    }
-</style>
 @section bottom
 {
 
@@ -233,15 +186,7 @@
 
     <!-- Page JS Code -->
     <script src="~/assets/js/pages/base_forms_wizard.js"></script>
-    <script>
-        //$(function () {
-        //    $("#kaydetx").click(function () {
-        //        $.notify({
-        //            message: "Kaydınız Alınmıştır. Teşekkür ederiz.",
-        //            title: "Servis MESAJI -",
-        //            type: "success"
-        //        });
-        //    });
-        //})
-    </script>
+
+    <script type="text/javascript" src="/assets/js/map.js"></script>
 }
+
