@@ -217,11 +217,12 @@ namespace TeknikServis.Web.UI.Controllers
 
             try
             {
-
-                ViewBag.TeknisyenK = BostaOlanTeknisyenler();
                 var ariza = new ArizaKayitRepo().GetById(id);
                 var data = Mapper.Map<ArizaViewModel>(ariza);
                 data.ArızaPath = new FotografRepo().GetAll(z => z.ArizaId == id).Select(u => u.Yol).ToList();
+                ViewBag.TeknisyenK = BostaOlanTeknisyenler(data);
+               
+               
 
                 return View(data);
             }

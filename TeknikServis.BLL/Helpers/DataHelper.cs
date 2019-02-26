@@ -40,6 +40,7 @@ namespace TeknikServis.BLL.Helpers
                     UserName = $"teknisyen{i + 1}",
                     Name = $"teknisyen{i + 1}",
                     Surname = $"teknisyenx{i + 1}",
+                    
 
                 };
                 Users.Add(teknisyen);
@@ -62,6 +63,8 @@ namespace TeknikServis.BLL.Helpers
                 user.EmailConfirmed = true;
                 user.PhoneNumber = "0 587 55 88";
                 user.PhoneNumberConfirmed = true;
+                user.Enlem = 41.022834;
+                user.Boylam = 29.027387;
                 if (result.Succeeded)
                 {
                     switch (userstore.Users.Count())

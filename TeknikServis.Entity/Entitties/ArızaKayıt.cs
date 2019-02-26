@@ -30,9 +30,9 @@ namespace TeknikServis.Entity.Entitties
         public string Email { get; set; }
 
         [DisplayName("Enlem Giriniz")]
-        public string Enlem { get; set; }
+        public double? Enlem { get; set; }
         [DisplayName("Boylam Giriniz ")]
-        public string Boylam { get; set; }
+        public double? Boylam { get; set; }
 
 
         //TODO resimler için gerekli alanlar kısmı
