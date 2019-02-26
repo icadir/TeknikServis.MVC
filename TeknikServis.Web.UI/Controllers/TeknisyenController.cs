@@ -116,24 +116,24 @@ namespace TeknikServis.Web.UI.Controllers
                     ariza.AnketCode = StringHelpers.GetCode();
                     new ArizaKayitRepo().Update(ariza);
 
-               
+
                     string SiteUrl = Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host +
                                      (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port);
                     var emailService = new EmailService();
                     var body = $"Merhaba {musteri.Name} {musteri.Surname} <b></b><br>FİTech için geri döüşleriniz çok önemli. 5 Dakikanızı ayırarak anketimizi doldurabilirsiniz. Aşagıdaki Linke tıklayarak anket sayfasına gidebilirsiniz.<br> <a href='{SiteUrl}/Anket/Index?code={ariza.AnketCode}' >Anket'e Gitmek için Tıklayınız. </a> ";
-                   
+
                     await emailService.SendAsync(new IdentityMessage()
                     {
-                        
+
                         Body = body,
                         Subject = "Anket"
                     }, model.Email);
-
+                    var emailService2 = new EmailService();
                     //TODO Acaba buradada kontrol eedildimi edilmedimi kontrol etmeye gerek var mı ?
-                    var body2 = $"Merhaba {Operator.Name} {Operator.Surname} <b></b><br>{teknisyen.Name} {teknisyen.Surname} isimli calısanımıza {model.TeknisyenAtandigiTarih}'de atamıs oldugunuz Arizanın çözüldügünü iletti. Kontrol etmek için aşagıdaki link'e tıklayınız.<br> <a href='{SiteUrl}/TeknisyenArizaRapor/{model.ArizaId}' >Kontrol Etmek için Tıklayınız. </a> ";
-                    await emailService.SendAsync(new IdentityMessage()
+                    var body2 = $"Merhaba {Operator.Name} {Operator.Surname} <b></b><br>{teknisyen.Name} {teknisyen.Surname} isimli calısanımıza {model.TeknisyenAtandigiTarih}'de atamıs oldugunuz Arizanın çözüldügünü iletti. Kontrol etmek için aşagıdaki link'e tıklayınız.<br> <a href='{SiteUrl}/Teknisyen/TeknisyenArizaRapor/{model.ArizaId}' >Kontrol Etmek için Tıklayınız. </a> ";
+                    await emailService2.SendAsync(new IdentityMessage()
                     {
-                        Body = body,
+                        Body = body2,
                         Subject = "Kontrol"
                     }, Operator.Email);
                 }
