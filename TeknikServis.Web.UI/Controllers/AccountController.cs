@@ -65,7 +65,11 @@ namespace TeknikServis.Web.UI.Controllers
                     Email = rm.Email,
                     Name = rm.Name,
                     Surname = rm.Surname,
-                    ActivationCode = StringHelpers.GetCode()
+                    Enlem = 41.022834,
+                    Boylam = 29.027387,
+                    AvatarPath = "/Image/fitech1.png",
+                    PhoneNumber = "0 534 855 55 40",
+                ActivationCode = StringHelpers.GetCode()
                 };
                 var result = await userManager.CreateAsync(newUser, rm.Password);
                 if (result.Succeeded)
