@@ -1,15 +1,14 @@
 # TeknikServis.MVC
 WissenAkademie MVC Proje Bitirme
 =========================
-Authentication Yönetiminin olduğu,
-Müşteri ile Arıza Kaydı Olusturup, Bu Kaydı Admin,Operator,Teknisyen ve Müşteri Rollerine göre  yönetebilirsiniz.
-Mail ile Bilgilendirme Sistemi.
-Her işlem Sonrası Loglama.
-Oluşturan Kaydın Rollere Göre Durum Takibi.
-Anket Maili.
-Anket Sonuclarının Kayıt Edilmesi ve Admin Detay Sayfası.
+> - Authentication Yönetiminin olduğu,
+> - Müşteri ile Arıza Kaydı Olusturup, Bu Kaydı Admin,Operator,Teknisyen ve Müşteri Rollerine göre  yönetebilirsiniz.
+> - Mail ile Bilgilendirme Sistemi.
+> - Her işlem Sonrası Loglama.
+> - Oluşturan Kaydın Rollere Göre Durum Takibi.
+> - Anket Maili.
+> - Anket Sonuclarının Kayıt Edilmesi ve Admin Detay Sayfası.
 
-Bir MVC Projesi.
 
 ----------
 ### Öngereklilikler
