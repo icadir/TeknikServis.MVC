@@ -93,6 +93,7 @@ namespace TeknikServis.Web.UI.Controllers
                     Boylam = model.Boylam,
                  
                 };
+
                 new ArizaKayitRepo().Insert(data);
 
                 var LogMusteri = new ArizaLOG
