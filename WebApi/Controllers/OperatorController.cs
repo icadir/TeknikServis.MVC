@@ -14,6 +14,7 @@ using TeknikServis.Entity.Entitties;
 using TeknikServis.Entity.Enums;
 using TeknikServis.Entity.IdentityModels;
 using TeknikServis.Entity.Models;
+using TeknikServis.Entity.ViewModels.ApiViewModel.Operator;
 using TeknikServis.Entity.ViewModels.ArizaViewModels;
 using static TeknikServis.BLL.Identity.MembershipTools;
 
@@ -24,24 +25,41 @@ namespace WebApi.Controllers
         [HttpGet]
         public async Task<IHttpActionResult> Index()
         {
+            List<OperatorIndexViewModel> data = new List<OperatorIndexViewModel>();
             try
             {
                 var arizalist = new ArizaKayitRepo()
                     .GetAll(x => x.OperatorKabul == false)
-                    .Select(x => Mapper.Map<ArizaViewModel>(x))
+                    //.Select(x => Mapper.Map<ArizaViewModel>(x))
                     .ToList();
-                if (arizalist != null)
+                for (int i = 0; i < arizalist.Count(); i++)
                 {
-                    return Ok(new ResponseData()
+                    arizalist[i].ArızaPath = new FotografRepo().GetAll(z => z.ArizaId == arizalist[i].Id).Select(u => u.Yol).ToList();
+                }
+                //Suanda burada bir kulşlanıcı yokki tabi gelmez.
+                var k = HttpContext.Current.User.Identity.GetUserId();
+                for (int i = 0; i < arizalist.Count(); i++)
+                {
+
+                    data.Add(new OperatorIndexViewModel
                     {
-                        success = true,
-                        data = arizalist,
+                        Adres = arizalist[i].Adres,
+                        ArizaCreatedDate = arizalist[i].CreatedDate,
+                        ArızaId = arizalist[i].Id,
+                        MusteriId = arizalist[i].MusteriId,
+                        Resim = arizalist[i].ArızaPath,
+                        Sistemdekiteknisyen = k,
+                        telno = arizalist[i].Telno,
+
                     });
                 }
-                else
+
+                return Ok(new ResponseData()
                 {
-                    return NotFound();
-                }
+                    success = true,
+                    data = data,
+                });
+
 
             }
             catch (Exception ex)
