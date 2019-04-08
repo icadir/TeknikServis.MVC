@@ -32,10 +32,10 @@ namespace TeknikServis.Web.UI
                        Name=rol,
                     });
             }
-            //if (!userStore.Users.Any())
-            //{
-            //    DataHelper.DataEkle();
-            //}
+            if (!userStore.Users.Any())
+            {
+                DataHelper.DataEkle();
+            }
         }
     }
 }

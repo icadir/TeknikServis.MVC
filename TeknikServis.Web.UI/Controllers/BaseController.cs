@@ -19,7 +19,7 @@ namespace TeknikServis.Web.UI.Controllers
     {
         // GET: Base
         private List<User> Teknisyenler = new List<User>();
-        protected List<SelectListItem> GetRoleList()
+        public List<SelectListItem> GetRoleList()
         {
             var data = new List<SelectListItem>();
             MembershipTools.NewRoleStore().Roles
@@ -35,7 +35,7 @@ namespace TeknikServis.Web.UI.Controllers
             return data;
         }
 
-        protected List<SelectListItem> BostaOlanTeknisyenler(ArizaViewModel model)
+        public List<SelectListItem> BostaOlanTeknisyenler(ArizaViewModel model)
         {
             List<SelectListItem> Teknisyenler = new List<SelectListItem>();
             //Tüm Teknisyenleri çekiyorm.
