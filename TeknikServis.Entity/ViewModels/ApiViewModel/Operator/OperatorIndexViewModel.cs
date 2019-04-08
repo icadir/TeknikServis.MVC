@@ -11,11 +11,13 @@ namespace TeknikServis.Entity.ViewModels.ApiViewModel.Operator
     {
     
         public int ArızaId { get; set; }
-        public List<string> Resim { get; set; }
+    
         public string MusteriId { get; set; }
         public string Sistemdekiteknisyen { get; set; }
         public DateTime  ArizaCreatedDate { get; set; }
         public string Adres { get; set; }
         public string telno { get; set; }
+        public List<string> ArızaResim { get; set; }
+        public string FaturaResim { get; set; }
     }
 }

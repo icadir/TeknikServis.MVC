@@ -22,6 +22,8 @@ namespace WebApi.Controllers
 {
     public class OperatorController : ApiController
     {
+        //Not found vs buradaIHHTp actionda mesaj ile göndermeli yapı yokmu. 
+        // idleri ipde bulup gönderemiyoruz. veya bir kayıt eklerken idleri nasıl alcaz
         [HttpGet]
         public async Task<IHttpActionResult> Index()
         {
@@ -37,18 +39,19 @@ namespace WebApi.Controllers
                     arizalist[i].ArızaPath = new FotografRepo().GetAll(z => z.ArizaId == arizalist[i].Id).Select(u => u.Yol).ToList();
                 }
                 //Suanda burada bir kulşlanıcı yokki tabi gelmez.
-                var k = HttpContext.Current.User.Identity.GetUserId();
+                var SistemdekiId = HttpContext.Current.User.Identity.GetUserId();
                 for (int i = 0; i < arizalist.Count(); i++)
                 {
 
                     data.Add(new OperatorIndexViewModel
                     {
+                        FaturaResim = arizalist[i].FaturaPath,
                         Adres = arizalist[i].Adres,
                         ArizaCreatedDate = arizalist[i].CreatedDate,
                         ArızaId = arizalist[i].Id,
                         MusteriId = arizalist[i].MusteriId,
-                        Resim = arizalist[i].ArızaPath,
-                        Sistemdekiteknisyen = k,
+                        ArızaResim = arizalist[i].ArızaPath,
+                        Sistemdekiteknisyen = SistemdekiId,
                         telno = arizalist[i].Telno,
 
                     });
@@ -59,30 +62,45 @@ namespace WebApi.Controllers
                     success = true,
                     data = data,
                 });
-
-
             }
             catch (Exception ex)
             {
                 return BadRequest($"Bir hata oluştu {ex.Message}");
             }
         }
+
         [HttpGet]
         public async Task<IHttpActionResult> ArizaDetay(int id)
         {
             try
             {
 
-                var x = new ArizaKayitRepo().GetById(id);
+                var ariza = new ArizaKayitRepo().GetById(id);
+                // Her list olayını için böylemi yapmalı
+                var fotolar = new FotografRepo().GetAll(x => x.ArizaId == ariza.Id).Select(x => x.Yol).ToList();
 
-                var arizadetaydata = Mapper.Map<ArizaViewModel>(x);
-                arizadetaydata.ArızaPath = new FotografRepo().GetAll(z => z.ArizaId == id).Select(u => u.Yol).ToList();
-                if (arizadetaydata != null)
+                ariza.ArızaPath = fotolar;
+
+                var data = new OperatorIndexViewModel
+                {
+                    ArızaResim = ariza.ArızaPath,
+                    Adres = ariza.Adres,
+                    ArızaId = ariza.Id,
+                    MusteriId = ariza.MusteriId,
+                    FaturaResim = ariza.FaturaPath,
+                    telno = ariza.Telno,
+                    ArizaCreatedDate = ariza.CreatedDate,
+
+                };
+
+                //arizadetaydata.ArızaPath = new FotografRepo().GetAll(z => z.ArizaId == id).Select(u => u.Yol).ToList();
+
+                if (data != null)
                 {
                     return Ok(new ResponseData()
                     {
                         success = true,
-                        data = arizadetaydata
+                        data = data
                     });
                 }
                 else
@@ -100,10 +118,9 @@ namespace WebApi.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> ArizaKabul(int id)
         {
-            //ikisiylede bulabilirsin o anki sistemde online olanı
-            //var OpertatorId = HttpContext.User.Identity.GetUserId();
+            // Nasıl alınır opId bilmiyorm.
+            var OpertatorId = HttpContext.Current.User.Identity.GetUserId();
 
-            var OpertatorId = System.Web.HttpContext.Current.User.Identity.GetUserId();
             try
             {
                 var ariza = await new ArizaKayitRepo().GetByIdAsync(id);
@@ -111,7 +128,11 @@ namespace WebApi.Controllers
                 if (ariza == null)
                 {
 
-                    return NotFound();
+                    return Ok(new ResponseData
+                    {
+                        message = $"Kayıt Bulunamadı",
+                        success = false,
+                    });
                 }
                 else
                 {
@@ -119,7 +140,16 @@ namespace WebApi.Controllers
                     ariza.OperatorKabul = true;
                     ariza.OperatorId = OpertatorId;
                     ariza.ArizaDurumu = ArizaDurum.OperatorTakibeAldı;
-                    new ArizaKayitRepo().Update(ariza);
+                    var updatesonuc =   new ArizaKayitRepo().Update(ariza);
+                    if (updatesonuc< 1)
+                    {
+                        return Ok(new ResponseData
+                        {
+                            message = $"Ariza Kayit Başarısz",
+                            success = false,
+                        });
+                    }
+
                     var OperatorLog = new ArizaLOG
                     {
                         CreatedDate = DateTime.Now,
@@ -129,17 +159,19 @@ namespace WebApi.Controllers
                         YapanınRolu = IdentityRoles.Teknisyen
                     };
                     var responce = new ArizaLogRepo().Insert(OperatorLog);
-                    if (responce >= 1)
+                    if (responce < 1)
                     {
                         return Ok(new ResponseData
                         {
-                            success = true,
+                            message = $"ArızaLog Başarısz",
+                            success = false,
                         });
                     }
-                    else
+                    return Ok(new ResponseData
                     {
-                        return StatusCode(HttpStatusCode.NoContent);
-                    }
+                        message=$"Atama ve log işlemleri başaarılı",
+                        success=true,
+                    });
                     //TODO Müşteriye Mail gönderilir bilgilendirme belki
                 }
 
@@ -150,11 +182,12 @@ namespace WebApi.Controllers
             }
         }
 
+        //burası ayrı bir sayfa tek sayfa olarak yapmıstık onu deniyelim yapamazsak burayı kullanarak ayırırız sayfaları deneriz.
         [HttpGet]
         public IHttpActionResult ArizaList()
         {
             //operator bulunuyor ve o operatorun aldıgı kayıtlar listelenip çekiliyor.
-
+          
             var OpertatorId = HttpContext.Current.User.Identity.GetUserId();
             try
             {
@@ -191,7 +224,11 @@ namespace WebApi.Controllers
                 var responce = new ArizaKayitRepo().Update(ariza);
                 if (responce < 1)
                 {
-                    return StatusCode(HttpStatusCode.NoContent);
+                    return Ok(new ResponseData
+                    {
+                        message = $"Ariza Kayıt Update Edilemedi.",
+                        success = false,
+                    });
                 }
 
                 var opId = HttpContext.Current.User.Identity.GetUserId();
@@ -207,9 +244,14 @@ namespace WebApi.Controllers
                     YapanınRolu = IdentityRoles.Teknisyen
                 };
                 var Logresponce = new ArizaLogRepo().Insert(OperatorLog);
+
                 if (Logresponce < 1)
                 {
-                    return StatusCode(HttpStatusCode.NoContent);
+                    return Ok(new ResponseData
+                    {
+                        message = $"Log kayıt Eklenemedi",
+                        success = false,
+                    });
 
                 }
 
@@ -241,7 +283,9 @@ namespace WebApi.Controllers
 
                 return Ok(new ResponseData()
                 {
-                    success = true
+                    success = true,
+                    message=$"Tüm işlemler başarılı bir şekilde gerçekleştri"
+                   
                 });
             }
 
@@ -251,15 +295,27 @@ namespace WebApi.Controllers
             }
 
         }
-
+        [HttpGet]
         public async Task<IHttpActionResult> OPArizaDetay(int id)
         {
 
             try
             {
                 var ariza = new ArizaKayitRepo().GetById(id);
-                var data = Mapper.Map<ArizaViewModel>(ariza);
-                data.ArızaPath = new FotografRepo().GetAll(z => z.ArizaId == id).Select(u => u.Yol).ToList();
+                var fotolar = new FotografRepo().GetAll(x => x.ArizaId == ariza.Id).Select(x => x.Yol).ToList();
+                ariza.ArızaPath = fotolar;
+                var data = new OperatorIndexViewModel
+                {
+                    ArızaResim = ariza.ArızaPath,
+                    Adres = ariza.Adres,
+                    ArızaId = ariza.Id,
+                    MusteriId = ariza.MusteriId,
+                    FaturaResim = ariza.FaturaPath,
+                    telno = ariza.Telno,
+                    ArizaCreatedDate = ariza.CreatedDate,
+
+                };
+
 
                 List<BosTeknisyenViewModel> TeknisyenList = new List<BosTeknisyenViewModel>();
                 var RoleTeknisyenler = NewRoleManager().FindByName("Teknisyen").Users.Select(x => x.UserId).ToList();
