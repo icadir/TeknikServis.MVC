@@ -131,6 +131,7 @@
                 }
             </tbody>
             <tbody id="emptyrecords"></tbody>
+
         </table>
     </div>
     <!-- .card-block -->
@@ -148,15 +149,14 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs/jq-3.3.1/dt-1.10.18/af-2.3.2/b-1.5.4/b-colvis-1.5.4/b-flash-1.5.4/b-html5-1.5.4/b-print-1.5.4/cr-1.5.0/r-2.2.2/sc-1.5.0/datatables.min.js"></script>
 
     <script>
-        $(".dataTable").DataTable({
+        $(function() {
+            $(".dataTable").DataTable({
             dom: 'Bfrtip',
             buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print'
             ]
         });
         $(function init() {
-
-
             $.ajax({
                 url: "http://localhost:62004/api/Operator/Index",
                 type: "GET",
@@ -181,38 +181,33 @@
                         th.innerText = key + 1;
                         var td = document.createElement("td");
                         td.innerText = value.Adres;
-                        var td1 = document.createElement("td");
-                        td.innerText = value.FaturaResim;
+                        console.log(value.Adres);
+                        //var td1 = document.createElement("td");
+                        //td.innerText = value.FaturaResim;
                         var td2 = document.createElement("td");
                         td.innerText = value.ArizaCreatedDate;
-                        var td3 = document.createElement("td");
-                        td.innerText = value.ArızaResim;
+                        //var td3 = document.createElement("td");
+                        //td.innerText = value.ArızaResim;
                         var td4 = document.createElement("td");
                         td.innerText = value.telno;
                         var td5 = document.createElement("td");
-                        var btnDetay = document.createElement("input");
+                        var div = document.createElement("div");
+                        var a = document.createElement("a");
+                        var i = document.createElement("i");
 
-                        $(btnDetay).attr({
-                            "type": "button",
-                            "class": "btn btn-info",
-                            "value": "ArizaDetay",
-                            "name": value.ArızaId
-                        }).on("click",
-                            function () {
-                                $.ajax({
-                                    url: "http://localhost:62004/api/ArizaDetay/Index/" + this.name,
-                                    method: "GET",
-                                    dataType: "json",
-                                }).done(function (e) {
-                                    console.log(e.data);
-                                    init();
-                                });
-                            });
-                        $(td5).append(btnDetay)
+                        $(i).attr("class", "ion-edit");
+                        $(div).addClass("btn-group");
+                        $(a).attr("href", "@Url.Action("ArizaDetay", "Operator")" + "/" + value.ArızaId).attr("class", "btn btn-success").html("Detail");
+                        $(td5).append(div).append(a).append(i);
+
+                        $(tr).append(td).append(td2).append(td4).append(td5).appendTo($("#emptyrecords"));
+
                     });
 
             }
         });
+        });
+
     </script>
 
 }

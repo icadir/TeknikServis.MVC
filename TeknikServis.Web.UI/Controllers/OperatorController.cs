@@ -37,13 +37,14 @@ namespace TeknikServis.Web.UI.Controllers
         {
             try
             {
+                ViewBag.id = id;
 
-                var x = new ArizaKayitRepo().GetById(id);
+                //var x = new ArizaKayitRepo().GetById(id);
 
-                var data = Mapper.Map<ArizaViewModel>(x);
-                data.ArızaPath= new FotografRepo().GetAll(z => z.ArizaId == id).Select(u=>u.Yol).ToList();
+                //var data = Mapper.Map<ArizaViewModel>(x);
+                //data.ArızaPath= new FotografRepo().GetAll(z => z.ArizaId == id).Select(u=>u.Yol).ToList();
 
-                return View(data);
+                return View();
             }
             catch (Exception ex)
             {

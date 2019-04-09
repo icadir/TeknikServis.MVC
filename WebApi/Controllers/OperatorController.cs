@@ -7,6 +7,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.UI.WebControls;
 using TeknikServis.BLL.Repository;
 using TeknikServis.BLL.Services.Senders;
@@ -20,6 +21,7 @@ using static TeknikServis.BLL.Identity.MembershipTools;
 
 namespace WebApi.Controllers
 {
+    [EnableCors("*","*","*")]
     public class OperatorController : ApiController
     {
         //Not found vs buradaIHHTp actionda mesaj ile göndermeli yapı yokmu. 
