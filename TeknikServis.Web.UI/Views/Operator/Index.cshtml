@@ -31,7 +31,7 @@
     }
 </div>
 <div class="card">
-    
+
 
     <div class="card-block">
         <table class="table table-bordered table-striped table-vcenter dataTable">
@@ -82,7 +82,7 @@
 
 <div class="card">
     <div class="card-header">
-     
+
         <h4 class="text-center">Onaylanmamış Arıza Listesi</h4>
     </div>
 
@@ -120,7 +120,6 @@
                         <td>@data2.ArizaOlusturmaTarihi</td>
                         <td>@data2.Adres</td>
 
-
                         <td class="text-center">
                             <div class="btn-group">
                                 <a href="@Url.Action("ArizaDetay", "Operator", new {id = data2.ArizaId})" class="btn btn-xs btn-default" title="Arıza Detay">
@@ -131,6 +130,7 @@
                     </tr>
                 }
             </tbody>
+            <tbody id="emptyrecords"></tbody>
         </table>
     </div>
     <!-- .card-block -->
@@ -148,13 +148,70 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs/jq-3.3.1/dt-1.10.18/af-2.3.2/b-1.5.4/b-colvis-1.5.4/b-flash-1.5.4/b-html5-1.5.4/b-print-1.5.4/cr-1.5.0/r-2.2.2/sc-1.5.0/datatables.min.js"></script>
 
     <script>
-        $(function () {
-            $(".dataTable").DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
-                ]
+        $(".dataTable").DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+        $(function init() {
+
+
+            $.ajax({
+                url: "http://localhost:62004/api/Operator/Index",
+                type: "GET",
+                dataType: "json",
+            }).done(function (e) {
+                if (e.success) {
+                    console.log(e.data);
+                    renderdata(e.data);
+                } else {
+                    alert(e.message);
+                }
             });
+
+            function renderdata(data) {
+                //Admin1 Idsi dc7e08b6-581d-40b0-906a-e3152492265f
+                $('#emptyrecords').empty();
+                $.each(data,
+                    function (key, value) {
+                        var tr = document.createElement("tr");
+                        var th = document.createElement("th");
+                        //Resimler birden fazla ise gösterme.
+                        th.innerText = key + 1;
+                        var td = document.createElement("td");
+                        td.innerText = value.Adres;
+                        var td1 = document.createElement("td");
+                        td.innerText = value.FaturaResim;
+                        var td2 = document.createElement("td");
+                        td.innerText = value.ArizaCreatedDate;
+                        var td3 = document.createElement("td");
+                        td.innerText = value.ArızaResim;
+                        var td4 = document.createElement("td");
+                        td.innerText = value.telno;
+                        var td5 = document.createElement("td");
+                        var btnDetay = document.createElement("input");
+
+                        $(btnDetay).attr({
+                            "type": "button",
+                            "class": "btn btn-info",
+                            "value": "ArizaDetay",
+                            "name": value.ArızaId
+                        }).on("click",
+                            function () {
+                                $.ajax({
+                                    url: "http://localhost:62004/api/ArizaDetay/Index/" + this.name,
+                                    method: "GET",
+                                    dataType: "json",
+                                }).done(function (e) {
+                                    console.log(e.data);
+                                    init();
+                                });
+                            });
+                        $(td5).append(btnDetay)
+                    });
+
+            }
         });
     </script>
 
