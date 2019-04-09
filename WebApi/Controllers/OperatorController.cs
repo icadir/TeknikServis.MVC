@@ -21,7 +21,7 @@ using static TeknikServis.BLL.Identity.MembershipTools;
 
 namespace WebApi.Controllers
 {
-    [EnableCors("*","*","*")]
+    [EnableCors("*", "*", "*")]
     public class OperatorController : ApiController
     {
         //Not found vs buradaIHHTp actionda mesaj ile göndermeli yapı yokmu. 
@@ -142,8 +142,8 @@ namespace WebApi.Controllers
                     ariza.OperatorKabul = true;
                     ariza.OperatorId = OpertatorId;
                     ariza.ArizaDurumu = ArizaDurum.OperatorTakibeAldı;
-                    var updatesonuc =   new ArizaKayitRepo().Update(ariza);
-                    if (updatesonuc< 1)
+                    var updatesonuc = new ArizaKayitRepo().Update(ariza);
+                    if (updatesonuc < 1)
                     {
                         return Ok(new ResponseData
                         {
@@ -171,8 +171,8 @@ namespace WebApi.Controllers
                     }
                     return Ok(new ResponseData
                     {
-                        message=$"Atama ve log işlemleri başaarılı",
-                        success=true,
+                        message = $"Atama ve log işlemleri başaarılı",
+                        success = true,
                     });
                     //TODO Müşteriye Mail gönderilir bilgilendirme belki
                 }
@@ -189,7 +189,7 @@ namespace WebApi.Controllers
         public IHttpActionResult ArizaList()
         {
             //operator bulunuyor ve o operatorun aldıgı kayıtlar listelenip çekiliyor.
-          
+
             var OpertatorId = HttpContext.Current.User.Identity.GetUserId();
             try
             {
@@ -286,8 +286,8 @@ namespace WebApi.Controllers
                 return Ok(new ResponseData()
                 {
                     success = true,
-                    message=$"Tüm işlemler başarılı bir şekilde gerçekleştri"
-                   
+                    message = $"Tüm işlemler başarılı bir şekilde gerçekleştri"
+
                 });
             }
 
@@ -368,5 +368,30 @@ namespace WebApi.Controllers
             }
 
         }
+        [HttpGet]
+        public async Task<IHttpActionResult> GetUser(string MusteriId)
+        {
+            var user = await NewUserManager().FindByIdAsync(MusteriId);
+            if (user == null)
+            {
+                return Ok(new ResponseData
+                {
+                    message = "Bir hata olustu",
+                    success = false,
+
+                });
+            }
+            else
+            {
+                return Ok(new ResponseData
+                {
+                    data = user,
+                    success = true,
+
+                });
+            }
+           
+        }
+
     }
 }

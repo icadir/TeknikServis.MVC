@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
+using TeknikServis.Entity.IdentityModels;
 
 namespace TeknikServis.Entity.Models
 {
@@ -15,6 +16,6 @@ namespace TeknikServis.Entity.Models
         public List<BosTeknisyenViewModel> Teknisyenler { get; set; }
         public DateTime responseTime { get; set; } = DateTime.Now;
         public string responseTimeU { get; set; } = $"{DateTime.Now:O}";
-    
+
     }
 }

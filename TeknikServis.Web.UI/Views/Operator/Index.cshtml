@@ -156,40 +156,38 @@
                 'copy', 'csv', 'excel', 'pdf', 'print'
             ]
         });
-        $(function init() {
+        function init() {
             $.ajax({
                 url: "http://localhost:62004/api/Operator/Index",
-                type: "GET",
+                method: "GET",
                 dataType: "json",
             }).done(function (e) {
                 if (e.success) {
                     console.log(e.data);
                     renderdata(e.data);
+
                 } else {
                     alert(e.message);
                 }
             });
+
 
             function renderdata(data) {
                 //Admin1 Idsi dc7e08b6-581d-40b0-906a-e3152492265f
                 $('#emptyrecords').empty();
                 $.each(data,
                     function (key, value) {
-                        var tr = document.createElement("tr");
-                        var th = document.createElement("th");
-                        //Resimler birden fazla ise gösterme.
-                        th.innerText = key + 1;
-                        var td = document.createElement("td");
-                        td.innerText = value.Adres;
-                        console.log(value.Adres);
-                        //var td1 = document.createElement("td");
-                        //td.innerText = value.FaturaResim;
-                        var td2 = document.createElement("td");
-                        td.innerText = value.ArizaCreatedDate;
-                        //var td3 = document.createElement("td");
-                        //td.innerText = value.ArızaResim;
-                        var td4 = document.createElement("td");
-                        td.innerText = value.telno;
+                        $.ajax({
+                            method: "GET",
+                            dataType: "json",
+                            url: "http://localhost:62004/api/Operator/GetUser/" + value.MusteriId,
+                        }).done(function (data) {
+                            if (data.success) {
+                                console.log(data.data)
+                            } else {
+                                alert(data.message);
+                            }
+                        });
                         var td5 = document.createElement("td");
                         var div = document.createElement("div");
                         var a = document.createElement("a");
@@ -200,12 +198,15 @@
                         $(a).attr("href", "@Url.Action("ArizaDetay", "Operator")" + "/" + value.ArızaId).attr("class", "btn btn-success").html("Detail");
                         $(td5).append(div).append(a).append(i);
 
-                        $(tr).append(td).append(td2).append(td4).append(td5).appendTo($("#emptyrecords"));
-
+                        $("<tr></tr>")
+                            .append($("<th class='bg - danger'></th>").text(key + 1))
+                            .append($("<td></td>").text(value.ArizaCreatedDate))
+                            .append($("<td></td>").text(value.Adres))
+                            .append(td5)
+                            .appendTo($("#emptyrecords"));
                     });
-
-            }
-        });
+            }};
+            init();
         });
 
     </script>
