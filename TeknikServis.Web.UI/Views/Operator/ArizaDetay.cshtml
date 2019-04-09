@@ -101,13 +101,24 @@
             App.initHelpers('slick');
 
 
-            var id = @ViewBag.id
+            @*var id = @ViewBag.id*@
+            var id = 2;
                 function init() {
                     $.ajax({
+                        method: "Get",
+                        url: "http://localhost:62004/api/Operator/ArizaDetay/" + id,
+                        dataType="Json",
+                    }).done(function (e) {
+                        if (e.success) {
+                            console.log(e.data);
+                            renderdata(e.data);
 
-                    })
+                        } else {
+                            alert(e.message);
+                        }
+                    });
 
-                }
+                };
 
             init();
         });
