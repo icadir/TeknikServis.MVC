@@ -3,13 +3,13 @@
 @using TeknikServis.BLL.Identity
 @using TeknikServis.BLL.Repository
 @using TeknikServis.Entity.Enums
-@model List<TeknikServis.Entity.ViewModels.ArizaViewModels.ArizaViewModel>
+@*@model List<TeknikServis.Entity.ViewModels.ArizaViewModels.ArizaViewModel>*@
 
 @{
     ViewBag.Title = "Operator Ana Sayfa";
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
-    var teknisyenId = HttpContext.Current.User.Identity.GetUserId();
-    var TeknisyeneAitList = new ArizaKayitRepo().GetAll(x => x.OperatorId == teknisyenId).OrderBy(x => x.ArizaOlusturmaTarihi).ToList();
+    //var teknisyenId = HttpContext.Current.User.Identity.GetUserId();
+    //var TeknisyeneAitList = new ArizaKayitRepo().GetAll(x => x.OperatorId == teknisyenId).OrderBy(x => x.ArizaOlusturmaTarihi).ToList();
 
 }
 
@@ -48,29 +48,29 @@
                 </tr>
             </thead>
             <tbody>
-                @for (int i = 0; i < TeknisyeneAitList.Count; i++)
-                {
-                    var dataTeknisyen = MembershipTools.GetMusteri(TeknisyeneAitList[i].TeknisyenId);
+                @*@for (int i = 0; i < TeknisyeneAitList.Count; i++)
+                    {
+                        var dataTeknisyen = MembershipTools.GetMusteri(TeknisyeneAitList[i].TeknisyenId);
 
-                    var data2 = TeknisyeneAitList[i];
+                        var data2 = TeknisyeneAitList[i];
 
-                    <tr class="@(data2.OperatorKabul==false ? "bg-red":"bg-green")">
-                        <td class="font-300 text-center">@(i + 1)</td>
-                        <td class="font-300 text-center">@(data2.ArizaDurumu)</td>
-                        <td class="font-300 text-center">@((data2.TeknisyenId == null) ? "Teknisyen Atanmadı" : dataTeknisyen.Name + " " + dataTeknisyen.Surname)</td>
-                        <td class="font-300 text-center">@((data2.TeknisyenId == null) ? "Teknisyen atanmadı" : data2.Telno)</td>
-                        <td class="font-300 text-center">@(data2.TeknisyenArizaDurum ?? TeknisyenArizaDurum.KontrolEdilmedi)</td>
-                        <td class="font-300 text-center">@(data2.TeknisyenArizaAciklama ?? "Kontrol Edilmedi")</td>
+                        <tr class="@(data2.OperatorKabul==false ? "bg-red":"bg-green")">
+                            <td class="font-300 text-center">@(i + 1)</td>
+                            <td class="font-300 text-center">@(data2.ArizaDurumu)</td>
+                            <td class="font-300 text-center">@((data2.TeknisyenId == null) ? "Teknisyen Atanmadı" : dataTeknisyen.Name + " " + dataTeknisyen.Surname)</td>
+                            <td class="font-300 text-center">@((data2.TeknisyenId == null) ? "Teknisyen atanmadı" : data2.Telno)</td>
+                            <td class="font-300 text-center">@(data2.TeknisyenArizaDurum ?? TeknisyenArizaDurum.KontrolEdilmedi)</td>
+                            <td class="font-300 text-center">@(data2.TeknisyenArizaAciklama ?? "Kontrol Edilmedi")</td>
 
-                        <td class="text-center">
-                            <div class="btn-group">
-                                <a href="@Url.Action("OPArizaDetay", "Operator", new {id=data2.Id})" class="btn btn-xs btn-default" title="Teknisyen Ata">
-                                    <i class="ion-android-arrow-up">Teknisyen Atama & Detay</i>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                }
+                            <td class="text-center">
+                                <div class="btn-group">
+                                    <a href="@Url.Action("OPArizaDetay", "Operator", new {id=data2.Id})" class="btn btn-xs btn-default" title="Teknisyen Ata">
+                                        <i class="ion-android-arrow-up">Teknisyen Atama & Detay</i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }*@
             </tbody>
         </table>
     </div>
@@ -101,14 +101,8 @@
                     <th class="text-center" style="width: 10%;">Detay</th>
                 </tr>
             </thead>
-            <tbody>
-                @for (int i = 0; i < Model.Count; i++)
-                {
-
-                    var data = MembershipTools.GetMusteri(Model[i].MusteriId);
-                    var data2 = Model[i];
-
-                    @*<tr class="@(data.EmailConfirmed?"":"bg-yellow")">*@
+            <tbody id="datatablebody">
+                @*<tr class="@(data.EmailConfirmed?"":"bg-yellow")"></tr>
                     <tr class="bg-danger">
                         <td class="text-center">@(i + 1)</td>
                         <td class="text-center">
@@ -125,13 +119,10 @@
                                 <a href="@Url.Action("ArizaDetay", "Operator", new {id = data2.ArizaId})" class="btn btn-xs btn-default" title="Arıza Detay">
                                     <i class="ion-edit"></i>
                                 </a>
-                            </div>
+                            </div>34324rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrt54
                         </td>
-                    </tr>
-                }
+                    </tr>*@
             </tbody>
-            <tbody id="emptyrecords"></tbody>
-
         </table>
     </div>
     <!-- .card-block -->
@@ -156,7 +147,8 @@
                 'copy', 'csv', 'excel', 'pdf', 'print'
             ]
         });
-        function init() {
+            function init() {
+                $("#datatablebody").empty();
             $.ajax({
                 url: "http://localhost:62004/api/Operator/Index",
                 method: "GET",
@@ -164,6 +156,7 @@
             }).done(function (e) {
                 if (e.success) {
                     console.log(e.data);
+
                     renderdata(e.data);
 
                 } else {
@@ -181,29 +174,60 @@
                             method: "GET",
                             dataType: "json",
                             url: "http://localhost:62004/api/Operator/GetUser/" + value.MusteriId,
-                        }).done(function (data) {
-                            if (data.success) {
-                                console.log(data.data)
+                        }).done(function (response) {
+                            if (response.success) {
+
+                                console.log(response.data)
+                                    @*<tr class="bg-danger">
+                                    <td class="text-center">@(i + 1)</td>
+                                    <td class="text-center">
+                                    <img src="@(string.IsNullOrEmpty(data.AvatarPath)?"/assets/img/avatars/avatar3.jpg":data.AvatarPath)" class="img-avatar-96" width="100" height="100" />
+                                    </td>
+                                    <td class="font-500">@data.UserName</td>
+                                    <td>@data.Name</td>
+                                    <td>@data.Surname</td>
+                                    <td>@data2.ArizaOlusturmaTarihi</td>
+                                    <td>@data2.Adres</td>
+
+                                    <td class="text-center">
+                                    <div class="btn-group">
+                                    <a href="@Url.Action("ArizaDetay", "Operator", new {id = data2.ArizaId})" class="btn btn-xs btn-default" title="Arıza Detay">
+                                    <i class="ion-edit"></i>
+                                    </a>
+                                    </div>
+                                    </td>
+                                    </tr>*@
+
+                                var tr = $("<tr></tr>");
+                                $(tr).append($("<td class='text-center'></td>").text(key + 1));
+                                var img = $("<img/>").attr("class", "img-avatar-96")
+                                    .attr("width", "100").attr("height", "100").attr("src", response.data.AvatarPath);
+          var a = $("<a></a>").attr("href", "@Url.Action("ArizaDetay", "Operator")" + "/" + value.ArızaId).attr("class", "btn btn-success").html("Arıza Detay");
+                                $(tr).append($("<td class='text-center'></td>").append($(img)));
+                                $(tr).append($("<td class='text-center'></td>").append($("<td></td>").text(response.data.UserName)));
+                                $(tr).append($("<td class='text center'></td>").text(response.data.Name));
+                                $(tr).append($("<td class='text center'></td>").text(response.data.Surname));
+                                $(tr).append($("<td></td>").text(value.ArizaCreatedDate));
+                                $(tr).append($("<td></td>").text(value.Adres));
+                                $(tr).append($("<td class='text-center'></td>")
+                                    .append($("<div class='btn-group'></div>")).append($(a)));
+
+                                $(tr).appendTo($("#datatablebody"));
+                                @*$("<tr></tr>")
+                                    .append($("<td class='text-center'></td>").text(key + 1))
+                                    .append($("<td class='text-center'></td>")).append($("<img/>").attr("src", response.data.AvatarPath).attr("class", "img-avatar-96").attr("width", "100").attr("height", "100"))
+                                    .append($("<td></td>").text(response.UserName))
+                                    .append($("<td class='text center'></td>").text(response.data.Name))
+                                    .append($("<td class='text center'></td>").text(response.data.Surname))
+                                    .append($("<td></td>").text(value.ArizaCreatedDate))
+                                    .append($("<td></td>").text(value.Adres))
+                                    .append($("<td class='text-center'></td>").append($("<div></div>").attr("class","btn-group")).append($("a").attr("href", "@Url.Action("ArizaDetay", "Operator")" + "/" + value.ArızaId).attr("class", "btn btn-success").html("Arıza Detay")))
+                                    .appendTo($("#datatablebody"));*@
                             } else {
-                                alert(data.message);
+                                alert(response.message);
                             }
                         });
-                        var td5 = document.createElement("td");
-                        var div = document.createElement("div");
-                        var a = document.createElement("a");
-                        var i = document.createElement("i");
 
-                        $(i).attr("class", "ion-edit");
-                        $(div).addClass("btn-group");
-                        $(a).attr("href", "@Url.Action("ArizaDetay", "Operator")" + "/" + value.ArızaId).attr("class", "btn btn-success").html("Detail");
-                        $(td5).append(div).append(a).append(i);
-
-                        $("<tr></tr>")
-                            .append($("<th class='bg - danger'></th>").text(key + 1))
-                            .append($("<td></td>").text(value.ArizaCreatedDate))
-                            .append($("<td></td>").text(value.Adres))
-                            .append(td5)
-                            .appendTo($("#emptyrecords"));
                     });
             }};
             init();

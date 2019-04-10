@@ -369,9 +369,9 @@ namespace WebApi.Controllers
 
         }
         [HttpGet]
-        public async Task<IHttpActionResult> GetUser(string MusteriId)
+        public async Task<IHttpActionResult> GetUser(string id)
         {
-            var user = await NewUserManager().FindByIdAsync(MusteriId);
+            var user = await NewUserManager().FindByIdAsync(id);
             if (user == null)
             {
                 return Ok(new ResponseData
