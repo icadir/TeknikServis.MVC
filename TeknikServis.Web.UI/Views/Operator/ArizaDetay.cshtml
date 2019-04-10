@@ -1,5 +1,4 @@
 ﻿@using TeknikServis.BLL.Identity
-@model TeknikServis.Entity.ViewModels.ArizaViewModels.ArizaViewModel
 @{
     ViewBag.Title = "Ariza Detay";
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
@@ -21,65 +20,66 @@
                 @using (Html.BeginForm("ArizaKabul", "Operator", FormMethod.Post, new { @class = "fieldset" }))
                 {
 
-                    var data = MembershipTools.GetMusteri(Model.MusteriId);
+                    //var data = MembershipTools.GetMusteri(Model.MusteriId);
 
                     <h4 class="m-t-sm m-b">Arıza Kayıt Bilgileri</h4>
                     <div class="form-group row">
                         <div class="col-xs-6">
-                            @*<label for="exampleInputName1">First name</label>*@
                             @Html.Label("", "Müşterinin Adı")
-                            @*<input type="text" class="form-control" id="exampleInputName1">*@
-                            @Html.TextBox("data.Name", data.Name, new { @class = "form-control", @readonly = "readonly" })
+                            @Html.TextBox("name", "", new { @class = "form-control", @readonly = "readonly" })
 
                         </div>
                         <div class="col-xs-6">
                             @Html.Label("", "Müşterinin Soyadı")
 
-                            @Html.TextBox("data.Surname", data.Surname, new { @class = "form-control", @readonly = "readonly" })
+                            @Html.TextBox("surname", "", new { @class = "form-control", @readonly = "readonly" })
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-xs-6">
                             @Html.Label("", "Müşteri Email")
-                            @Html.TextBox("data.Email", data.Email, new { @class = "form-control", @readonly = "readonly" })
+                            @Html.TextBox("email", "", new { @class = "form-control", @readonly = "readonly" })
                         </div>
                         <div class="col-xs-6">
-                            @Html.LabelFor(x => x.Telno)
-                            @Html.TextBoxFor(x => x.Telno, new { @class = "form-control", @readonly = "readonly" })
+                            @Html.Label("", "Müşteri Telno")
+                            @Html.TextBox("telno", "", new { @class = "form-control", @readonly = "readonly" })
                         </div>
                     </div>
                     <div class="form-group">
                         @Html.Label("", "Adres Bilgisi")
-                        @Html.TextAreaFor(x => x.Adres, new { @class = "form-control", @readonly = "readonly" })
+                        @Html.TextBox("adres", "", new { @class = "form-control", @readonly = "readonly" })
                     </div>
 
                     <div class="form-group row">
                         <div class="col-xs-6">
-                            <div class="js-slider" data-slider-dots="true" data-slider-autoplay="true" data-slider-autoplay-speed="3000">
+                            <div id="arizaresim" class="js-slider" data-slider-dots="true" data-slider-autoplay="true" data-slider-autoplay-speed="3000">
                                 @Html.Label("", "Arızalı Ürün Resimleri")<br />
 
-                                @for (int i = 0; i < Model.ArızaPath.Count; i++)
-                                {
-                                    var cx = Model.ArızaPath[i];
-                                    <a href="@cx" rel="lightbox">
-                                        <img src="@cx" class="img-avatar-96" width="100" height="100">
-                                    </a>
-                                }
+                                @*@for (int i = 0; i < Model.ArızaPath.Count; i++)
+                                    {
+                                        var cx = Model.ArızaPath[i];
+                                        <a href="@cx" rel="lightbox">
+                                            <img src="@cx" class="img-avatar-96" width="100" height="100">
+                                        </a>
+                                    }*@
                             </div>
                         </div>
-                        <div class="col-xs-6">
-                            @Html.Label("", "Ürün Fatura Bilgisi")
-                            <a href="@(string.IsNullOrEmpty(Model.FaturaPath) ? "~/assets/img/avatars/avatar3.jpg" : Model.FaturaPath)" rel="lightbox">
-                                <img src="@(string.IsNullOrEmpty(Model.FaturaPath) ? "~/assets/img/avatars/avatar3.jpg" : Model.FaturaPath)" class="img-avatar-96" width="100" height="100" />
-                            </a>
+                        <div class="col-xs-6" id="faturaresim">
+                            <div class="col-md-12">
+                                @Html.Label("", "Ürün Fatura Bilgisi")
+                            </div>
+                           
+                            @*<a href="@(string.IsNullOrEmpty(Model.FaturaPath) ? "~/assets/img/avatars/avatar3.jpg" : Model.FaturaPath)" rel="lightbox">
+                                    <img src="@(string.IsNullOrEmpty(Model.FaturaPath) ? "~/assets/img/avatars/avatar3.jpg" : Model.FaturaPath)" class="img-avatar-96" width="100" height="100" />
+                                </a>*@
                         </div>
 
                     </div>
                     <div class="row narrow-gutter">
-                        <div class="col-xs-12">
-                            <a href="@Url.Action("ArizaKabul", "Operator", new {id = Model.ArizaId})" class="btn btn-app btn-block hidden-xs" title="Arıza Kabul">
-                                Arızayı Onayla
-                            </a>
+                        <div id="btnKabul" class="col-xs-12">
+                            @*<a href="@Url.Action("ArizaKabul", "Operator", new {id = Model.ArizaId})" class="btn btn-app btn-block hidden-xs" title="Arıza Kabul">
+                                    Arızayı Onayla
+                                </a>*@
                         </div>
                     </div>
                 }
@@ -93,21 +93,20 @@
 </div>
 @section bottom{
     <script src="~/assets/js/plugins/slick/slick.min.js"></script>
-    <script src="~/assets/js/lightbox-plus-jquery.min.js"></script>
-    <script src="~/assets/js/lightbox.js"></script>
+    @*<script src="~/assets/js/lightbox-plus-jquery.min.js"></script>
+        <script src="~/assets/js/lightbox.js"></script>*@
     <script>
         $(function () {
             // Init page helpers (Slick Slider plugin)
             App.initHelpers('slick');
 
-
-            @*var id = @ViewBag.id*@
-            var id = 2;
+            var id = @ViewBag.id
                 function init() {
+
                     $.ajax({
                         method: "Get",
                         url: "http://localhost:62004/api/Operator/ArizaDetay/" + id,
-                        dataType="Json",
+                        dataType:"json",
                     }).done(function (e) {
                         if (e.success) {
                             console.log(e.data);
@@ -119,6 +118,54 @@
                     });
 
                 };
+            function renderdata(data) {
+                console.log("bu")
+                console.log(data);
+                        $.ajax({
+                            method: "GET",
+                            dataType: "json",
+                            url: "http://localhost:62004/api/Operator/GetUser/" + data.MusteriId,
+                        }).done(function(response) {
+                            if (response.success) {
+                                console.log(response.data)
+                                $("#name").val(response.data.Name);
+                                $("#surname").val(response.data.Surname);
+                                $("#email").val(response.data.Email);
+                                $("#telno").val(response.data.PhoneNumber);
+                                $("#adres").val(data.Adres);
+                                var a = $("<a></a>").attr("href", data.FaturaResim);
+                                var img = $("<img/>").attr("class", "img-avatar-96")
+                                    .attr("width", "100").attr("height", "100").attr("src", data.FaturaResim);
+                                $("#faturaresim").append($(a)).append($(img));
+
+                                if (data.ArızaResim.length > 1) {
+                                    for (var i = 0; i < data.ArızaResim.length; i++) {
+                                        var a2 = $("<a></a>").attr("href", data.ArızaResim[i]);
+                                        var img2 = $("<img/>").attr("class", "img-avatar-96")
+                                            .attr("width", "100").attr("height", "100").attr("src", data.ArızaResim[i]);
+                                        $("#arizaresim").append($(a2)).append($(img2));
+                                    }
+                                } else {
+                                    var a1 = $("<a></a>").attr("href", data.ArızaResim);
+                                    var img1 = $("<img/>").attr("class", "img-avatar-96")
+                                        .attr("width", "100").attr("height", "100").attr("src", data.ArızaResim);
+                                    $("#arizaresim").append($(a1)).append($(img1));
+                                }
+                                @*<a href="@Url.Action("ArizaKabul", "Operator", new {id = Model.ArizaId})" class="btn btn-app btn-block hidden-xs" title="Arıza Kabul">
+                                    Arızayı Onayla
+                                </a>*@
+                                var input = $("<a></a>")
+                                    .attr("href", "@Url.Action("ArizaKabul", "Operator")" + "/" + data.ArızaId)
+                                    .attr("class", "btn btn-app btn-block hidden-xs").attr("title", "Arıza Kabul")
+                                    .attr("type","button").text("Arızayi Kabul Et");
+                                $("#btnKabul").append($(input));
+                            } else {
+                                alert("Bir hata Oluştu");
+                            }
+                        });
+                    };
+
+
 
             init();
         });

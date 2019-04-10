@@ -119,7 +119,7 @@
                                 <a href="@Url.Action("ArizaDetay", "Operator", new {id = data2.ArizaId})" class="btn btn-xs btn-default" title="Arıza Detay">
                                     <i class="ion-edit"></i>
                                 </a>
-                            </div>34324rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrt54
+                            </div>
                         </td>
                     </tr>*@
             </tbody>
@@ -156,15 +156,11 @@
             }).done(function (e) {
                 if (e.success) {
                     console.log(e.data);
-
                     renderdata(e.data);
-
                 } else {
                     alert(e.message);
                 }
             });
-
-
             function renderdata(data) {
                 //Admin1 Idsi dc7e08b6-581d-40b0-906a-e3152492265f
                 $('#emptyrecords').empty();
@@ -176,9 +172,22 @@
                             url: "http://localhost:62004/api/Operator/GetUser/" + value.MusteriId,
                         }).done(function (response) {
                             if (response.success) {
-
                                 console.log(response.data)
-                                    @*<tr class="bg-danger">
+                                var tr = $("<tr></tr>");
+                                $(tr).append($("<td class='text-center'></td>").text(key + 1));
+                                var img = $("<img/>").attr("class", "img-avatar-96")
+                                    .attr("width", "100").attr("height", "100").attr("src", response.data.AvatarPath);
+          var a = $("<a></a>").attr("href", "@Url.Action("ArizaDetay", "Operator")" + "/" + value.ArızaId).attr("class", "btn btn-success").html("Arıza Detay");
+                                $(tr).append($("<td class='text-center'></td>").append($(img)));
+                                $(tr).append($("<td class='text-center'></td>").append($("<td></td>").text(response.data.UserName)));
+                                $(tr).append($("<td class='text center'></td>").text(response.data.Name));
+                                $(tr).append($("<td class='text center'></td>").text(response.data.Surname));
+                                $(tr).append($("<td></td>").text(value.ArizaCreatedDate));
+                                $(tr).append($("<td></td>").text(value.Adres));
+                                $(tr).append($("<td class='text-center'></td>")
+                                    .append($("<div class='btn-group'></div>")).append($(a)));
+                                $(tr).appendTo($("#datatablebody"));
+                                @*<tr class="bg-danger">
                                     <td class="text-center">@(i + 1)</td>
                                     <td class="text-center">
                                     <img src="@(string.IsNullOrEmpty(data.AvatarPath)?"/assets/img/avatars/avatar3.jpg":data.AvatarPath)" class="img-avatar-96" width="100" height="100" />
@@ -197,22 +206,6 @@
                                     </div>
                                     </td>
                                     </tr>*@
-
-                                var tr = $("<tr></tr>");
-                                $(tr).append($("<td class='text-center'></td>").text(key + 1));
-                                var img = $("<img/>").attr("class", "img-avatar-96")
-                                    .attr("width", "100").attr("height", "100").attr("src", response.data.AvatarPath);
-          var a = $("<a></a>").attr("href", "@Url.Action("ArizaDetay", "Operator")" + "/" + value.ArızaId).attr("class", "btn btn-success").html("Arıza Detay");
-                                $(tr).append($("<td class='text-center'></td>").append($(img)));
-                                $(tr).append($("<td class='text-center'></td>").append($("<td></td>").text(response.data.UserName)));
-                                $(tr).append($("<td class='text center'></td>").text(response.data.Name));
-                                $(tr).append($("<td class='text center'></td>").text(response.data.Surname));
-                                $(tr).append($("<td></td>").text(value.ArizaCreatedDate));
-                                $(tr).append($("<td></td>").text(value.Adres));
-                                $(tr).append($("<td class='text-center'></td>")
-                                    .append($("<div class='btn-group'></div>")).append($(a)));
-
-                                $(tr).appendTo($("#datatablebody"));
                                 @*$("<tr></tr>")
                                     .append($("<td class='text-center'></td>").text(key + 1))
                                     .append($("<td class='text-center'></td>")).append($("<img/>").attr("src", response.data.AvatarPath).attr("class", "img-avatar-96").attr("width", "100").attr("height", "100"))
