@@ -243,10 +243,13 @@
     <Content Include="assets\js\plugins\slick\slick.min.css" />
     <Content Include="assets\js\plugins\slick\slick.min.js" />
     <Content Include="assets\js\plugins\sparkline\jquery.sparkline.min.js" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="assets\css\lightbox.css" />
     <Content Include="assets\css\lightbox.min.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="fonts\bootstrap\fontawesome-webfont.svg" />
     <Content Include="fonts\bootstrap\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\bootstrap\ionicons.svg" />
@@ -277,7 +280,15 @@
     <Content Include="assets\js\lightbox-plus-jquery.min.js" />
     <Content Include="assets\js\lightbox.js" />
     <Content Include="assets\js\lightbox.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -378,6 +389,11 @@
     <Content Include="Views\Admin\ArizaDurumGor.cshtml" />
     <Content Include="Views\Admin\AnketPuanRapor.cshtml" />
     <Content Include="Views\Admin\Charts.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index2.cshtml" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

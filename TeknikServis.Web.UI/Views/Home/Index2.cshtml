@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "Giriş Sayfası";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<section class="login-info">
+    <div class="container">
+        <div class="row main">
+            <div class="form-header">
+                <h1 class="text-center ">Giriş Formu </h1>
+            </div>
+            <div class="main-content">
+
+                @Html.ValidationSummary(false)
+                @if (ViewBag.SetLink != null)
+                {
+                    <a href="@ViewBag.SetLink" class="btn btn-primary">Activate</a>
+                }
+
+                <div class="input-group ">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></span>
+
+                    @Html.TextBox("name", "", new { @class = "form-control", placeholder = "Kullanıcı Adınız" })
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></span>
+                    @Html.TextBox("password", "", new { @class = "form-control", placeholder = "Şifreniz", type = "password" })
+                </div>
+
+                <div class="form-group ">
+                    <button onclick="Login()" id="btnLogin" class="btn btn-danger btn-lg btn-block login-button">Giriş</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section bottom{
+
+    <script>
+
+        function Login() {
+            var loginObject = {
+                UserName: $("#name").val(),
+                Password: $("#password").val(),
+
+            };
+
+            $.post("http://localhost:62004/token", loginObject, function (result) {
+                sessionStorage.removeItem("MyToken");
+                sessionStorage.setItem("MyToken", resul.access_token);
+                //window.location.href = "http://localhost:56430/Operator/Index";
+                window.location.replace("http://localhost:56430/Operator/Index");
+
+            }).fail(function (err) {
+                alert(err.status + " " + err.status);
+            });
+        };
+
+
+
+    </script>
+}
