@@ -21,11 +21,15 @@ using static TeknikServis.BLL.Identity.MembershipTools;
 
 namespace WebApi.Controllers
 {
+   
+
     [EnableCors("*", "*", "*")]
+    [Authorize]
     public class OperatorController : ApiController
     {
         //Not found vs buradaIHHTp actionda mesaj ile göndermeli yapı yokmu. 
         // idleri ipde bulup gönderemiyoruz. veya bir kayıt eklerken idleri nasıl alcaz
+     
         [HttpGet]
         public async Task<IHttpActionResult> Index()
         {

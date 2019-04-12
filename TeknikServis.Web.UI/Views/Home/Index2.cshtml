@@ -43,17 +43,41 @@
     <script>
 
         function Login() {
+            //var settings = {
+            //    "async": true,
+            //    "crossDomain": true,
+            //    "url": "http://localhost:62004/token",
+            //    "method": "POST",
+            //    "headers": {
+            //        "Content-Type": "application/x-www-form-urlencoded",
+            //        "Accept": "application/json",
+            //        "cache-control": "no-cache",
+            //        "Postman-Token": "80fe291c-182c-4dba-ae8b-c1944f1a6430"
+            //    },
+            //    "data": {
+            //        "grant_type": "password",
+            //        "username": "admin1",
+            //        "password": "123123"
+            //    }
+            //}
+
+            //$.ajax(settings).done(function (response) {
+            //    sessionStorage.setItem("MyToken", response.access_token);
+            //    console.log(response);
+            //});
             var loginObject = {
                 UserName: $("#name").val(),
                 Password: $("#password").val(),
-
+                 grant_type: "password"
+                 
             };
 
             $.post("http://localhost:62004/token", loginObject, function (result) {
                 sessionStorage.removeItem("MyToken");
-                sessionStorage.setItem("MyToken", resul.access_token);
-                //window.location.href = "http://localhost:56430/Operator/Index";
-                window.location.replace("http://localhost:56430/Operator/Index");
+                sessionStorage.setItem("MyToken", result.access_token);
+              
+                window.location.href = "/Operator/Index";
+                //window.location.replace("http://localhost:56430/Operator/Index");
 
             }).fail(function (err) {
                 alert(err.status + " " + err.status);

@@ -20,6 +20,15 @@
     <link rel="stylesheet" href="~/assets/js/plugins/datatables/jquery.dataTables.min.css" />
     <link rel="stylesheet" id="css-font-awesome" href="~/assets/css/font-awesome.css" />
     <link rel="stylesheet" id="css-ionicons" href="~/assets/css/ionicons.css" />
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script>
+
+        var token = sessionStorage.getItem('MyToken');
+        //console.log(token);
+        if (token == null) {
+            window.location.href = "/Home/Index2";
+        }
+    </script>
 }
 <div class="card-header">
     <h5 class="text-center">Merhaba @MembershipTools.GetNameSurname(null) - İyi Çalışmalar Dileriz. FiTech<span class="ion-alert"></span></h5><br />
@@ -30,7 +39,7 @@
         </div>
     }
 </div>
-<div class="card">
+<div class="card" id="card1">
 
 
     <div class="card-block">
@@ -80,7 +89,7 @@
 
 
 
-<div class="card">
+<div class="card" id="card2">
     <div class="card-header">
 
         <h4 class="text-center">Onaylanmamış Arıza Listesi</h4>
@@ -140,54 +149,57 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs/jq-3.3.1/dt-1.10.18/af-2.3.2/b-1.5.4/b-colvis-1.5.4/b-flash-1.5.4/b-html5-1.5.4/b-print-1.5.4/cr-1.5.0/r-2.2.2/sc-1.5.0/datatables.min.js"></script>
 
     <script>
-        $(function() {
+        $(function () {
+          
             $(".dataTable").DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ]
-        });
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            });
             function init() {
                 $("#datatablebody").empty();
-            $.ajax({
-                url: "http://localhost:62004/api/Operator/Index",
-                method: "GET",
-                dataType: "json",
-            }).done(function (e) {
-                if (e.success) {
-                    console.log(e.data);
-                    renderdata(e.data);
-                } else {
-                    alert(e.message);
-                }
-            });
-            function renderdata(data) {
-                //Admin1 Idsi dc7e08b6-581d-40b0-906a-e3152492265f
-                $('#emptyrecords').empty();
-                $.each(data,
-                    function (key, value) {
-                        $.ajax({
-                            method: "GET",
-                            dataType: "json",
-                            url: "http://localhost:62004/api/Operator/GetUser/" + value.MusteriId,
-                        }).done(function (response) {
-                            if (response.success) {
-                                console.log(response.data)
-                                var tr = $("<tr></tr>");
-                                $(tr).append($("<td class='text-center'></td>").text(key + 1));
-                                var img = $("<img/>").attr("class", "img-avatar-96")
-                                    .attr("width", "100").attr("height", "100").attr("src", response.data.AvatarPath);
-          var a = $("<a></a>").attr("href", "@Url.Action("ArizaDetay", "Operator")" + "/" + value.ArızaId).attr("class", "btn btn-success").html("Arıza Detay");
-                                $(tr).append($("<td class='text-center'></td>").append($(img)));
-                                $(tr).append($("<td class='text-center'></td>").append($("<td></td>").text(response.data.UserName)));
-                                $(tr).append($("<td class='text center'></td>").text(response.data.Name));
-                                $(tr).append($("<td class='text center'></td>").text(response.data.Surname));
-                                $(tr).append($("<td></td>").text(value.ArizaCreatedDate));
-                                $(tr).append($("<td></td>").text(value.Adres));
-                                $(tr).append($("<td class='text-center'></td>")
-                                    .append($("<div class='btn-group'></div>")).append($(a)));
-                                $(tr).appendTo($("#datatablebody"));
-                                @*<tr class="bg-danger">
+                $.ajax({
+                    url: "http://localhost:62004/api/operator/index",
+                    method: "GET",
+                    dataType: "json",
+                    headers: { Authorization: "Bearer " + sessionStorage.getItem("MyToken") },
+                }).done(function (e) {
+                    if (e.success) {
+                        console.log(e.data);
+                        renderdata(e.data);
+                    } else {
+                        alert(e.message);
+                    }
+                });
+                function renderdata(data) {
+                    //Admin1 Idsi dc7e08b6-581d-40b0-906a-e3152492265f
+                    $('#emptyrecords').empty();
+                    $.each(data,
+                        function (key, value) {
+                            $.ajax({
+                                method: "GET",
+                                dataType: "json",
+                                url: "http://localhost:62004/api/operator/GetUser/" + value.MusteriId,
+                                headers: { Authorization: "Bearer " + sessionStorage.getItem("MyToken") },
+                            }).done(function (response) {
+                                if (response.success) {
+                                    console.log(response.data)
+                                    var tr = $("<tr></tr>");
+                                    $(tr).append($("<td class='text-center'></td>").text(key + 1));
+                                    var img = $("<img/>").attr("class", "img-avatar-96")
+                                        .attr("width", "100").attr("height", "100").attr("src", response.data.AvatarPath);
+                                    var a = $("<a></a>").attr("href", "@Url.Action("ArizaDetay", "Operator")" + "/" + value.ArızaId).attr("class", "btn btn-success").html("Arıza Detay");
+                                    $(tr).append($("<td class='text-center'></td>").append($(img)));
+                                    $(tr).append($("<td class='text-center'></td>").append($("<td></td>").text(response.data.UserName)));
+                                    $(tr).append($("<td class='text center'></td>").text(response.data.Name));
+                                    $(tr).append($("<td class='text center'></td>").text(response.data.Surname));
+                                    $(tr).append($("<td></td>").text(value.ArizaCreatedDate));
+                                    $(tr).append($("<td></td>").text(value.Adres));
+                                    $(tr).append($("<td class='text-center'></td>")
+                                        .append($("<div class='btn-group'></div>")).append($(a)));
+                                    $(tr).appendTo($("#datatablebody"));
+                                    @*<tr class="bg-danger">
                                     <td class="text-center">@(i + 1)</td>
                                     <td class="text-center">
                                     <img src="@(string.IsNullOrEmpty(data.AvatarPath)?"/assets/img/avatars/avatar3.jpg":data.AvatarPath)" class="img-avatar-96" width="100" height="100" />
@@ -206,7 +218,7 @@
                                     </div>
                                     </td>
                                     </tr>*@
-                                @*$("<tr></tr>")
+                                    @*$("<tr></tr>")
                                     .append($("<td class='text-center'></td>").text(key + 1))
                                     .append($("<td class='text-center'></td>")).append($("<img/>").attr("src", response.data.AvatarPath).attr("class", "img-avatar-96").attr("width", "100").attr("height", "100"))
                                     .append($("<td></td>").text(response.UserName))
@@ -216,13 +228,13 @@
                                     .append($("<td></td>").text(value.Adres))
                                     .append($("<td class='text-center'></td>").append($("<div></div>").attr("class","btn-group")).append($("a").attr("href", "@Url.Action("ArizaDetay", "Operator")" + "/" + value.ArızaId).attr("class", "btn btn-success").html("Arıza Detay")))
                                     .appendTo($("#datatablebody"));*@
-                            } else {
-                                alert(response.message);
-                            }
-                        });
+                                } else {
+                                    alert(response.message);
+                                }
+                            });
 
-                    });
-            }};
+                        });
+                }};
             init();
         });
 

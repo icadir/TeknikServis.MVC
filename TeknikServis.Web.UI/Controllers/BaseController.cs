@@ -13,7 +13,7 @@ using TeknikServis.Entity.ViewModels.ArizaViewModels;
 using static TeknikServis.BLL.Identity.MembershipTools;
 namespace TeknikServis.Web.UI.Controllers
 {
-    [Authorize]
+    //[Authorize]
 
     public class BaseController : Controller
     {

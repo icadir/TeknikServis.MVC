@@ -8,6 +8,15 @@
     <link href="~/assets/css/lightbox.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/assets/js/plugins/slick/slick.min.css" />
     <link rel="stylesheet" href="~/assets/js/plugins/slick/slick-theme.min.css" />
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script>
+
+        var token = sessionStorage.getItem('MyToken');
+        //console.log(token);
+        if (token == null) {
+            window.location.href = "/Home/Index2";
+        }
+    </script>
 
 }
 <h2 class="text-center">Ariza Detay</h2>
@@ -68,7 +77,7 @@
                             <div class="col-md-12">
                                 @Html.Label("", "Ürün Fatura Bilgisi")
                             </div>
-                           
+
                             @*<a href="@(string.IsNullOrEmpty(Model.FaturaPath) ? "~/assets/img/avatars/avatar3.jpg" : Model.FaturaPath)" rel="lightbox">
                                     <img src="@(string.IsNullOrEmpty(Model.FaturaPath) ? "~/assets/img/avatars/avatar3.jpg" : Model.FaturaPath)" class="img-avatar-96" width="100" height="100" />
                                 </a>*@
@@ -95,76 +104,107 @@
     <script src="~/assets/js/plugins/slick/slick.min.js"></script>
     @*<script src="~/assets/js/lightbox-plus-jquery.min.js"></script>
         <script src="~/assets/js/lightbox.js"></script>*@
+    @* Local stroge ile sessionStorage arasındaki fark localstorage süresi bitinceye kadar silinceye kadar orda durur. Localsessin ise chrom veya browser kapanıncaya kadar. *@
     <script>
-        $(function () {
+        $(function() {
             // Init page helpers (Slick Slider plugin)
             App.initHelpers('slick');
 
             var id = @ViewBag.id
-                function init() {
 
-                    $.ajax({
-                        method: "Get",
-                        url: "http://localhost:62004/api/Operator/ArizaDetay/" + id,
-                        dataType:"json",
-                    }).done(function (e) {
-                        if (e.success) {
-                            console.log(e.data);
-                            renderdata(e.data);
 
-                        } else {
-                            alert(e.message);
-                        }
-                    });
+            function init() {
 
-                };
+                $.ajax({
+                    method: "Get",
+                    url: "http://localhost:62004/api/operator/ArizaDetay/" + id,
+                    dataType: "json",
+                    headers: { Authorization: "Bearer " + sessionStorage.getItem("MyToken") },
+                }).done(function(e) {
+                    if (e.success) {
+                        console.log(e.data);
+                        renderdata(e.data);
+
+                    } else {
+                        alert(e.message);
+                    }
+                });
+
+            };
+
             function renderdata(data) {
                 console.log("bu")
                 console.log(data);
-                        $.ajax({
-                            method: "GET",
-                            dataType: "json",
-                            url: "http://localhost:62004/api/Operator/GetUser/" + data.MusteriId,
-                        }).done(function(response) {
-                            if (response.success) {
-                                console.log(response.data)
-                                $("#name").val(response.data.Name);
-                                $("#surname").val(response.data.Surname);
-                                $("#email").val(response.data.Email);
-                                $("#telno").val(response.data.PhoneNumber);
-                                $("#adres").val(data.Adres);
-                                var a = $("<a></a>").attr("href", data.FaturaResim);
-                                var img = $("<img/>").attr("class", "img-avatar-96")
-                                    .attr("width", "100").attr("height", "100").attr("src", data.FaturaResim);
-                                $("#faturaresim").append($(a)).append($(img));
+                $.ajax({
+                    method: "GET",
+                    dataType: "json",
+                    url: "http://localhost:62004/api/Operator/GetUser/" + data.MusteriId,
+                    headers: { Authorization: "Bearer " + sessionStorage.getItem("MyToken") },
+                }).done(function(response) {
+                    if (response.success) {
+                        console.log(response.data)
+                        $("#name").val(response.data.Name);
+                        $("#surname").val(response.data.Surname);
+                        $("#email").val(response.data.Email);
+                        $("#telno").val(response.data.PhoneNumber);
+                        $("#adres").val(data.Adres);
+                        var a = $("<a></a>").attr("href", data.FaturaResim);
+                        var img = $("<img/>").attr("class", "img-avatar-96")
+                            .attr("width", "100").attr("height", "100").attr("src", data.FaturaResim);
+                        $("#faturaresim").append($(a)).append($(img));
 
-                                if (data.ArızaResim.length > 1) {
-                                    for (var i = 0; i < data.ArızaResim.length; i++) {
-                                        var a2 = $("<a></a>").attr("href", data.ArızaResim[i]);
-                                        var img2 = $("<img/>").attr("class", "img-avatar-96")
-                                            .attr("width", "100").attr("height", "100").attr("src", data.ArızaResim[i]);
-                                        $("#arizaresim").append($(a2)).append($(img2));
-                                    }
-                                } else {
-                                    var a1 = $("<a></a>").attr("href", data.ArızaResim);
-                                    var img1 = $("<img/>").attr("class", "img-avatar-96")
-                                        .attr("width", "100").attr("height", "100").attr("src", data.ArızaResim);
-                                    $("#arizaresim").append($(a1)).append($(img1));
-                                }
-                                @*<a href="@Url.Action("ArizaKabul", "Operator", new {id = Model.ArizaId})" class="btn btn-app btn-block hidden-xs" title="Arıza Kabul">
+                        if (data.ArızaResim.length > 1) {
+                            for (var i = 0; i < data.ArızaResim.length; i++) {
+                                var a2 = $("<a></a>").attr("href", data.ArızaResim[i]);
+                                var img2 = $("<img/>").attr("class", "img-avatar-96")
+                                    .attr("width", "100").attr("height", "100").attr("src", data.ArızaResim[i]);
+                                $("#arizaresim").append($(a2)).append($(img2));
+                            }
+                        } else {
+                            var a1 = $("<a></a>").attr("href", data.ArızaResim);
+                            var img1 = $("<img/>").attr("class", "img-avatar-96")
+                                .attr("width", "100").attr("height", "100").attr("src", data.ArızaResim);
+                            $("#arizaresim").append($(a1)).append($(img1));
+                        }
+                        @*<a href="@Url.Action("ArizaKabul", "Operator", new {id = Model.ArizaId})" class="btn btn-app btn-block hidden-xs" title="Arıza Kabul">
                                     Arızayı Onayla
                                 </a>*@
-                                var input = $("<a></a>")
-                                    .attr("href", "@Url.Action("ArizaKabul", "Operator")" + "/" + data.ArızaId)
-                                    .attr("class", "btn btn-app btn-block hidden-xs").attr("title", "Arıza Kabul")
-                                    .attr("type","button").text("Arızayi Kabul Et");
-                                $("#btnKabul").append($(input));
-                            } else {
-                                alert("Bir hata Oluştu");
-                            }
-                        });
-                    };
+                        var input = $("<button></button>")
+                            .attr("href", "@Url.Action("ArizaKabul", "Operator")" + "/" + data.ArızaId)
+                            .attr("class", "btn btn-app btn-block hidden-xs").attr("title", "Arıza Kabul")
+                            .attr("id", "arizaId")
+                            .attr("value",data.ArızaId)
+                            .attr("name", data.ArızaId)
+                            .on("click", function() {
+                                ArizaKabul(data.ArızaId);
+                            })
+                            .attr("type", "button").text("Arızayi Kabul Et");
+                        $("#btnKabul").append($(input));
+                    } else {
+                        alert("Bir hata Oluştu");
+                    }
+                });
+            };
 
+            function ArizaKabul(id) {
+                console.log(id);
+                $.ajax({
+                    method: "POST",
+                    dataType: "json",
+                    url: "http://localhost:62004/api/Operator/ArizaKabul/" + id,
+                    headers: { Authorization: "Bearer " + sessionStorage.getItem("MyToken") }
+                }).done(function(response) {
+                    if (response.success) {
+                        setTimeout(function() {
+                            window.location.href = "/Operator/Index";
+                        }, 2000);
+                        alert(response.message);
+                    }
+                    else {
+                        alert("bir hata olsutu");
+                    }
+                });
+            };
 
 
             init();
